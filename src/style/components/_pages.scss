@@ -1,0 +1,7 @@
+$iota-components-pages-name: 'page';
+$iota-components-pages-namespace: $iota-global-components-namespace + $iota-components-pages-name;
+
+.#{$iota-components-pages-namespace} {
+  background-color: #fff;
+  min-height      : 100vh;
+}
