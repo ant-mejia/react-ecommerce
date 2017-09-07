@@ -2285,8 +2285,13 @@ select {
 p {
   color: red; }
 
-p {
-  color: red; }
+.fade-enter {
+  opacity: 0;
+  z-index: 1; }
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in; }
 
 p {
   color: red; }
@@ -2317,10 +2322,6 @@ p {
 
 .c-jumbotron_image {
   opacity: 0.2; }
-
-.c-page {
-  background-color: #fff;
-  min-height: 100vh; }
 
 h1.c-heading-large {
   font-size: 3.54375rem; }
@@ -2382,6 +2383,41 @@ h6.c-heading-xlarge {
     margin-left: 0; }
     .c-heading_block.c-heading_active::before {
       width: 0; }
+
+#app.header_active .c-page_container {
+  perspective: 1200px;
+  perspective-origin: 50% -50%; }
+  #app.header_active .c-page_container .c-page_wrapper {
+    transform: translate3d(0px, 70%, -200px);
+    transition: transform 0.45s, opacity 0.45s;
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1); }
+
+header.c-header {
+  z-index: 1000; }
+  header.c-header .c-header-menu {
+    background-color: #ffa; }
+    header.c-header .c-header-menu .c-header-menu_button {
+      max-width: 50px; }
+  header.c-header .c-header-container {
+    background: #ececec; }
+
+.c-page_container {
+  perspective: 1200px;
+  perspective-origin: 50% -50%;
+  overflow: hidden; }
+  .c-page_container .c-page_wrapper {
+    height: 100vh;
+    overflow: scroll;
+    transition: transform 0.45s, opacity 0.45s; }
+    .c-page_container .c-page_wrapper .c-page {
+      background-color: #fff;
+      min-height: 100vh;
+      min-width: 100vw;
+      position: absolute;
+      padding-left: 100px; }
+
+#app {
+  background: #ececec; }
 
 .js body,
 html.js {

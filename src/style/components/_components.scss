@@ -1,3 +1,8 @@
+$iota-components-pages-name          : 'page';
+$iota-components-pages-container-name: 'container';
+$iota-components-pages-wrapper-name  : 'wrapper';
+$iota-components-pages-namespace     : $iota-global-components-namespace + $iota-components-pages-name;
 @import "jumbotron";
-@import "pages";
 @import "heading";
+@import "header";
+@import "pages";

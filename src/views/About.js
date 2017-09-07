@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-class NotFound extends Component {
+class About extends Component {
 
   render() {
     return (
@@ -10,11 +10,11 @@ class NotFound extends Component {
           <Link to="/about"><p className="u-inline-block u-mr-small">about</p></Link>
           <Link to="/asda"><p className="u-inline-block u-mr-small">asda</p></Link>
         </div>
-        <h1>Not Found!!</h1>
+        <h1>This is the about page!!</h1>
       </div>
     );
   }
 
 }
 
-export default NotFound;
+export default About;

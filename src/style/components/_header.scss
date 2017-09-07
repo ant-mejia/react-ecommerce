@@ -1,0 +1,42 @@
+$iota-components-header-name: 'header';
+$iota-components-header-active-name: 'active';
+$iota-components-header-menu-name: 'menu';
+$iota-components-header-separator: '-';
+$iota-components-header-namespace: $iota-global-components-namespace + $iota-components-header-name;
+$iota-components-header-menu-namespace: $iota-global-components-namespace + $iota-components-header-name + $iota-components-header-separator + $iota-components-header-menu-name;
+$iota-components-header-menu-width: 50px;
+$iota-components-header-menu-buffer: 50px;
+
+#app.#{$iota-components-header-name + $iota-global-separator + $iota-components-header-active-name} {
+  .#{$iota-components-pages-namespace + $iota-global-separator + $iota-components-pages-container-name} {
+    perspective       : 1200px;
+    perspective-origin: 50% -50%;
+
+    .c-page_wrapper {
+      transform : translate3d(0px, 70%, -200px);
+      // transform : scale(0.5);
+      transition: transform 0.45s, opacity 0.45s;
+      box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+
+      .c-page {}
+    }
+  }
+  // background-color: #afa;
+}
+
+header.#{$iota-components-header-namespace} {
+  z-index: 1000;
+
+  .#{$iota-components-header-menu-namespace} {
+    background-color: #ffa;
+
+    .#{$iota-components-header-menu-namespace + $iota-global-separator + 'button'} {
+      max-width: $iota-components-header-menu-width;
+      // position : absolute;
+    }
+  }
+
+  .#{$iota-components-header-namespace + $iota-components-header-separator + 'container'} {
+    background: $iota-global-off-white;
+  }
+}

@@ -1,7 +1,19 @@
-$iota-components-pages-name: 'page';
-$iota-components-pages-namespace: $iota-global-components-namespace + $iota-components-pages-name;
+.#{$iota-components-pages-namespace + $iota-global-separator + $iota-components-pages-container-name} {
+  perspective       : 1200px;
+  perspective-origin: 50% -50%;
+  overflow          : hidden;
 
-.#{$iota-components-pages-namespace} {
-  background-color: #fff;
-  min-height      : 100vh;
+  .#{$iota-components-pages-namespace + $iota-global-separator + $iota-components-pages-wrapper-name} {
+    height    : 100vh;
+    overflow  : scroll;
+    transition: transform 0.45s, opacity 0.45s;
+
+    .#{$iota-components-pages-namespace} {
+      background-color: #fff;
+      min-height      : 100vh;
+      min-width       : 100vw;
+      position        : absolute;
+      padding-left    : $iota-components-header-menu-width + $iota-components-header-menu-buffer;
+    }
+  }
 }

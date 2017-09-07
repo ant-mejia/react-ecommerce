@@ -30,6 +30,10 @@
 @import "partials/partials";
 @import "components/components";
 
+#app {
+  background: $iota-global-off-white;
+}
+
 .js body,
 html.js {
   overflow: hidden;
