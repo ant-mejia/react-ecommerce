@@ -6,7 +6,7 @@ class Index extends Component {
     const { className, ...props } = this.props;
     return (
       <div className="c-page">
-        <div className="u-ml-large">
+        <div>
           <Link to="/"><p className="u-inline-block u-mr-small">Home</p></Link>
           <Link to="/about"><p className="u-inline-block u-mr-small">about</p></Link>
           <Link to="/asda"><p className="u-inline-block u-mr-small">asda</p></Link>
