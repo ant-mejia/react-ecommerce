@@ -9,34 +9,36 @@ $iota-components-header-menu-buffer: 50px;
 
 #app.#{$iota-components-header-name + $iota-global-separator + $iota-components-header-active-name} {
   .#{$iota-components-pages-namespace + $iota-global-separator + $iota-components-pages-container-name} {
-    z-index           : -1;
-    perspective       : 1200px;
-    perspective-origin: 50% -50%;
+    transform : translate3d(0px, 70%, -200px);
+    // transform : scale(0.5);
+    transition: transform 0.45s, opacity 0.45s;
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
 
     .c-page_wrapper {
-      transform : translate3d(0px, 75%, -200px);
-      // transform : scale(0.5);
-      transition: transform 0.45s, opacity 0.45s;
-      box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
-
       .c-page {}
     }
   }
 
-  .#{$iota-components-header-menu-namespace + $iota-global-separator + 'button'} {
-    background: rgb(244, 255, 110);
+  header.#{$iota-components-header-namespace} {
+    .#{$iota-components-header-menu-namespace + $iota-global-separator + 'button'} {
+      &::before {
+        // background: #faa;
+        transform: rotate3d(0, 0, 1, 45deg);
+      }
 
-    &::before {
-      // background: #faa;
-      transform: rotate3d(0, 0, 1, 45deg);
+      &::after {
+        transform: rotate3d(0, 0, 1, -45deg);
+      }
+
+      span {
+        opacity: 0;
+      }
     }
 
-    &::after {
-      transform: rotate3d(0, 0, 1, -45deg);
-    }
-
-    span {
-      opacity: 0;
+    .#{$iota-components-header-namespace + $iota-components-header-separator + 'container' + $iota-global-separator + $iota-components-header-menu-name} {
+      transition: all 0.50s cubic-bezier(0.2, 1, 0.3, 1);
+      opacity   : 1;
+      transform : translate3d(0,0,0);
     }
   }
 }
@@ -84,7 +86,7 @@ header.#{$iota-components-header-namespace} {
         transition              : transform 0.25s;
         -webkit-transform-origin: 50% 50%;
         transform-origin        : 50% 50%;
-        background              : #000;
+        background-color        : darken($iota-global-off-white, 40%);
       }
 
       span {
@@ -99,7 +101,7 @@ header.#{$iota-components-header-namespace} {
         transition              : all 0.25s linear;
         -webkit-transform-origin: 50% 50%;
         transform-origin        : 50% 50%;
-        background-color        : #000;
+        background-color        : darken($iota-global-off-white, 40%);
       }
 
       &::after {
@@ -116,7 +118,7 @@ header.#{$iota-components-header-namespace} {
         transition              : transform 0.25s;
         -webkit-transform-origin: 50% 50%;
         transform-origin        : 50% 50%;
-        background              : #000;
+        background-color        : darken($iota-global-off-white, 40%);
       }
     }
   }
@@ -125,14 +127,15 @@ header.#{$iota-components-header-namespace} {
     background: $iota-global-off-white;
 
     .#{$iota-components-header-namespace + $iota-components-header-separator + 'container' + $iota-global-separator + $iota-components-header-menu-name} {
-      position: absolute;
-      top     : 50px;
-      left    : 0;
-      width   : 100%;
-      height  : 50vh;
+      transition: all 0.50s linear;
+      opacity   : 0;
+      transform : translate3d(0, 100px, -50px);
+      position  : absolute;
+      top       : 50px;
+      left      : 0;
+      width     : 100%;
+      height    : 50vh;
       // padding : 60px;
-      border  : 5px solid rgb(136, 20, 217);
-
       .#{$iota-components-header-namespace + $iota-components-header-separator + 'container' + $iota-global-separator + $iota-components-header-menu-name + $iota-components-header-separator + 'wrapper'} {
         display        : -webkit-flex;
         display        : -ms-flex;
@@ -143,16 +146,37 @@ header.#{$iota-components-header-namespace} {
         letter-spacing : 2px;
         padding-left   : 8%;
         padding-right  : 8%;
+        @include iota-breakpoint(sm) {
+          flex-direction : row;
+          justify-content: space-evenly;
+          flex-wrap      : wrap;
+        };
 
         .#{$iota-components-header-namespace + $iota-components-header-separator + 'container' + $iota-global-separator + $iota-components-header-menu-name + $iota-components-header-separator + 'item'} {
           color     : #868686;
           transition: color 0.3s linear;
-          display   : block;
+          // display   : block;
+          width     : 33%;
+          position  : relative;
           font-size : 20px;
-          width     : auto;
+          @include iota-breakpoint(sm) {
+            text-align: center;
+            padding   : 1.5%;
+
+            &::after {
+              display    : inline-block;
+              text-align : center;
+              margin-left: 50%;
+            }
+          };
 
           &:hover {
             color: #000;
+            @include iota-breakpoint(sm) {
+              &::after {
+                margin-left: calc(50% - 15px);
+              }
+            };
 
             &::after {
               // margin-left: 0;
@@ -162,17 +186,35 @@ header.#{$iota-components-header-namespace} {
 
           &::after {
             transition: all 0.25s linear;
-            // margin-left: 50%;
             display   : block;
             content   : '';
             width     : 0;
-            height    : 4px;
+            height    : 3px;
             background: #000;
           }
         }
 
         .c-header-container_menu-item-alternate {
           color: darken($iota-global-off-white, 20);
+        }
+
+        .c-header-container_menu-item-alternate-wrapper {
+          width          : 100%;
+          padding        : 1.5%;
+          display        : -webkit-flex;
+          display        : -ms-flex;
+          display        : flex;
+          flex-direction : row;
+          flex-wrap      : nowrap;
+          font-size      : 10px;
+          justify-content: flex-start;
+          @include iota-breakpoint(sm) {
+            justify-content: space-evenly;
+          };
+
+          .c-header-container_menu-item-alternate-item {
+            margin: 10px;
+          }
         }
       }
     }

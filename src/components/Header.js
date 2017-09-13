@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   constructor(props) {
@@ -15,18 +16,25 @@ class Header extends Component {
           <div ref="headerMenuButton" onClick={this.props.toggleHeader} className="c-header-menu_button">
             <span/>
           </div>
+          {/* <div>
+            <img src="https://cdn.dribbble.com/assets/logo-bw-0200c7483844c355752e89efaa4ba89b83c9c591d70254ba10f4b25d901359d0.gif"/>
+          </div> */}
         </div>
         <div className="c-header-container">
           <div className="c-header-container_menu">
             <div className="c-header-container_menu-wrapper">
-              <h1 className="c-header-container_menu-item">Home</h1>
-              <h1 className="c-header-container_menu-item">Home</h1>
-              <h1 className="c-header-container_menu-item">Home</h1>
-              <h1 className="c-header-container_menu-item">Home</h1>
-              <h1 className="c-header-container_menu-item">Home</h1>
-              <h1 className="c-header-container_menu-item">Home</h1>
-              <p className="c-header-container_menu-item-alternate">Alternate Link</p>
-              <div>
+              <Link className="c-header-container_menu-item" to="/index">Home</Link>
+              <Link className="c-header-container_menu-item" to="/index">Home</Link>
+              <Link className="c-header-container_menu-item" to="/index">Home</Link>
+              <Link className="c-header-container_menu-item" to="/index">Home</Link>
+              <Link className="c-header-container_menu-item" to="/index">Home</Link>
+              <Link className="c-header-container_menu-item" to="/index">Home</Link>
+              <div className="c-header-container_menu-item-alternate-wrapper">
+                <p className="c-header-container_menu-item-alternate-item">Where to buy</p>
+                <p className="c-header-container_menu-item-alternate-item">Link</p>
+                <p className="c-header-container_menu-item-alternate-item">Link</p>
+              </div>
+              <div className="c-header-container_menu-footer">
                 This is a really, really, really, really, really, really, really, really, really, really, really, long sentence
               </div>
             </div>

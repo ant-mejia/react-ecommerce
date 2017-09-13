@@ -1,17 +1,40 @@
-// server/app.js
 const express = require('express');
 const morgan = require('morgan');
+const jwt = require('jsonwebtoken');
 const path = require('path');
-const bodyParser = require('body-parser')
-
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const bcrypt = require('bcryptjs');
+const passportLocal = require('./auth/local');
+const db = require('../db/index');
 const app = express();
-var http = require('http');
-var server = http.createServer();
-var socketio = require('socket.io');
+const models = require('../db/models/index');
+const passport = require('passport');
+require('dotenv').config();
+const authHelpers = require('./auth/auth-helpers');
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+const slogger = require('slogged')
+const moment = require('moment');
+const rfs = require('rotating-file-stream');
+const sessionManager = require('./managers/sessionManager');
+
+// Setup logger
+var logDirectory = path.join(__dirname, 'logs');
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+let stream = rfs('file.log', { size: '10M', interval: '1d', path: logDirectory });
+
+morgan.token('type', function(req, res) { return req.user ? req.user.email : 'anonymous' });
+morgan.token('moment', function(req, res) { return moment().format("MM/DD/YYYY h:mm:ss a Z") });
+app.use(morgan(':remote-addr - :type :referrer :moment ":method :url HTTP/:http-version" :status :response-time ms', {
+  stream: stream
+}));
+io.use(slogger());
+// OLD!
 server.listen(3030);
-var io = socketio();
-io.attach(server);
+
 io.on('connection', (socket) => {
+  sessionManager.createSession(socket);
   console.log("Socket connected: " + socket.id);
   socket.on('action', (action) => {
     if (action.type === 'server/hello') {

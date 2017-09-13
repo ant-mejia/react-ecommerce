@@ -1,23 +1,29 @@
-.#{$iota-components-pages-namespace + $iota-global-separator + $iota-components-pages-container-name} {
+#{$iota-global-root} {
   perspective       : 1200px;
   perspective-origin: 50% -50%;
   overflow          : hidden;
 
-  .#{$iota-components-pages-namespace + $iota-global-separator + $iota-components-pages-wrapper-name} {
-    height    : 100vh;
-    overflow  : scroll;
+  .#{$iota-components-pages-namespace + $iota-global-separator + $iota-components-pages-container-name} {
     transition: transform 0.45s, opacity 0.45s;
+    z-index   : 10;
+    position  : relative;
 
-    .#{$iota-components-pages-namespace} {
-      background-color: #fff;
-      min-height      : 100vh;
-      min-width       : 100vw;
-      padding-left    : $iota-components-header-menu-buffer;
-      padding-right   : $iota-components-header-menu-buffer;
-      padding-top     : $iota-components-header-menu-width;
-      @include iota-breakpoint(sm) {
-        padding-right: $iota-components-header-menu-width + $iota-components-header-menu-buffer;
-        padding-left : $iota-components-header-menu-width + $iota-components-header-menu-buffer;
+    .#{$iota-components-pages-namespace + $iota-global-separator + $iota-components-pages-wrapper-name} {
+      height    : 100vh;
+      overflow  : scroll;
+      transition: transform 0.45s, opacity 0.45s;
+
+      .#{$iota-components-pages-namespace} {
+        background-color: #fff;
+        min-height      : 100vh;
+        min-width       : 100vw;
+        padding-left    : $iota-components-header-menu-buffer;
+        padding-right   : $iota-components-header-menu-buffer;
+        padding-top     : $iota-components-header-menu-width;
+        @include iota-breakpoint(sm) {
+          padding-right: $iota-components-header-menu-width + $iota-components-header-menu-buffer;
+          padding-left : $iota-components-header-menu-width + $iota-components-header-menu-buffer;
+        }
       }
     }
   }

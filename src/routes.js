@@ -36,12 +36,12 @@ class Routes extends Component {
                 <Page/>
               </div> */}
               <div className="c-page_wrapper">
-                <AnimatedSwitch atEnter={{ opacity: 0 }} atLeave={{ opacity: 0 }} atActive={{ opacity: 1 }} className="switch-wrapper" runOnMount={true}>
+                <Switch onEnter={() => {console.log('bb');}}>
                   <Route exact path="/" component={Index} />
                   <Route exact path="/about" component={About} />
                   <Route exact path="/app" component={Index} />
                   <Route component={NotFound} />
-                </AnimatedSwitch>
+                </Switch>
               </div>
             </div>
             {/* <Footer/> */}
