@@ -25,6 +25,15 @@
           padding-left : $iota-components-header-menu-width + $iota-components-header-menu-buffer;
         }
       }
+
+      .#{$iota-components-pages-namespace + "_main-section"} {
+        @extend .#{$iota-components-pages-namespace};
+      }
+
+      .#{$iota-components-pages-namespace + "_jumbotron"} {
+        background: #fff;
+        height    : 100vh;
+      }
     }
   }
 }

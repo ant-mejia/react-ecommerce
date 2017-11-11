@@ -2560,7 +2560,7 @@ header.c-header {
       height: 100vh;
       overflow: scroll;
       transition: transform 0.45s, opacity 0.45s; }
-      #app .c-page_container .c-page_wrapper .c-page {
+      #app .c-page_container .c-page_wrapper .c-page, #app .c-page_container .c-page_wrapper .c-page_main-section {
         background-color: #fff;
         min-height: 100vh;
         min-width: 100vw;
@@ -2568,9 +2568,12 @@ header.c-header {
         padding-right: 50px;
         padding-top: 50px; }
         @media screen and (min-width: 768px) {
-          #app .c-page_container .c-page_wrapper .c-page {
+          #app .c-page_container .c-page_wrapper .c-page, #app .c-page_container .c-page_wrapper .c-page_main-section {
             padding-right: 100px;
             padding-left: 100px; } }
+      #app .c-page_container .c-page_wrapper .c-page_jumbotron {
+        background: #fff;
+        height: 100vh; }
 
 #app {
   background: #ececec; }

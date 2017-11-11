@@ -1,13 +1,16 @@
 import axios from 'axios';
-export var headerStatus = false;
-export const toggleHeader = () => {
-  headerStatus = !headerStatus;
-  console.log('Header Status: ' + headerStatus);
-  return { type: 'toggleHeader' }
-}
+
 export const EXPRESS_TEST_START = "EXPRESS_TEST_START";
 export const expressTestStart = () => {
   return { type: EXPRESS_TEST_START }
+}
+export const AUTH_SIGNIN = "AUTH_SIGNIN";
+export const authSignin = (e) => {
+  e.preventDefault();
+  console.log('user signed in!');
+  return dispatch => {
+    dispatch(expressTest());
+  }
 }
 
 export const EXPRESS_TEST_RESULTS = "EXPRESS_TEST_RESULTS";

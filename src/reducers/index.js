@@ -5,7 +5,7 @@ import demo from './demo';
 
 const Reducers = combineReducers({
   demo,
-  routing: routerReducer
+  routerReducer
 });
 
 export default Reducers;
