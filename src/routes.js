@@ -8,6 +8,9 @@ import About from './views/About';
 import Index from './views/Index';
 import NotFound from './views/NotFound';
 import Login from './views/auth/Login';
+import Register from './views/auth/Register';
+import AuthRoute from './containers/AuthRoute';
+import Profile from './views/auth/Profile';
 
 class Routes extends Component {
   constructor(props) {
@@ -27,7 +30,7 @@ class Routes extends Component {
       <div id="app" className={this.props.activeHeader ? 'header_active' : ''}>
         <Router history={this.props.history}>
           <div>
-            <Header toggleHeader={this.toggleHeader}/>
+            <Header toggleHeader={this.props.actions.toggleHeader}/>
             <div className="c-page_container">
               {/* <div className="c-page_stack">
                 <Page/>
@@ -38,6 +41,8 @@ class Routes extends Component {
                   <Route exact path="/about" component={About} />
                   <Route exact path="/app" component={Index} />
                   <Route exact path="/login" component={({location, history}) => <Login location={location} actions={this.props.actions}/>} />
+                  <Route exact path="/register" component={({location, history}) => <Register location={location} actions={this.props.actions}/>} />
+                  <AuthRoute path="/profile" actions={this.props.actions} store={this.props.store} user={'adaad'} component={() => <Profile isUserAuth={this.isUserAuth}/>}/>
                   <Route component={NotFound} />
                 </Switch>
               </div>

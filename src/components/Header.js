@@ -31,7 +31,7 @@ class Header extends Component {
               <Link className="c-header-container_menu-item" to="/index">Home</Link>
               <div className="c-header-container_menu-item-alternate-wrapper">
                 <Link to="/login"><p className="c-header-container_menu-item-alternate-item">Sign In</p></Link>
-                <p className="c-header-container_menu-item-alternate-item">Link</p>
+                <Link to="/register"><p className="c-header-container_menu-item-alternate-item">Register</p></Link>
                 <p className="c-header-container_menu-item-alternate-item">Link</p>
               </div>
               <div className="c-header-container_menu-footer">
