@@ -10,7 +10,10 @@ const sessionDevice = db.define('sessionDevice', {
     primaryKey: true,
     unique: true
   },
-  type: Sequelize.STRING,
+  type: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   location: {
     type: Sequelize.STRING
   },

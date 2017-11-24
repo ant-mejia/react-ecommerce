@@ -2,10 +2,11 @@
 
 const Product = require('./product')
 const Review = require('./review');
-const Sessions = require('./sessions/index');
-const Users = require('./users/index');
+const sessions = require('./sessions/index');
+const users = require('./users/index');
+const logs = require('./logs/index');
 
-Sessions.Session.belongsTo(Users.User);
+sessions.Session.belongsTo(users.User);
 
 
-module.exports = { Product, Review, Sessions, Users };
+module.exports = { Product, Review, sessions, users, logs };

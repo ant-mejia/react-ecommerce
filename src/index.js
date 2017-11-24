@@ -84,9 +84,9 @@ class App extends Component {
     this.socket.emit('auth/login', { type: 'email', data: { email: 'a@antmejia.com', password: 'adasdsa' } })
   }
 
-  registerUser = () => {
+  registerUser = (user) => {
     console.log('user registered');
-    this.socket.emit('auth/register', { email: 'ant@antmejia.com' })
+    this.socket.emit('auth/register', { user })
   }
 
   actions = () => {

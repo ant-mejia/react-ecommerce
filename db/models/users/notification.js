@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const db = require('../../index.js');
 
-const sessionEvent = db.define('sessionEvent', {
+const notification = db.define('notification', {
   uid: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -14,27 +14,15 @@ const sessionEvent = db.define('sessionEvent', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  target: {
+  message: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  originUrl: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  targetUrl: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  description: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  timestamp: {
+  viewedAt: {
     type: Sequelize.DATE,
-    allowNull: false
+    allowNull: true
   }
 
 });
 
-module.exports = sessionEvent;
+module.exports = notification;

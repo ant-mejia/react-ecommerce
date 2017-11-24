@@ -5,7 +5,11 @@ class Register extends Component {
 
   registerUser = (e) => {
     e.preventDefault();
-    this.props.actions.registerUser();
+    let user = {
+      email: this.refs.email.value,
+      password: 'adadadadsa'
+    };
+    this.props.actions.registerUser(user);
     console.log('re');
   }
 
@@ -23,7 +27,7 @@ class Register extends Component {
       <div className="c-page">
         <h2>Register User</h2>
         <form onSubmit={e => this.registerUser(e)}>
-          <input type="text"/>
+          <input ref="email" type="text"/>
           <input type="submit"/>
         </form>
       </div>

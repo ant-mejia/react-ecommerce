@@ -1,6 +1,7 @@
 'use strict';
 
 const User = require('./user');
+const userProfile = require('./profile');
 
-
-module.exports = { User };
+userProfile.belongsTo(User);
+module.exports = { User, userProfile };

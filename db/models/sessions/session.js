@@ -10,7 +10,6 @@ const Session = db.define('sessions', {
     primaryKey: true,
     unique: true
   },
-  events: Sequelize.ARRAY(Sequelize.STRING),
   device: {
     type: Sequelize.STRING,
     allowNull: false

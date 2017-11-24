@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 
@@ -16,8 +17,8 @@ const AuthRoute = ({ component: Component, ...rest }) => {
 };
 
 AuthRoute.propTypes = {
-  actions: React.PropTypes.object.isRequired,
-  store: React.PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
 };
 
 export default AuthRoute;

@@ -2,23 +2,22 @@
 
 const Sequelize = require('sequelize');
 const db = require('../../index.js');
-const helpers = require('../../../server/helpers');
 
-const userProfile = db.define('userProfile', {
+const userLog = db.define('logUser', {
   uid: {
     type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true,
     unique: true
   },
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  lastName: {
+  type: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  privilege: Sequelize.ARRAY(Sequelize.STRING),
+  event: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
 });
-module.exports = userProfile;
+
+module.exports = userLog;
