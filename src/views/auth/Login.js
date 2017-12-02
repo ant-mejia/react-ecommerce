@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 class Login extends Component {
 
+  componentDidMount() {
+    let a = 10;
+    let b = 13;
+    let c = a + b;
+  }
+
   logIn = (event) => {
     event.preventDefault();
     this.props.actions.loginUser("email", "password");
@@ -10,12 +16,12 @@ class Login extends Component {
   render() {
     let path = this.props.location.state ?
       this.props.location.state.from.pathname.split('/')[1] :
-      '/profile';
-    let heading = path === 'profile' ?
+      '/account';
+    let heading = path === 'account' ?
       'You have to Login!' :
       'Please Login';
     if (this.props.actions.isUserAuth()) {
-      return (<Redirect to={'/profile'}/>)
+      return (<Redirect to={'/account'}/>)
     }
     return (
       <div className="c-page">

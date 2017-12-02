@@ -39,7 +39,6 @@ io.engine.generateId = (req) => {
 server.listen(3030);
 
 io.on('connection', (socket) => {
-  console.log(process.env.SK);
   sessionManager.createSession(socket);
   console.log("Socket connected: " + socket.id);
   socket.on('session/view', (data) => {
@@ -60,7 +59,7 @@ io.on('connection', (socket) => {
       socket.emit('user/auth', payload)
     }
     let failureCallback = (arg) => {
-      console.log('failed callback!');
+      console.log('failed callback!', arg);
     }
     authManager.createUser(data.user, successCallback, failureCallback)
   })
