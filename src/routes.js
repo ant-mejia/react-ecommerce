@@ -39,7 +39,7 @@ class Routes extends Component {
               <Route exact path="/app" component={Index} />
               <Route exact path="/login" component={({location, history}) => <Login location={location} actions={this.props.actions}/>} />
               <Route exact path="/register" component={({location, history}) => <Register location={location} actions={this.props.actions}/>} />
-              <AuthRoute path="/account" actions={this.props.actions} store={this.props.store} user={'adaad'} component={() => <Account isUserAuth={this.isUserAuth}/>}/>
+              <AuthRoute path="/account" psda={'sadas'} actions={this.props.actions} store={this.props.store} component={() => <Account actions={this.props.actions} store={this.props.store}/>}/>
               <Route component={NotFound} />
             </Switch>
           </div>

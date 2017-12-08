@@ -4,14 +4,15 @@ import { Route, Redirect } from 'react-router-dom';
 
 
 const AuthRoute = ({ component: Component, ...rest }) => {
+  console.log({ ...rest });
   return (
     <Route {...rest} render={props => {
       let p = { ...rest };
-      return (p.actions.isUserAuth() ? (<Component {...props}/>): (true ? (
-    <Redirect to={{pathname: '/login', state: { from: props.location } }}/>
-  ) : (<Component {...props}/>))
-)
-}
+      return (p.actions.isUserAuth() ? (<Component {...rest}/>): (true ? (
+        <Redirect to={{pathname: '/login', state: { from: props.location } }}/>
+      ) : (<Component {...rest}/>))
+      )
+    }
 }
 />)
 };

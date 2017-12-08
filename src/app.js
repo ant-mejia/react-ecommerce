@@ -20,8 +20,7 @@ class App extends Component {
     this.history.listen(this.listenHistory);
     this.socket = io('http://localhost:3030');
     this.socket.on('connect', () => {
-      this.socket.emit('message', { data: 'socket connected!' });
-      this.socket.emit('session/view', { path: this.history.location.pathname, type: 'test' })
+      this.listenHistory();
     });
   }
   componentDidMount() {}
@@ -63,9 +62,7 @@ class App extends Component {
     return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
   }
 
-  isUserAuth = () => {
-    return this.state.store.user !== undefined;
-  }
+  isUserAuth = () => this.state.store.user !== undefined;
 
   toggleHeader = () => {
     this.setState({ activeHeader: !this.state.activeHeader })
@@ -90,12 +87,21 @@ class App extends Component {
     this.socket.emit('auth/register', { user })
   }
 
-  actions = () => {
+  actions = (arr = []) => {
+    console.log("ARGUMENTS: ", arr);
     let methods = {}
     let keys = Object.keys(this)
     keys.map((item) => {
       if (typeof this[item] === 'function' && item !== 'actions') {
-        methods[item] = this[item]
+        let included = false;
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] === item) {
+            included = true;
+          }
+        }
+        if (included === false) {
+          methods[item] = this[item];
+        }
       }
     })
     return methods;
@@ -103,7 +109,7 @@ class App extends Component {
 
   render() {
     return (
-      <div id="app" className={this.activeHeader ? 'header_active' : ''}>
+      <div id="app" className={this.state.activeHeader ? 'header_active' : ''}>
         <Router history={this.history}>
           <Routes actions={this.actions()} activeHeader={this.state.activeHeader} store={this.state.store} history={this.history}/>
         </Router>

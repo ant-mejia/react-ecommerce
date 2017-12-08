@@ -40,11 +40,6 @@ describe('Index Page', () => {
 describe('Routing', () => {
   app = new App();
   let wrapper = shallow(<Routes actions={app.actions()} history={app.history} />);
-  let mountWrapper = mount(
-    <MemoryRouter>
-      <Routes actions={app.actions()} history={app.history}/>
-    </MemoryRouter>
-  );
   const pathMap = wrapper.find(Route).reduce((pathMap, route) => {
     const routeProps = route.props();
     pathMap[routeProps.path] = routeProps.component;
@@ -52,43 +47,58 @@ describe('Routing', () => {
   }, {});
   describe('Renders routes correctly', () => {
     it('Renders Index page', () => {
-      let indexPath = '/'
-      expect(pathMap[indexPath]).toBe(Index);
+      let targetPath = '/'
+      let mountWrapper = mount(
+        <MemoryRouter initialEntries={[ targetPath ]}>
+          <Routes actions={app.actions()} history={app.history}/>
+        </MemoryRouter>
+      );
+      expect(mountWrapper.find(Index)).toHaveLength(1);
     });
     it('Renders About page', () => {
-      let aboutPath = '/about'
-      expect(pathMap[aboutPath]).toBe(About);
+      let targetPath = '/about'
+      let mountWrapper = mount(
+        <MemoryRouter initialEntries={[ targetPath ]}>
+          <Routes actions={app.actions()} history={app.history}/>
+        </MemoryRouter>
+      );
+      expect(mountWrapper.find(About)).toHaveLength(1);
     });
     it('Renders App page', () => {
-      let appPath = '/app'
-      expect(pathMap[appPath]).toBe(Index);
+      let targetPath = '/app'
+      let mountWrapper = mount(
+        <MemoryRouter initialEntries={[ targetPath ]}>
+          <Routes actions={app.actions()} history={app.history}/>
+        </MemoryRouter>
+      );
+      expect(mountWrapper.find(Index)).toHaveLength(1);
     });
     it('Renders Login page', () => {
-      let loginPath = '/login';
-      const wrapper = mount(
-        <MemoryRouter initialEntries={[ loginPath ]}>
+      let targetPath = '/login';
+      let mountWrapper = mount(
+        <MemoryRouter initialEntries={[ targetPath ]}>
           <Routes actions={app.actions()} history={app.history}/>
         </MemoryRouter>
       );
-      expect(wrapper.find(Login)).toHaveLength(1);
+      expect(mountWrapper.find(Login)).toHaveLength(1);
     });
     it('Renders Register page', () => {
-      let registerPath = '/register';
-      const wrapper = mount(
-        <MemoryRouter initialEntries={[ registerPath ]}>
+      let targetPath = '/register';
+      let mountWrapper = mount(
+        <MemoryRouter initialEntries={[ targetPath ]}>
           <Routes actions={app.actions()} history={app.history}/>
         </MemoryRouter>
       );
-      expect(wrapper.find(Register)).toHaveLength(1);
+      expect(mountWrapper.find(Register)).toHaveLength(1);
     });
     it('Redirects to 404 on invalid path', () => {
-      let randomPath = '/testw019aasd';
-      const wrapper = mount(
-        <MemoryRouter initialEntries={[ randomPath ]}>
+      let targetPath = '/testw019aasd';
+      let mountWrapper = mount(
+        <MemoryRouter initialEntries={[ targetPath ]}>
           <Routes actions={app.actions()} history={app.history}/>
         </MemoryRouter>
       );
-      expect(wrapper.find(NotFound)).toHaveLength(1);
+      expect(mountWrapper.find(NotFound)).toHaveLength(1);
     });
   });
 });

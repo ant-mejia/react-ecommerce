@@ -9,6 +9,7 @@ const userProfile = db.define('userProfile', {
     type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true,
+    defaultValue: helpers.generateUid(),
     unique: true
   },
   firstName: {

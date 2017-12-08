@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component - Lifecycle Renders correctly without errors 1`] = `
+<header
+  className="c-header"
+>
+  <div
+    className="c-header-menu u-fixed"
+  >
+    <div
+      className="c-header-menu_button"
+    >
+      <span />
+    </div>
+  </div>
+  <div
+    className="c-header-container"
+  >
+    <div
+      className="c-header-container_menu"
+    >
+      <div
+        className="c-header-container_menu-wrapper"
+      >
+        <Link
+          className="c-header-container_menu-item"
+          replace={false}
+          to="/index"
+        >
+          Home
+        </Link>
+        <Link
+          className="c-header-container_menu-item"
+          replace={false}
+          to="/index"
+        >
+          Home
+        </Link>
+        <Link
+          className="c-header-container_menu-item"
+          replace={false}
+          to="/index"
+        >
+          Home
+        </Link>
+        <Link
+          className="c-header-container_menu-item"
+          replace={false}
+          to="/index"
+        >
+          Home
+        </Link>
+        <Link
+          className="c-header-container_menu-item"
+          replace={false}
+          to="/index"
+        >
+          Home
+        </Link>
+        <Link
+          className="c-header-container_menu-item"
+          replace={false}
+          to="/index"
+        >
+          Home
+        </Link>
+        <div
+          className="c-header-container_menu-item-alternate-wrapper"
+        >
+          <Link
+            replace={false}
+            to="/login"
+          >
+            <p
+              className="c-header-container_menu-item-alternate-item"
+            >
+              Sign In
+            </p>
+          </Link>
+          <Link
+            replace={false}
+            to="/register"
+          >
+            <p
+              className="c-header-container_menu-item-alternate-item"
+            >
+              Register
+            </p>
+          </Link>
+          <p
+            className="c-header-container_menu-item-alternate-item"
+          >
+            Link
+          </p>
+        </div>
+        <div
+          className="c-header-container_menu-footer"
+        >
+          This is a really, really, really, really, really, really, really, really, really, really, really, long sentence
+        </div>
+      </div>
+    </div>
+    <div
+      className="c-header-container_page-stack"
+    />
+  </div>
+</header>
+`;

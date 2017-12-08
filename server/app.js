@@ -18,6 +18,7 @@ const slogger = require('slogged')
 const moment = require('moment');
 const sessionManager = require('./managers/sessionManager');
 const authManager = require('./managers/authManager');
+const socketManager = require('./managers/socketManager');
 const helpers = require('./helpers');
 var get_ip = require('ipware')().get_ip;
 // Setup logger
@@ -39,6 +40,7 @@ io.engine.generateId = (req) => {
 server.listen(3030);
 
 io.on('connection', (socket) => {
+  socketManager.logIt('item');
   sessionManager.createSession(socket);
   console.log("Socket connected: " + socket.id);
   socket.on('session/view', (data) => {
