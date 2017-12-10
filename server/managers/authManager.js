@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 let loginUser = () => {
-
   return { type: 'success', data: { jwt: helpers.generateToken({ email: 'test', password: 'jgkhh' }) } }
 }
 

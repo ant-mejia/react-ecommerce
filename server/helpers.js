@@ -15,6 +15,11 @@ const generateUid = (length = 30, uuid = false) => {
   return text;
 }
 
+const isFunction = (functionToCheck) => {
+  var getType = {};
+  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+}
+
 const verboseMessage = (type, message) => {
   return { type, message }
 }
@@ -62,8 +67,19 @@ const generateToken = (data, secret = process.env.SK) => {
   return jwt.sign(data, secret, { expiresIn: '30d' });
 }
 
+const verifyToken = (token, cb, secret = process.env.SK) => {
+  jwt.verify(token, secret, (err, decoded) => {
+    if (err) {
+      console.log(err);
+    } else if (isFunction(cb)) {
+      cb(decoded);
+    }
+    console.log(decoded);
+  });
+}
+
 const comparePass = (userPassword, databasePassword) => {
   return bcrypt.compareSync(userPassword, databasePassword);
 }
 
-module.exports = { generateUid, validateEmail, generateToken, comparePass };
+module.exports = { isFunction, generateUid, validateEmail, generateToken, comparePass, verifyToken };

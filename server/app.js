@@ -40,6 +40,7 @@ io.engine.generateId = (req) => {
 server.listen(3030);
 
 io.on('connection', (socket) => {
+  helpers.verifyToken('asd', (a) => console.log(a))
   socketManager.logIt('item');
   sessionManager.createSession(socket);
   console.log("Socket connected: " + socket.id);

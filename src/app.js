@@ -6,6 +6,7 @@ import store from 'store';
 import Routes from './routes';
 import './style/main.css';
 
+import _ from 'lodash'
 import io from 'socket.io-client';
 import createHistory from 'history/createBrowserHistory';
 
@@ -50,6 +51,10 @@ class App extends Component {
     })
   }
 
+  getStore = (prop) => {
+    return this.state.store[prop];
+  }
+
   listenHistory = () => {
     this.socket.emit('session/view', { path: this.history.location.pathname, type: 'test' })
     this.setState({
@@ -62,7 +67,17 @@ class App extends Component {
     return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
   }
 
-  isUserAuth = () => this.state.store.user !== undefined;
+  isUserAuth = (method) => {
+    if (this.getStore('user') !== undefined) {
+      if (method === 'strict') {
+        this.socket.emit('auth/authenticate', {
+          method,
+          user: this.state.store.user
+        })
+      }
+    }
+    return this.state.store.user !== undefined
+  };
 
   toggleHeader = () => {
     this.setState({ activeHeader: !this.state.activeHeader })
@@ -88,7 +103,10 @@ class App extends Component {
   }
 
   actions = (arr = []) => {
-    console.log("ARGUMENTS: ", arr);
+    if (typeof arr === 'string') {
+      let newArray = [arr];
+      arr = newArray;
+    }
     let methods = {}
     let keys = Object.keys(this)
     keys.map((item) => {
@@ -108,6 +126,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(_.has(this.state.store.user, 'jwt'));
     return (
       <div id="app" className={this.state.activeHeader ? 'header_active' : ''}>
         <Router history={this.history}>
