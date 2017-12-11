@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser')
 const morgan = require('morgan');
 const jwt = require('jsonwebtoken');
 const path = require('path');
@@ -14,6 +15,7 @@ require('dotenv').config();
 const authHelpers = require('./auth/auth-helpers');
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+const passportSocketIo = require('passport.socketio');
 const slogger = require('slogged')
 const moment = require('moment');
 const sessionManager = require('./managers/sessionManager');
@@ -27,20 +29,20 @@ fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 // let stream = rfs('file.log', { size: '10M', interval: '1d', path: logDirectory });
 
 morgan.token('type', function(req, res) { return req.user ? req.user.email : 'anonymous' });
-morgan.token('moment', function(req, res) { return moment().format("MM/DD/YYYY h:mm:ss a Z") });
+morgan.token('moment', function(req, res) { return moment().format('MM/DD/YYYY h:mm:ss a Z') });
 app.use(morgan(':remote-addr - :type :referrer :moment ":method :url HTTP/:http-version" :status :response-time ms'));
 // app.use(morgan(':remote-addr - :type :referrer :moment ":method :url HTTP/:http-version" :status :response-time ms', {
 // stream: stream
 // }));
 io.use(slogger());
-io.engine.generateId = (req) => {
+io.engine.generateId = () => {
   return helpers.generateUid(); // custom id must be unique
 }
 // OLD!
 server.listen(3030);
 
 io.on('connection', (socket) => {
-  helpers.verifyToken('asd', (a) => console.log(a))
+  helpers.verifyToken(helpers.generateToken({ data: 'test' }), (a) => console.log('boom!', a))
   socketManager.logIt('item');
   sessionManager.createSession(socket);
   console.log("Socket connected: " + socket.id);
@@ -51,7 +53,12 @@ io.on('connection', (socket) => {
     })
   });
   socket.on('auth/login', (data) => {
-    socket.emit('user/login', authManager.loginUser());
+    console.log(data);
+    authManager.loginUser(data.data)
+      .then((data) => {
+        socket.emit('user/login', socketManager.sendData('success', data));
+      })
+      .catch((item) => console.log('oh no!'));
   });
   socket.on('auth/register', (data) => {
     let successCallback = (data) => {

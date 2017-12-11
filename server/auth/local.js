@@ -7,8 +7,7 @@ const authHelpers = require('./auth-helpers');
 
 const options = {
   usernameField: 'email',
-  passwordField: 'password',
-  session: false
+  session: true
 };
 
 init();
@@ -20,13 +19,17 @@ passport.use(new LocalStrategy(options, (email, password, done) => {
       email: email
     }
   }).then((user) => {
-    if (!user || !authHelpers.comparePass(password, user.dataValues.password)) {
-      return done(null, false, 'Incorrect email/password');
-    } else {
-      return done(null, user.dataValues);
-    }
+    return new Promise(function(resolve, reject) {
+      if (!user || !authHelpers.comparePass(password, user.dataValues.password)) {
+        reject('Incorrect email/password');
+      } else {
+        resolve(user.dataValues);
+      }
+    });
   }).catch((err) => {
-    return done(err);
+    return new Promise(function(resolve, reject) {
+      reject('Local.js line 31')
+    });
   });
 }));
 

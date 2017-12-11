@@ -74,7 +74,6 @@ const verifyToken = (token, cb, secret = process.env.SK) => {
     } else if (isFunction(cb)) {
       cb(decoded);
     }
-    console.log(decoded);
   });
 }
 

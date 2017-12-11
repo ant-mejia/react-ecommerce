@@ -3,14 +3,22 @@ const models = require('../../db/models/index');
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
-    done(null, user.uid);
+    return new Promise(function(resolve, reject) {
+      if (user) {
+        resolve(user.uid);
+      } else {
+        reject('ugh!')
+      }
+    });
   });
 
   passport.deserializeUser((uid, done) => {
-    models.Users.findById(uid).then((user) => {
-      done(null, user);
-    }).catch((err) => {
-      done(err, null);
+    return new Promise(function(resolve, reject) {
+      models.users.findById(uid).then((user) => {
+        resolve(user)
+      }).catch((err) => {
+        reject('boo!');
+      });
     });
   });
 };

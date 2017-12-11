@@ -40,15 +40,23 @@ class App extends Component {
     return store.get(key);
   }
 
-  setStore = (obj) => {
-    let keys = Object.keys(obj);
-    let newStore = { ...this.state.store };
-    keys.map((key) => {
-      newStore[key] = obj[key];
-    });
-    this.setState({
-      store: newStore
-    })
+  setStore = (obj, temp) => {
+    if (temp !== undefined || temp !== null) {
+      console.log('sda');
+      let newStore = { ...this.state.store };
+      newStore[obj] = temp;
+      this.setState({ store: newStore })
+    } else {
+      console.log('asd');
+      let keys = Object.keys(obj);
+      let newStore = { ...this.state.store };
+      keys.map((key) => {
+        newStore[key] = obj[key];
+      });
+      this.setState({
+        store: newStore
+      })
+    }
   }
 
   getStore = (prop) => {
@@ -83,18 +91,17 @@ class App extends Component {
     this.setState({ activeHeader: !this.state.activeHeader })
   }
 
-  loginUser = (email, password, cb) => {
+  loginUser = (email, password) => {
     this.socket.emit('auth/login', { type: 'email', data: { email: 'a@antmejia.com', password: 'adasdsa' } })
     this.socket.on('user/login', (response) => {
-      if (response.type === 'success') {
-        if (this.isFunction(cb)) {
-          cb(response);
+      return new Promise((resolve, reject) => {
+        console.log('response recieved! ::: ', response);
+        if ('success' === 'success') {
+          this.setStore('user', response.data);
+          this.setStorage('jwa', response.data.token);
+          resolve(response.data)
         }
-        this.setStore({
-          user: response.data,
-        });
-        this.setStorage('jwa', response.data.jwt);
-      }
+      });
     });
   }
 

@@ -3,9 +3,52 @@ const helpers = require('../helpers');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const passport = require('../auth/local');
 
-let loginUser = () => {
-  return { type: 'success', data: { jwt: helpers.generateToken({ email: 'test', password: 'jgkhh' }) } }
+let validUserObj = (obj) => {
+  let options = {
+    notNull: obj !== null,
+    hasDataValue: obj.hasOwnProperty('dataValues')
+  };
+  for (var prop in options) {
+    if (options[prop] === false) {
+      return false;
+    }
+  }
+  return true;
+}
+
+let loginUser = (cred, method = 'email') => {
+  return new Promise((resolve, reject) => {
+    if (method === 'email') {
+      models.users.User.findOne({
+        where: {
+          email: cred.email
+        }
+      }).then((user) => {
+        if (validUserObj(user)) {
+          user = user.dataValues;
+          models.users.userProfile.findOne({
+            where: {
+              userUid: user.uid
+            }
+          }).then((profile) => {
+            if (profile !== null && profile.hasOwnProperty('dataValues')) {
+              user['profile'] = profile.dataValues;
+              let token = helpers.generateToken(user);
+              user['jwt'] = token;
+              resolve(user);
+            }
+          })
+        } else {
+          reject(Error("It broke"))
+        }
+      });
+    } else {
+      resolve({ data: "Stuff worked!" });
+      reject(Error("It broke"));
+    }
+  });
 }
 
 let createUser = (user, scb, fcb) => {
