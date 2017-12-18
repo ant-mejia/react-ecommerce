@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const db = require('../../index.js');
 
-const userLog = db.define('logUser', {
+const userEvent = db.define('userEvent', {
   uid: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -14,10 +14,14 @@ const userLog = db.define('logUser', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  event: {
+  method: {
     type: Sequelize.STRING,
     allowNull: false
-  }
+  },
+  eventType: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
 });
 
-module.exports = userLog;
+module.exports = userEvent;

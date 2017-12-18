@@ -4,11 +4,10 @@ const moment = require('moment');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const passport = require('../auth/local');
-
+const Sifter = require('sifter');
 let validUserObj = (obj) => {
   let options = {
-    notNull: obj !== null,
-    hasDataValue: obj.hasOwnProperty('dataValues')
+    notNull: obj !== null
   };
   for (var prop in options) {
     if (options[prop] === false) {
@@ -18,7 +17,7 @@ let validUserObj = (obj) => {
   return true;
 }
 
-let loginUser = (cred, method = 'email') => {
+this.loginUser = (cred, method = 'email') => {
   return new Promise((resolve, reject) => {
     if (method === 'email') {
       models.users.User.findOne({
@@ -26,62 +25,116 @@ let loginUser = (cred, method = 'email') => {
           email: cred.email
         }
       }).then((user) => {
+        // console.log('Password Verification: ::: ', helpers.comparePass(cred.password, user.password));
         if (validUserObj(user)) {
           user = user.dataValues;
-          models.users.userProfile.findOne({
-            where: {
-              userUid: user.uid
-            }
-          }).then((profile) => {
-            if (profile !== null && profile.hasOwnProperty('dataValues')) {
-              user['profile'] = profile.dataValues;
-              let token = helpers.generateToken(user);
-              user['jwt'] = token;
-              resolve(user);
-            }
-          })
+          if (this.comparePass(cred.password, user.password)) {
+            models.users.userProfile.findOne({
+              where: {
+                userUid: user.uid
+              }
+            }).then((profile) => {
+              if (profile !== null && profile.hasOwnProperty('dataValues')) {
+                user['profile'] = profile.dataValues;
+                let token = helpers.generateToken(user);
+                user['token'] = token;
+                resolve(user);
+              }
+            });
+          } else {
+            return reject(helpers.error('Authentication', "Invalid Password", "The password provided is invalid"));
+          }
         } else {
-          reject(Error("It broke"))
+          return reject(helpers.error('Authentication', "Invalid Email", "The email address provided is invalid"));
+        }
+      });
+    } else if (method === 'auto') {
+      models.users.User.findOne({
+        where: {
+          email: cred.email
+        }
+      }).then((user) => {
+        // console.log('Password Verification: ::: ', helpers.comparePass(cred.password, user.password));
+        if (validUserObj(user)) {
+          user = user.dataValues;
+          if (cred.password === user.password) {
+            models.users.userProfile.findOne({
+              where: {
+                userUid: user.uid
+              }
+            }).then((profile) => {
+              if (profile !== null && profile.hasOwnProperty('dataValues')) {
+                user['profile'] = profile.dataValues;
+                let token = helpers.generateToken(user);
+                user['token'] = token;
+                resolve(user);
+              }
+            });
+          } else {
+            return reject(helpers.error('Authentication', "Invalid Password", "The password provided is invalid"));
+          }
+        } else {
+          return reject(helpers.error('Authentication', "Invalid Email", "The email address provided is invalid"));
         }
       });
     } else {
       resolve({ data: "Stuff worked!" });
-      reject(Error("It broke"));
     }
   });
 }
 
-let createUser = (user, scb, fcb) => {
-  models.users.User.create({
-    uid: helpers.generateUid(30, true),
-    email: user.email,
-    password: validatePassword(user.password),
-    firstname: user.firstname,
-    lastname: user.lastname,
-    party: user.party || null
-  }).then((user) => {
-    user = user.dataValues;
-    models.users.userProfile.create({
+this.logoutUser = (id) => {
+  console.log(id);
+}
+
+this.logUser = (type, method, eventType, obj) => {
+  return new Promise(function(resolve, reject) {
+    models.logs.userEvent.create({
       uid: helpers.generateUid(),
-      firstName: 'First',
-      lastName: 'Last',
-      userUid: user.uid
-    }).then((profile) => {
-      user.profile = profile.dataValues;
-      let token = jwt.sign(user, process.env.SK);
-      scb({ user, token });
-    }).catch((a, b) => {
-      fcb(a, b)
+      type,
+      method,
+      eventType,
+      userUid: obj.userUid,
+      sessionUid: obj.sessionUid
+    }).then((log) => {
+      resolve(log);
+    }).catch((err) => {
+      reject(helpers.error());
+    })
+  });
+}
+this.createUser = (user) => {
+  return new Promise(function(resolve, reject) {
+    models.users.User.create({
+      uid: helpers.generateUid(30, true),
+      email: user.email,
+      password: helpers.hashPass(user.password)
+    }).then((account) => {
+      userData = account.dataValues;
+      models.users.userProfile.create({
+        uid: helpers.generateUid(),
+        firstName: user.firstName,
+        lastName: user.lastName,
+        userUid: userData.uid
+      }).then((profile) => {
+        userData.profile = profile.dataValues;
+        let token = helpers.generateToken(userData);
+        userData.token = token;
+        resolve(userData);
+      }).catch((err) => {
+        // Reject error
+        reject(err);
+      });
+    }).catch((err) => {
+      // Reject error
+      reject(err);
     });
-  }).catch((a, b) => {
-    fcb(a, b)
   });
 }
 
-let validatePassword = (password) => {
-  const salt = bcrypt.genSaltSync();
-  const hash = bcrypt.hashSync(password, salt);
-  console.log(password, helpers.comparePass(password, hash));
-  return hash;
+
+this.comparePass = (userPassword, databasePassword) => {
+  return bcrypt.compareSync(userPassword, databasePassword);
 }
-module.exports = { loginUser, createUser };
+
+module.exports = this;

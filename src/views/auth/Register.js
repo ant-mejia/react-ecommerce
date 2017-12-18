@@ -7,10 +7,11 @@ class Register extends Component {
     e.preventDefault();
     let user = {
       email: this.refs.email.value,
-      password: 'adadadadsa'
+      password: this.refs.password.value,
+      firstName: this.refs.firstname.value,
+      lastName: this.refs.lastname.value
     };
     this.props.actions.registerUser(user);
-    console.log('re');
   }
 
   render() {
@@ -27,7 +28,10 @@ class Register extends Component {
       <div className="c-page">
         <h2>Register User</h2>
         <form onSubmit={e => this.registerUser(e)}>
-          <input ref="email" type="text"/>
+          <input ref="email" placeholder="email" type="text"/>
+          <input ref="password" placeholder="password" type="password"/>
+          <input ref="firstname" placeholder="firstname" type="text"/>
+          <input ref="lastname" placeholder="lastname" type="text"/>
           <input type="submit"/>
         </form>
       </div>

@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const db = require('../../index.js');
 
-const cart = db.define('cart', {
+const Cart = db.define('cart', {
   uid: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -18,11 +18,15 @@ const cart = db.define('cart', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  viewedAt: {
+  addedAt: {
+    type: Sequelize.DATE,
+    allowNull: false
+  },
+  removedAt: {
     type: Sequelize.DATE,
     allowNull: true
   }
 
 });
 
-module.exports = cart;
+module.exports = Cart;

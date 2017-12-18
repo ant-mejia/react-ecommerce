@@ -2,25 +2,23 @@
 
 const Sequelize = require('sequelize');
 const db = require('../../index.js');
+const helpers = require('../../../server/helpers');
 
-const Session = db.define('sessions', {
+const searchHistory = db.define('searchHistory', {
   uid: {
     type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true,
+    defaultValue: helpers.generateUid(),
     unique: true
   },
-  device: {
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  description: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  timeStart: {
-    type: Sequelize.DATE,
-    allowNull: false
-  },
-  timeEnd: {
-    type: Sequelize.DATE
-  }
 });
-
-module.exports = Session;
+module.exports = searchHistory;

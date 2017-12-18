@@ -1,5 +1,5 @@
 'use strict';
 
-const userLog = require('./userLog');
+const userEvent = require('./userEvent');
 
-module.exports = { userLog };
+module.exports = { userEvent };

@@ -11,6 +11,9 @@ import Login from './views/auth/Login';
 import Register from './views/auth/Register';
 import AuthRoute from './containers/AuthRoute';
 import Account from './views/auth/Account';
+import Collections from './views/product/Collections';
+import Search from './views/Search';
+import NotificationContainer from './containers/NotificationContainer'
 
 class Routes extends Component {
   constructor(props) {
@@ -32,11 +35,15 @@ class Routes extends Component {
           {/* <div className="c-page_stack">
             <Page/>
           </div> */}
+          <NotificationContainer notifications={this.props.notifications}/>
           <div className="c-page_wrapper">
             <Switch onEnter={() => {console.log('bb');}}>
               <Route exact path="/" component={Index} />
               <Route exact path="/about" component={About} />
               <Route exact path="/app" component={Index} />
+              <Route exact path="/collections" component={Collections} />
+              <Route path="/collections/:collection" component={Collections}/>
+              <Route exact path="/search" component={() => <Search socket={this.props.socket}/> } />
               <Route exact path="/login" component={({location, history}) => <Login location={location} actions={this.props.actions}/>} />
               <Route exact path="/register" component={({location, history}) => <Register location={location} actions={this.props.actions}/>} />
               <AuthRoute path="/account" psda={'sadas'} actions={this.props.actions} store={this.props.store} component={() => <Account actions={this.props.actions} store={this.props.store}/>}/>

@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const db = require('../../index.js');
 
-const notification = db.define('notification', {
+const Notification = db.define('notification', {
   uid: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -22,7 +22,6 @@ const notification = db.define('notification', {
     type: Sequelize.DATE,
     allowNull: true
   }
-
 });
 
-module.exports = notification;
+module.exports = Notification;

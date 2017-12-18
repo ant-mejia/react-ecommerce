@@ -4,7 +4,22 @@ const passport = require('./auth/local');
 const Isemail = require('isemail');
 const uuidv4 = require('uuid/v4');
 
-const generateUid = (length = 30, uuid = false) => {
+this.error = (type = 'Server', title = 'Unkown error occured', message = 'An unknown error occured') => {
+  return {
+    type,
+    title,
+    message
+  }
+}
+
+this.hashPass = (pass) => {
+  const salt = bcrypt.genSaltSync();
+  const hash = bcrypt.hashSync(pass, salt);
+  // console.log(password, helpers.comparePass(password, hash));
+  return hash;
+}
+
+this.generateUid = (length = 30, uuid = false) => {
   if (uuid === true) {
     return uuidv4();
   };
@@ -15,16 +30,16 @@ const generateUid = (length = 30, uuid = false) => {
   return text;
 }
 
-const isFunction = (functionToCheck) => {
+this.isFunction = (functionToCheck) => {
   var getType = {};
   return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 }
 
-const verboseMessage = (type, message) => {
+this.verboseMessage = (type, message) => {
   return { type, message }
 }
 
-const validateEmail = (email, arr = process.env.Blacklist, verbose = false) => {
+this.validateEmail = (email, arr = process.env.Blacklist, verbose = false) => {
   console.log('Blacklist: ', arr.split(','));
   if (typeof arr !== 'array') {
     if (arr.indexOf(',') >= 0) {
@@ -63,22 +78,24 @@ const validateEmail = (email, arr = process.env.Blacklist, verbose = false) => {
   }
 }
 
-const generateToken = (data, secret = process.env.SK) => {
+this.generateToken = (data, secret = process.env.SK) => {
   return jwt.sign(data, secret, { expiresIn: '30d' });
 }
 
-const verifyToken = (token, cb, secret = process.env.SK) => {
-  jwt.verify(token, secret, (err, decoded) => {
-    if (err) {
-      console.log(err);
-    } else if (isFunction(cb)) {
-      cb(decoded);
-    }
+this.verifyToken = (token, secret = process.env.SK) => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, secret, (err, decoded) => {
+      if (err) {
+        reject(this.error('Server', 'Token unauthorized'));
+      } else {
+        resolve(decoded);
+      }
+    });
   });
 }
 
-const comparePass = (userPassword, databasePassword) => {
+this.comparePass = (userPassword, databasePassword) => {
   return bcrypt.compareSync(userPassword, databasePassword);
 }
 
-module.exports = { isFunction, generateUid, validateEmail, generateToken, comparePass, verifyToken };
+module.exports = this;

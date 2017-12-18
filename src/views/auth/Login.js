@@ -10,7 +10,7 @@ class Login extends Component {
 
   logIn = (event) => {
     event.preventDefault();
-    this.props.actions.loginUser("email", "password");
+    this.props.actions.loginUser(this.refs.emailInput.value, this.refs.passwordInput.value);
   }
 
   render() {
@@ -32,8 +32,8 @@ class Login extends Component {
         </div>
         <h1>Log In</h1>
         <form onSubmit={e => this.logIn(e)}>
-          <input type="text" placeholder="email"/>
-          <input type="password" placeholder="password"/>
+          <input type="text" ref="emailInput" placeholder="email"/>
+          <input type="password" ref="passwordInput" placeholder="password"/>
           <input type="submit"/>
         </form>
       </div>

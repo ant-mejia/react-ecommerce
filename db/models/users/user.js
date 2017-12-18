@@ -20,7 +20,10 @@ const User = db.define('users', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  privilege: Sequelize.ARRAY(Sequelize.STRING),
+  privilege: {
+    type: Sequelize.ARRAY(Sequelize.STRING)
+  },
+
 }, {
   validate: {
     validEmail() {

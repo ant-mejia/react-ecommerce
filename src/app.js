@@ -16,17 +16,60 @@ class App extends Component {
     super(props);
     this.state = {
       activeHeader: false,
-      store: {}
+      store: {},
+      notifications: []
     };
     this.history.listen(this.listenHistory);
     this.socket = io('http://localhost:3030');
     this.socket.on('connect', () => {
       this.listenHistory();
     });
+    this.socket.on('user/login', (response) => {
+      console.log(response);
+      this.setState({ waiting: undefined });
+      if (response.type === 'success') {
+        this.setStore('user', response.data);
+        if (response.method !== 'auto') {
+          this.setStorage('jtk', response.data.token);
+        }
+        // resolve(response.data)
+      } else if (response.type === 'error') {
+        console.log(response.error.message);
+        if (response.method === 'auto') {
+          this.removeStorage('jtk');
+        }
+      }
+    });
+    this.socket.on('session/notify', (response) => {
+      if (response.type === 'success') {
+        let notifications = this.state.notifications;
+        notifications.push(response.data);
+        console.log('notifications: ', notifications);
+        console.log('New notifications: ', 'newNotifications');
+        this.setState({ notifications: notifications });
+
+      }
+    });
   }
+  componentWillMount() {
+    if (this.getStorage('jtk') !== undefined && this.getStore('user') === undefined) {
+      this.setState({ waiting: true });
+      this.socket.emit('auth/authenticate', this.getStorage('jtk'));
+    };
+  }
+
   componentDidMount() {}
+
   setStorage = (key, value) => {
-    store.set(key, value)
+    if (value === null) {
+      store.remove(key);
+    } else {
+      store.set(key, value);
+    }
+  }
+
+  removeStorage = (item) => {
+    store.remove(item);
   }
 
   getStorage = (key) => {
@@ -42,12 +85,10 @@ class App extends Component {
 
   setStore = (obj, temp) => {
     if (temp !== undefined || temp !== null) {
-      console.log('sda');
       let newStore = { ...this.state.store };
       newStore[obj] = temp;
       this.setState({ store: newStore })
     } else {
-      console.log('asd');
       let keys = Object.keys(obj);
       let newStore = { ...this.state.store };
       keys.map((key) => {
@@ -78,10 +119,10 @@ class App extends Component {
   isUserAuth = (method) => {
     if (this.getStore('user') !== undefined) {
       if (method === 'strict') {
-        this.socket.emit('auth/authenticate', {
-          method,
-          user: this.state.store.user
-        })
+        // this.socket.emit('auth/authenticate', {
+        //   method,
+        //   user: this.state.store.user
+        // })
       }
     }
     return this.state.store.user !== undefined
@@ -92,17 +133,13 @@ class App extends Component {
   }
 
   loginUser = (email, password) => {
-    this.socket.emit('auth/login', { type: 'email', data: { email: 'a@antmejia.com', password: 'adasdsa' } })
-    this.socket.on('user/login', (response) => {
-      return new Promise((resolve, reject) => {
-        console.log('response recieved! ::: ', response);
-        if ('success' === 'success') {
-          this.setStore('user', response.data);
-          this.setStorage('jwa', response.data.token);
-          resolve(response.data)
-        }
-      });
-    });
+    this.socket.emit('auth/login', { type: 'email', data: { email, password } });
+  }
+
+  logoutUser = () => {
+    this.socket.emit('auth/logout', this.getStore('user').uid);
+    this.setStore('user', undefined);
+    this.setStorage('jtk', undefined);
   }
 
   registerUser = (user) => {
@@ -132,12 +169,26 @@ class App extends Component {
     return methods;
   }
 
+  addNotification = (obj) => {
+    this.socket.emit('session/notification', obj)
+  }
+
+  renderNotification = () => {
+
+  }
+
+  componentWillUnmount() {
+    this.socket.disconnect();
+  }
+
   render() {
-    console.log(_.has(this.state.store.user, 'jwt'));
+    if (this.state.waiting === true) {
+      return <div/>
+    }
     return (
       <div id="app" className={this.state.activeHeader ? 'header_active' : ''}>
         <Router history={this.history}>
-          <Routes actions={this.actions()} activeHeader={this.state.activeHeader} store={this.state.store} history={this.history}/>
+          <Routes actions={this.actions()} activeHeader={this.state.activeHeader} store={this.state.store} socket={this.socket} notifications={this.state.notifications} history={this.history}/>
         </Router>
       </div>
     );

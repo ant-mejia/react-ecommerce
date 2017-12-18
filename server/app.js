@@ -22,6 +22,7 @@ const sessionManager = require('./managers/sessionManager');
 const authManager = require('./managers/authManager');
 const socketManager = require('./managers/socketManager');
 const helpers = require('./helpers');
+const Sifter = require('sifter');
 var get_ip = require('ipware')().get_ip;
 // Setup logger
 var logDirectory = path.join(__dirname, 'logs');
@@ -42,7 +43,6 @@ io.engine.generateId = () => {
 server.listen(3030);
 
 io.on('connection', (socket) => {
-  helpers.verifyToken(helpers.generateToken({ data: 'test' }), (a) => console.log('boom!', a))
   socketManager.logIt('item');
   sessionManager.createSession(socket);
   console.log("Socket connected: " + socket.id);
@@ -52,26 +52,76 @@ io.on('connection', (socket) => {
       type: data.type
     })
   });
+  socket.on('auth/authenticate', (token) => {
+    helpers.verifyToken(token)
+      .then((user) => {
+        let credentials = { email: user.email, password: user.password }
+        authManager.loginUser(credentials, 'auto').then((user) => {
+            socket.emit('user/login', socketManager.sendData('success', user));
+            authManager.logUser('login', 'auto-login', 'server-side', { userUid: user.uid, sessionUid: socket.id })
+            sessionManager.bindUser(socket, user.uid);
+          })
+          .catch((err) => {
+            socket.emit('user/login', socketManager.sendError(err));
+          });
+      })
+      .catch((err) => {
+        let error = socketManager.sendError(err);
+        error.method = 'auto';
+        socket.emit('user/login', error);
+      })
+  })
   socket.on('auth/login', (data) => {
     console.log(data);
     authManager.loginUser(data.data)
       .then((data) => {
         socket.emit('user/login', socketManager.sendData('success', data));
+        authManager.logUser('login', 'button-click', 'client-side', { userUid: data.uid, sessionUid: socket.id })
+        sessionManager.bindUser(socket, data.uid);
       })
-      .catch((item) => console.log('oh no!'));
+      .catch((err) => {
+        socket.emit('user/login', socketManager.sendError(err));
+      });
   });
+
+  socket.on('auth/logout', (userId) => {
+    authManager.logoutUser(userId);
+    authManager.logUser('logout', 'button-click', 'client-side', { userUid: userId, sessionUid: socket.id })
+  });
+
   socket.on('auth/register', (data) => {
-    let successCallback = (data) => {
-      let payload = {
-        type: 'success',
-        data
-      }
-      socket.emit('user/auth', payload)
-    }
-    let failureCallback = (arg) => {
-      console.log('failed callback!', arg);
-    }
-    authManager.createUser(data.user, successCallback, failureCallback)
+    authManager.createUser(data.user)
+      .then((user) => {
+        console.log('user created! ::: ', user);
+        socket.emit('user/login', socketManager.sendData('success', user, 'auto'));
+      })
+      .catch((err) => {
+        // send error
+        console.log(err.message);
+      })
+  });
+
+  socket.on('search', (search) => {
+    models.product.findAll().then((products) => {
+      let productArray = products.map((prd) => {
+        return prd.dataValues;
+      })
+      var sifter = new Sifter(productArray);
+      var result = sifter.search(search.query, {
+        fields: ['title', 'description'],
+        sort: [{ field: 'title', direction: 'asc' }],
+        limit: 3
+      });
+      let items = result.items.map((obj) => {
+        return productArray[obj.id]
+      })
+      socket.emit('search/results', items);
+    });
+  })
+
+  socket.on('session/notification', (obj) => {
+    obj.id = helpers.generateUid();
+    socket.emit('session/notify', socketManager.sendData('success', obj));
   })
   socket.on('action', (action) => {
     if (action.type === 'auth/hello') {
