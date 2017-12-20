@@ -4,19 +4,22 @@ import Notification from '../components/Notification';
 class NotificationContainer extends Component {
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('oo');
+    // console.log('oo');
   }
 
   handleClick = () => {
     console.log('bbo');
   }
+  closeNotification = (uid) => {
+    this.props.closeNotification(uid);
+  }
 
   render() {
     return (
-      <div>
+      <div className="c-notification_container">
         {
           this.props.notifications.map((item) => {
-            return <Notification key={this.props.notifications.indexOf(item)} message={"Notification message"} handleClick={this.handleClick}/>
+            return <Notification uid={item.uid} key={this.props.notifications.indexOf(item)} message={"Notification message"} closeNotification={this.closeNotification} handleClick={this.handleClick}/>
           })
         }
       </div>

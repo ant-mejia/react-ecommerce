@@ -2579,12 +2579,15 @@ header.c-header {
  * 1. Set position
  * 2. Dimensions
  */
+.c-notification_container {
+  position: fixed;
+  z-index: 1040;
+  left: 50%;
+  top: 40px; }
+
 .uk-notification {
   /* 1 */
-  position: fixed;
   top: 10px;
-  left: 10px;
-  z-index: 1040;
   /* 2 */
   box-sizing: border-box;
   width: 350px; }

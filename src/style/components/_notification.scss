@@ -42,12 +42,18 @@ $notification-message-danger-color: $global-danger-background !default;
  * 1. Set position
  * 2. Dimensions
  */
+.c-notification_container {
+  position: fixed;
+  z-index : $notification-z-index;
+  left    : 50%;
+  top     : 40px;
+}
+
 .uk-notification {
   /* 1 */
-  position  : fixed;
+  // position  : absolute;
   top       : $notification-position;
-  left      : $notification-position;
-  z-index   : $notification-z-index;
+  // left      : $notification-position;
   /* 2 */
   box-sizing: border-box;
   width     : $notification-width;

@@ -7,7 +7,6 @@ class Account extends Component {
   }
 
   render() {
-    console.log("Is User Auth: ", this.props.actions.isUserAuth('strict'));
     return (
       <div className="c-page">
         <h1>My Account</h1>

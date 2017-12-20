@@ -76,5 +76,37 @@ this.bindUser = (socket, uid) => {
   }).then((item) => {
     console.log(socket.id, uid);
   })
+};
+
+this.createNotification = (data, user) => {
+  console.log(data);
+  return new Promise(function(resolve, reject) {
+    models.users.Notification.create({
+        uid: helpers.generateUid(),
+        type: data.status,
+        title: data.title,
+        message: data.message,
+        userUid: user,
+        priority: data.priority
+      })
+      .then((item) => resolve(item))
+      .catch((error) => reject(error))
+  });
+}
+
+this.closeNotification = (uid) => {
+  return new Promise((resolve, reject) => {
+    models.users.Notification.update({ viewedAt: moment().format() }, {
+      where: {
+        uid: uid
+      }
+    }).then((item) => {
+      console.log('success!!');
+      resolve(item)
+    }).catch((error) => {
+      console.log('failure!!');
+      reject(error)
+    })
+  });
 }
 module.exports = this

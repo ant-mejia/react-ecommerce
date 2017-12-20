@@ -9,8 +9,16 @@ const Product = db.define('products', {
     type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true,
-    defaultValue: helpers.generateUid(30, true),
+    defaultValue: helpers.generateUid(),
     unique: true
+  },
+  path: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      is: /^\/(([A-z0-9\-])+$)/
+    }
   },
   title: {
     type: Sequelize.STRING,

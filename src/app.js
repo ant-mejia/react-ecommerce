@@ -47,7 +47,6 @@ class App extends Component {
         console.log('notifications: ', notifications);
         console.log('New notifications: ', 'newNotifications');
         this.setState({ notifications: notifications });
-
       }
     });
   }
@@ -170,7 +169,27 @@ class App extends Component {
   }
 
   addNotification = (obj) => {
-    this.socket.emit('session/notification', obj)
+    this.socket.emit('session/notification', {
+      type: 'create',
+      data: obj
+    })
+  }
+
+  testNotification = () => {
+    let obj = {
+      status: 'primary',
+      title: 'Title Notification',
+      message: 'This is just a test message',
+      priority: false
+    }
+    this.addNotification(obj)
+  }
+
+  closeNotification = (uid) => {
+    this.socket.emit('session/notification', {
+      type: 'close',
+      data: { uid: uid }
+    })
   }
 
   renderNotification = () => {

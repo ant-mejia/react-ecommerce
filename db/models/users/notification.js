@@ -14,8 +14,16 @@ const Notification = db.define('notification', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   message: {
     type: Sequelize.STRING,
+    allowNull: false
+  },
+  priority: {
+    type: Sequelize.BOOLEAN,
     allowNull: false
   },
   viewedAt: {

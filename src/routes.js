@@ -14,6 +14,7 @@ import Account from './views/auth/Account';
 import Collections from './views/product/Collections';
 import Search from './views/Search';
 import NotificationContainer from './containers/NotificationContainer'
+import ProductView from './views/product/ProductView';
 
 class Routes extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class Routes extends Component {
           {/* <div className="c-page_stack">
             <Page/>
           </div> */}
-          <NotificationContainer notifications={this.props.notifications}/>
+          <NotificationContainer closeNotification={this.props.actions.closeNotification} notifications={this.props.notifications}/>
           <div className="c-page_wrapper">
             <Switch onEnter={() => {console.log('bb');}}>
               <Route exact path="/" component={Index} />
@@ -43,6 +44,7 @@ class Routes extends Component {
               <Route exact path="/app" component={Index} />
               <Route exact path="/collections" component={Collections} />
               <Route path="/collections/:collection" component={Collections}/>
+              <Route path="/products/:product" component={({match}) => <ProductView match={match} socket={this.props.socket}/>}/>
               <Route exact path="/search" component={() => <Search socket={this.props.socket}/> } />
               <Route exact path="/login" component={({location, history}) => <Login location={location} actions={this.props.actions}/>} />
               <Route exact path="/register" component={({location, history}) => <Register location={location} actions={this.props.actions}/>} />

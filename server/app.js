@@ -119,9 +119,20 @@ io.on('connection', (socket) => {
     });
   })
 
-  socket.on('session/notification', (obj) => {
-    obj.id = helpers.generateUid();
-    socket.emit('session/notify', socketManager.sendData('success', obj));
+  socket.on('session/notification', (response) => {
+    if (response.type === 'close') {
+      sessionManager.closeNotification(response.data.uid)
+        .then(data => console.log(data))
+        .catch(error => console.log(error))
+    } else if (response.type === 'create') {
+      sessionManager.createNotification(response.data).then((data) => {
+        // console.log(data.dataValues);
+        socket.emit('session/notify', socketManager.sendData('success', data.dataValues));
+      })
+    }
+  })
+  socket.on('product/view', (data) => {
+    console.log(data);
   })
   socket.on('action', (action) => {
     if (action.type === 'auth/hello') {

@@ -4,14 +4,21 @@ import PropTypes from 'prop-types';
 
 class Notification extends Component {
 
+  closeNotification = () => {
+    this.props.closeNotification(this.props.uid)
+  }
+
   render() {
     return (
       <div className="uk-notification">
-        <Tappable className="uk-notification uk-notification-top-center" onTap={this.props.handleClick} onPress={this.props.handleClick}>
+        <div className="uk-notification uk-notification-top-center">
           <div className="uk-notification-message uk-transition">
-            <div>{this.props.message}</div>
+            <Tappable onTap={this.props.handleClick} onPress={this.props.handleClick}>
+              {this.props.message}
+            </Tappable>
+            <span className="" onClick={this.closeNotification}>X</span>
           </div>
-        </Tappable>
+        </div>
       </div>
     );
   }
