@@ -66,6 +66,18 @@ this.viewSessions = () => {
   return this.sessions;
 }
 
+this.getSession = (sessionId) => {
+  return new Promise(function(resolve, reject) {
+    models.sessions.Session.findById(sessionId)
+      .then((session) => {
+        resolve(session);
+      })
+      .catch((error) => {
+        reject(error);
+      })
+  });
+}
+
 this.bindUser = (socket, uid) => {
   models.sessions.Session.update({
     userUid: uid

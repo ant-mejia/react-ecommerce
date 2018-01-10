@@ -37,6 +37,12 @@ const Product = db.define('products', {
     type: Sequelize.BOOLEAN,
     allowNull: false
   },
+  clearance: {
+    type: Sequelize.INTEGER
+  },
+  releaseDate: {
+    type: Sequelize.DATE
+  },
   inventory: {
     type: Sequelize.INTEGER,
     allowNull: false

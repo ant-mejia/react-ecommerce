@@ -6,15 +6,10 @@ const jwt = require('jsonwebtoken');
 const passport = require('../auth/local');
 const Sifter = require('sifter');
 let validUserObj = (obj) => {
-  let options = {
-    notNull: obj !== null
-  };
-  for (var prop in options) {
-    if (options[prop] === false) {
-      return false;
-    }
-  }
-  return true;
+  // console.log(obj);
+  let returnValue = true;
+
+  return returnValue;
 }
 
 this.loginUser = (cred, method = 'email') => {
@@ -26,7 +21,8 @@ this.loginUser = (cred, method = 'email') => {
         }
       }).then((user) => {
         // console.log('Password Verification: ::: ', helpers.comparePass(cred.password, user.password));
-        if (validUserObj(user)) {
+        if (validUserObj(user.dataValues) && cred.email === user.dataValues.email) {
+          console.log('kill');
           user = user.dataValues;
           if (this.comparePass(cred.password, user.password)) {
             models.users.userProfile.findOne({
@@ -35,6 +31,7 @@ this.loginUser = (cred, method = 'email') => {
               }
             }).then((profile) => {
               if (profile !== null && profile.hasOwnProperty('dataValues')) {
+                console.log('profile found!');
                 user['profile'] = profile.dataValues;
                 let token = helpers.generateToken(user);
                 user['token'] = token;

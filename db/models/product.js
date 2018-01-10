@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 const db = require('../index.js');
 const helpers = require('../../server/helpers');
 
-const Product = db.define('products', {
+const Product = db.define('product', {
   uid: {
     type: Sequelize.STRING,
     allowNull: false,

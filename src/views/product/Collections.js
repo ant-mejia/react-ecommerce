@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class Collections extends Component {
+  componentDidMount() {
+    console.log('mounted');
+  }
 
   render() {
     return (

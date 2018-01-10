@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Router, Redirect, Link } from 'react-router-dom';
-
 import store from 'store';
-
 import Routes from './routes';
 import './style/main.css';
-
 import _ from 'lodash'
 import io from 'socket.io-client';
 import createHistory from 'history/createBrowserHistory';
@@ -23,9 +20,9 @@ class App extends Component {
     this.socket = io('http://localhost:3030');
     this.socket.on('connect', () => {
       this.listenHistory();
+      this.socket.emit('cart', { method: 'get' })
     });
     this.socket.on('user/login', (response) => {
-      console.log(response);
       this.setState({ waiting: undefined });
       if (response.type === 'success') {
         this.setStore('user', response.data);
@@ -40,6 +37,13 @@ class App extends Component {
         }
       }
     });
+
+    this.socket.on('update/cart', (response) => {
+      console.log(response.data);
+      if (response.type === 'success') {
+        this.setStore('cart', response.data)
+      }
+    })
     this.socket.on('session/notify', (response) => {
       if (response.type === 'success') {
         let notifications = this.state.notifications;
@@ -49,6 +53,10 @@ class App extends Component {
         this.setState({ notifications: notifications });
       }
     });
+
+    this.socket.on('cart/update', (cart) => {
+      console.log(cart);
+    })
   }
   componentWillMount() {
     if (this.getStorage('jtk') !== undefined && this.getStore('user') === undefined) {
@@ -194,6 +202,23 @@ class App extends Component {
 
   renderNotification = () => {
 
+  }
+
+  getProduct = (path) => {
+    this.socket.emit('session/:param', { parameter: "products", path })
+  }
+
+  addToCart = (productId) => {
+    console.log(productId);
+    let parcel = {
+      action: 'add',
+      data: {
+        product: {
+          uid: productId
+        }
+      }
+    };
+    this.socket.emit('cart', parcel)
   }
 
   componentWillUnmount() {

@@ -21,6 +21,8 @@ const moment = require('moment');
 const sessionManager = require('./managers/sessionManager');
 const authManager = require('./managers/authManager');
 const socketManager = require('./managers/socketManager');
+const productManager = require('./managers/productManager');
+const cartManager = require('./managers/cartManager');
 const helpers = require('./helpers');
 const Sifter = require('sifter');
 var get_ip = require('ipware')().get_ip;
@@ -57,6 +59,7 @@ io.on('connection', (socket) => {
       .then((user) => {
         let credentials = { email: user.email, password: user.password }
         authManager.loginUser(credentials, 'auto').then((user) => {
+            socket.userUid = user.uid;
             socket.emit('user/login', socketManager.sendData('success', user));
             authManager.logUser('login', 'auto-login', 'server-side', { userUid: user.uid, sessionUid: socket.id })
             sessionManager.bindUser(socket, user.uid);
@@ -102,7 +105,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('search', (search) => {
-    models.product.findAll().then((products) => {
+    models.products.Product.findAll().then((products) => {
       let productArray = products.map((prd) => {
         return prd.dataValues;
       })
@@ -131,9 +134,55 @@ io.on('connection', (socket) => {
       })
     }
   })
-  socket.on('product/view', (data) => {
-    console.log(data);
+  socket.on('session/:param', (response) => {
+    if (response.parameter === 'products') {
+      productManager.getProduct('path', response).then((data) => {
+        let package = socketManager.sendData('success', data);
+        package.renderCode = 200;
+        let userClearance = 0;
+        if (socket.userUid && data.availability === true) {
+          models.users.User.findById(socket.userUid)
+            .then((item) => {
+              userClearance = item.dataValues.privilege === null ? userClearance : item.dataValues.privilege;
+              if (userClearance < data.clearance) {
+                package.data.availability = false;
+              }
+              socket.emit('product/view', package);
+            }).catch((err) => {
+              console.log("error ::: ", err);
+              // user was not able to be found via userUid provided from socket.userUid
+              // 1. Reset user clearance to 0 (default user clearance)
+              // 2.
+              console.log('socket.userUid', socket.userUid);
+            });
+        } else {
+          if (userClearance < data.clearance) {
+            package.data.availability = false;
+          }
+          socket.emit('product/view', package);
+        }
+      }).catch((error) => {
+        let package = socketManager.sendError(error);
+        package.renderCode = 404;
+        socket.emit('product/view', package);
+        console.log("FAILURE!!", error);
+      })
+    }
+  });
+
+  socket.on('cart', (cart) => {
+    if (cart.action === 'add') {
+      console.log(cart);
+      cartManager.addToCart(cart.data.product.uid, socket.id).then((a) => {
+        console.log(a);
+        cartManager.getCartbyUserId(a.userUid).then((data) => {
+          console.log(data);
+          socket.emit('update/cart', socketManager.sendData('success', data));
+        });
+      });
+    }
   })
+
   socket.on('action', (action) => {
     if (action.type === 'auth/hello') {
       console.log('Got hello data!', action.data);

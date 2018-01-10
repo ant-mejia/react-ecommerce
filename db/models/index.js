@@ -10,5 +10,7 @@ const product = require('./product');
 sessions.Session.belongsTo(users.User);
 logs.userEvent.belongsTo(users.User);
 logs.userEvent.belongsTo(sessions.Session);
+users.Cart.belongsTo(sessions.Session, { foreignKey: { allowNull: false } });
+users.Cart.belongsTo(products.Product, { foreignKey: { allowNull: false } });
 
 module.exports = { product, products, Review, sessions, users, logs };

@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
+import NotFound from '../NotFound';
 
 class ProductView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.props.socket.on('')
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    return this.state !== nextState;
-  }
-
-  componentWillMount() {
-    this.props.socket.emit('product/view', {
-      path: `/${this.props.match.params.product}`
-    })
   }
 
 
   render() {
     console.log(this.props.match.params.product);
+    if (this.state.product === null) {
+      return <NotFound/>
+    }
     return (
       <div className="c-page">
         <h1>Page!</h1>

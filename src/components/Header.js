@@ -22,14 +22,14 @@ class Header extends Component {
             <div className="c-header-container_menu-wrapper">
               <Link className="c-header-container_menu-item" to="/index">Home</Link>
               <Link className="c-header-container_menu-item" to="/collections">Collections</Link>
-              <Link className="c-header-container_menu-item" to="/app">App</Link>
+              <Link className="c-header-container_menu-item" to="/search">Search</Link>
               <Link className="c-header-container_menu-item" to="/products/item">Item</Link>
-              <Link className="c-header-container_menu-item" to="/index">Home</Link>
-              <Link className="c-header-container_menu-item" to="/index">Home</Link>
+              <Link className="c-header-container_menu-item" to="/products/test-product">Test Product</Link>
+              <Link className="c-header-container_menu-item" to="/products/unavailable">Unavailable</Link>
               <div className="c-header-container_menu-item-alternate-wrapper">
                 <Link to="/login"><p className="c-header-container_menu-item-alternate-item">Sign In</p></Link>
                 <Link to="/register"><p className="c-header-container_menu-item-alternate-item">Register</p></Link>
-                <p className="c-header-container_menu-item-alternate-item">Link</p>
+                <Link to="/cart"><p className="c-header-container_menu-item-alternate-item">Cart</p></Link>
               </div>
               <div className="c-header-container_menu-footer">
                 This is a really, really, really, really, really, really, really, really, really, really, really, long sentence
