@@ -4,7 +4,7 @@ class Footer extends Component {
 
   render() {
     return (
-      <div>Footer</div>
+      <div className="u-bgcolor-white">Footer</div>
     );
   }
 

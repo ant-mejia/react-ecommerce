@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import ProductUnavailable from '../views/product/ProductUnavailable';
 import NotFound from '../views/NotFound';
+import ProductViewContainer from './ProductViewContainer';
 
 class ProductContainer extends Component {
   constructor(props) {
@@ -66,13 +67,7 @@ class ProductContainer extends Component {
         return <ProductUnavailable product={this.state.product}/>
       }
     }
-    return (
-      <div className="c-page">
-        <h2>{this.props.match.params.product}</h2>
-        <h4>{JSON.stringify(this.state.product)}</h4>
-        <button onClick={this.addToCart}>Add to cart</button>
-      </div>
-    );
+    return <ProductViewContainer addToCart={this.addToCart} product={this.state.product}/>
   }
 
 }

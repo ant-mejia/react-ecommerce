@@ -4,21 +4,13 @@ const Sequelize = require('sequelize');
 const db = require('../../index.js');
 const helpers = require('../../../server/helpers');
 
-const Product = db.define('products', {
+const Promo = db.define('promo', {
   uid: {
     type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true,
     defaultValue: helpers.generateUid(),
     unique: true
-  },
-  path: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      is: /^\/(([A-z0-9\-])+$)/
-    }
   },
   title: {
     type: Sequelize.STRING,
@@ -32,32 +24,25 @@ const Product = db.define('products', {
     type: Sequelize.TEXT,
     allowNull: false
   },
-  category: Sequelize.ARRAY(Sequelize.STRING),
-  price: {
-    type: Sequelize.DOUBLE,
+  promotion: {
+    type: Sequelize.JSON,
     allowNull: false
   },
-  availability: {
+  active: {
     type: Sequelize.BOOLEAN,
     allowNull: false
   },
   clearance: {
     type: Sequelize.INTEGER
   },
-  releaseDate: {
-    type: Sequelize.DATE
-  },
-  inventory: {
-    type: Sequelize.INTEGER,
+  startDate: {
+    type: Sequelize.DATE,
     allowNull: false
   },
-  presentationLevel: {
-    type: Sequelize.INTEGER,
+  endDate: {
+    type: Sequelize.DATE,
     allowNull: false
-  },
-  images: {
-    type: Sequelize.JSON
   }
 });
 
-module.exports = Product;
+module.exports = Promo;

@@ -7,6 +7,7 @@ class Header extends Component {
   }
 
   render() {
+    let cartLength = this.props.store.cart ? this.props.store.cart.length : 0;
     return (
       <header ref="header" className='c-header'>
         <div className="c-header-menu u-fixed">
@@ -29,7 +30,7 @@ class Header extends Component {
               <div className="c-header-container_menu-item-alternate-wrapper">
                 <Link to="/login"><p className="c-header-container_menu-item-alternate-item">Sign In</p></Link>
                 <Link to="/register"><p className="c-header-container_menu-item-alternate-item">Register</p></Link>
-                <Link to="/cart"><p className="c-header-container_menu-item-alternate-item">Cart</p></Link>
+                <Link to="/cart"><p className="c-header-container_menu-item-alternate-item">Cart ({cartLength})</p></Link>
               </div>
               <div className="c-header-container_menu-footer">
                 This is a really, really, really, really, really, really, really, really, really, really, really, long sentence

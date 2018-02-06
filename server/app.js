@@ -24,8 +24,11 @@ const socketManager = require('./managers/socketManager');
 const productManager = require('./managers/productManager');
 const cartManager = require('./managers/cartManager');
 const helpers = require('./helpers');
+const stripe = require('stripe')('pk_test_6NW0ufnPuIGneWb88nmNDvqR');
 const Sifter = require('sifter');
 var get_ip = require('ipware')().get_ip;
+var useragent = require('useragent');
+
 // Setup logger
 var logDirectory = path.join(__dirname, 'logs');
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
@@ -45,16 +48,50 @@ io.engine.generateId = () => {
 server.listen(3030);
 
 io.on('connection', (socket) => {
+  // var docs = gendoc(models).auto();
+  // console.log(docs);
+  // console.log();
+  console.log('socket.client.conn.remoteAddress', socket.client.conn.remoteAddress);
+  console.log('socket.request.connection.remoteAddress', socket.request.connection.remoteAddress);
+  console.log('socket.handshake.address', socket.handshake.address);
+  // console.log(stripe);
+  // stripe.charges.retrieve("ch_1BjZzCLDJXbTgH4wxZSFBUST", {
+  //   api_key: "sk_test_pt5W3nh0S1VIkw3gREYacV1B"
+  // });
+  // let socketKeys = Object.keys(socket.request.connection);
+  // socketKeys.map((key) => {
+  //   console.log(`${key} ::: ${socket[key]}`);
+  // })
+  console.log(socket.handshake.headers['user-agent']);
   socketManager.logIt('item');
   sessionManager.createSession(socket);
   console.log("Socket connected: " + socket.id);
   socket.on('session/view', (data) => {
+    /**
+     * @api {get} /session/view Create a view for session
+     * @apiName GetUser
+     * @apiGroup Session
+     *
+     * @apiParam {String} Path Path of the session view.
+     * @apiParam {String} Type Type of view that is being emitted.
+     * @apiParam {Object} Data object.
+     */
     sessionManager.createView(socket, {
       path: data.path,
       type: data.type
     })
   });
   socket.on('auth/authenticate', (token) => {
+    /**
+     * @api {socket} /auth/authenticate Authenticate user token
+     * @apiName GetUser
+     * @apiGroup User
+     * @apiPermission admim
+     *
+     * @apiParam {String} Path Path of the session view.
+     * @apiParam {String} Type Type of view that is being emitted.
+     * @apiParam {Object} Data object.
+     */
     helpers.verifyToken(token)
       .then((user) => {
         let credentials = { email: user.email, password: user.password }
@@ -63,6 +100,7 @@ io.on('connection', (socket) => {
             socket.emit('user/login', socketManager.sendData('success', user));
             authManager.logUser('login', 'auto-login', 'server-side', { userUid: user.uid, sessionUid: socket.id })
             sessionManager.bindUser(socket, user.uid);
+            socket.join(`user:${user.uid}`)
           })
           .catch((err) => {
             socket.emit('user/login', socketManager.sendError(err));
@@ -75,11 +113,21 @@ io.on('connection', (socket) => {
       })
   })
   socket.on('auth/login', (data) => {
+    /**
+     * @api {socket} /auth/login Log in User
+     * @apiName LoginUser
+     * @apiGroup User
+     *
+     * @apiParam {String} Path Path of the session view.
+     * @apiParam {String} Type Type of view that is being emitted.
+     * @apiParam {Object} Data object.
+     */
     console.log(data);
     authManager.loginUser(data.data)
       .then((data) => {
         socket.emit('user/login', socketManager.sendData('success', data));
         authManager.logUser('login', 'button-click', 'client-side', { userUid: data.uid, sessionUid: socket.id })
+        socket.join(`user:${data.uid}`)
         sessionManager.bindUser(socket, data.uid);
       })
       .catch((err) => {
@@ -88,11 +136,31 @@ io.on('connection', (socket) => {
   });
 
   socket.on('auth/logout', (userId) => {
+    /**
+     * @api {socket} /auth/logout Log out User
+     * @apiName LogoutUser
+     * @apiGroup User
+     *
+     * @apiParam {String} Path Path of the session view.
+     * @apiParam {String} Type Type of view that is being emitted.
+     * @apiParam {Object} Data object.
+     */
     authManager.logoutUser(userId);
     authManager.logUser('logout', 'button-click', 'client-side', { userUid: userId, sessionUid: socket.id })
+    socket.leave(`user:${userId}`)
+    socket.userUid = undefined;
   });
 
   socket.on('auth/register', (data) => {
+    /**
+     * @api {socket} /auth/register Register User
+     * @apiName RegisterUser
+     * @apiGroup User
+     *
+     * @apiParam {String} Path Path of the session view.
+     * @apiParam {String} Type Type of view that is being emitted.
+     * @apiParam {Object} Data object.
+     */
     authManager.createUser(data.user)
       .then((user) => {
         console.log('user created! ::: ', user);
@@ -136,7 +204,9 @@ io.on('connection', (socket) => {
   })
   socket.on('session/:param', (response) => {
     if (response.parameter === 'products') {
-      productManager.getProduct('path', response).then((data) => {
+      socket.join('session/products');
+      // io.in('session/products').emit('session/notify', socketManager.sendData('success', response));
+      productManager.getProduct('path', response, socket.userUid).then((data) => {
         let package = socketManager.sendData('success', data);
         package.renderCode = 200;
         let userClearance = 0;
@@ -172,14 +242,35 @@ io.on('connection', (socket) => {
 
   socket.on('cart', (cart) => {
     if (cart.action === 'add') {
-      console.log(cart);
+      // console.log(cart);
       cartManager.addToCart(cart.data.product.uid, socket.id).then((a) => {
-        console.log(a);
+        // console.log(a);
         cartManager.getCartbyUserId(a.userUid).then((data) => {
-          console.log(data);
+          // console.log(data);
           socket.emit('update/cart', socketManager.sendData('success', data));
+          socket.to(`user:${a.userUid}`).emit('update/cart', socketManager.sendData('success', data));
         });
       });
+    } else if (cart.action === 'remove') {
+      console.log(cart);
+      cartManager.removeFromCart(cart.data.cart.uid, socket.id).then((response) => {
+        console.log(response);
+        cartManager.getCartbyUserId(socket.userUid).then((data) => {
+          console.log(data);
+          socket.emit('update/cart', socketManager.sendData('success', data));
+          socket.to(`user:${socket.userUid}`).emit('update/cart', socketManager.sendData('success', data));
+        });
+      })
+    } else if (cart.action === 'get') {
+      if (cart.data) {
+        if (cart.data.userToken) {
+          helpers.verifyToken(cart.data.userToken).then((user) => {
+            cartManager.getCartbyUserId(user.uid).then((response) => {
+              socket.emit('update/cart', socketManager.sendData('success', response));
+            })
+          })
+        }
+      }
     }
   })
 

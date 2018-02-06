@@ -26,6 +26,12 @@
         }
       }
 
+      .#{$iota-components-pages-namespace + "_min"} {
+        background-color: #fff;
+        min-height      : 100vh;
+        min-width       : 100vw;
+      }
+
       .#{$iota-components-pages-namespace + "_main-section"} {
         @extend .#{$iota-components-pages-namespace};
       }

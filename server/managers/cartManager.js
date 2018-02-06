@@ -60,6 +60,20 @@ this.addToCart = (productId, socketId) => {
   });
 }
 
+this.removeFromCart = (cartId, socketId) => {
+  return new Promise((resolve, reject) => {
+    models.users.Cart.update({
+      removedAt: moment()
+    }, {
+      where: {
+        uid: cartId
+      }
+    }).then((item) => {
+      resolve(item)
+    })
+  });
+}
+
 this.getCartbyUserId = (userId) => {
   return new Promise(function(resolve, reject) {
     // make sure that the userId is currently valid.
@@ -72,6 +86,9 @@ this.getCartbyUserId = (userId) => {
       }
       models.users.Cart.findAll({
         where: { userUid: userId, removedAt: null },
+        order: [
+          ['addedAt', 'DESC']
+        ],
         include: [{ model: models.products.Product, required: true }]
       }).then((cart) => {
         resolve(cart);

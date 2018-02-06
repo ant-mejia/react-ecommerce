@@ -1,3 +1,5 @@
 const Product = require('./Product');
+const Promo = require('./Promo');
 
-module.exports = { Product };
+Promo.belongsTo(Product, { foreignKey: { allowNull: false } });
+module.exports = { Product, Promo };

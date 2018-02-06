@@ -14,9 +14,10 @@ import Account from './views/auth/Account';
 import Collections from './views/product/Collections';
 import Cart from './views/cart/Cart';
 import Search from './views/Search';
-import NotificationContainer from './containers/NotificationContainer'
-import ProductContainer from './containers/ProductContainer'
-
+import NotificationContainer from './containers/NotificationContainer';
+import ProductContainer from './containers/ProductContainer';
+import CheckoutContainer from './containers/CheckoutContainer';
+import Helmet from 'react-helmet';
 class Routes extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +33,12 @@ class Routes extends Component {
   render() {
     return (
       <div>
-        <Header toggleHeader={this.props.actions.toggleHeader}/>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>My Title</title>
+          <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
+        <Header store={this.props.store} toggleHeader={this.props.actions.toggleHeader}/>
         <div className="c-page_container">
           {/* <div className="c-page_stack">
             <Page/>
@@ -47,12 +53,14 @@ class Routes extends Component {
               <Route path="/collections/:collection" component={Collections}/>
               <Route path="/products/:product" render={({match}) => <ProductContainer actions={this.props.actions} match={match} socket={this.props.socket}/>}/>
               <Route exact path="/search" render={({match}) => <Search socket={this.props.socket}/> } />
-              <Route exact path="/cart" render={({match}) => <Cart store={this.props.store} actions={this.props.actions}/> } />
+              <Route exact path="/cart" component={({match}) => <Cart store={this.props.store} actions={this.props.actions}/> } />
               <Route exact path="/login" component={({location, history}) => <Login location={location} actions={this.props.actions}/>} />
               <Route exact path="/register" component={({location, history}) => <Register location={location} actions={this.props.actions}/>} />
               <AuthRoute path="/account" actions={this.props.actions} store={this.props.store} component={() => <Account actions={this.props.actions} store={this.props.store}/>}/>
+              <AuthRoute path="/checkout" actions={this.props.actions} store={this.props.store} component={() => <CheckoutContainer actions={this.props.actions} store={this.props.store}/>}/>
               <Route component={NotFound}/>
             </Switch>
+            <Footer/>
           </div>
         </div>
       </div>

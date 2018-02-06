@@ -41,7 +41,7 @@ this.createEvent = (socket, obj, cb) => {
   });
 }
 this.createSession = (socket) => {
-  this.sessions[socket.id] = 'online'
+  this.sessions[socket.id] = { status: 'online' }
   // console.log('socket headers: ', socket.handshake);
   // console.log(socket.id, 'session created!');
   models.sessions.Session.create({

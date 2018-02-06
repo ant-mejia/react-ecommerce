@@ -1,0 +1,58 @@
+// Options
+$iota-components-image-gallery: true;
+$iota-components-image-gallery-namespace: 'image-gallery' !default;
+$iota-components-image-gallery-container-name: 'container' !default;
+$iota-components-image-gallery-image-name: 'main-image' !default;
+$iota-components-image-gallery-slideshow-name: 'slideshow' !default;
+$iota-components-image-gallery-slideshow-slide-name: '-slide' !default;
+$iota-components-image-gallery-slideshow-slide-active-name: '-slide-active' !default;
+$iota-components-image-gallery-icon-name: 'icon' !default;
+$iota-components-image-gallery-padding: $iota-global-gutter-default !default;
+$iota-components-image-gallery-background: #f6f6f6 !default;
+$iota-components-image-gallery-container-background: rgb(255, 255, 255) !default; // Helper Local Variables
+// .c-image-gallery
+
+.#{$iota-global-components-namespace + $iota-components-image-gallery-namespace} {
+  display           : -webkit-flex;
+  display           : -ms-flex;
+  display           : flex;
+  flex-direction    : row;
+  -webkit-box-shadow: -29px 40px 116px -46px rgba(0,0,0,0.4);
+  -moz-box-shadow   : -29px 40px 116px -46px rgba(0,0,0,0.4);
+  box-shadow        : -29px 40px 116px -46px rgba(0,0,0,0.4);
+  // .c-image-gallery_main-image
+  .#{$iota-global-components-namespace + $iota-components-image-gallery-namespace + $iota-global-separator + $iota-components-image-gallery-image-name} {
+    background: $iota-components-image-gallery-background;
+  }
+  // .c-image-gallery_slideshow
+  .#{$iota-global-components-namespace + $iota-components-image-gallery-namespace + $iota-global-separator + $iota-components-image-gallery-slideshow-name} {
+    display       : -webkit-flex;
+    display       : -ms-flex;
+    display       : flex;
+    flex-direction: column;
+    border-left   : 2px solid rgba(0,0,0,0.075);
+    // .c-image-gallery_slideshow-slide
+    .#{$iota-global-components-namespace + $iota-components-image-gallery-namespace + $iota-global-separator + $iota-components-image-gallery-slideshow-name + $iota-components-image-gallery-slideshow-slide-name} {
+      width        : 50px;
+      border-bottom: 2px solid rgba(0,0,0,0.075);
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      img {
+        transition: opacity 0.2s linear;
+        width     : 100%;
+      }
+    }
+
+    .#{$iota-global-components-namespace + $iota-components-image-gallery-namespace + $iota-global-separator + $iota-components-image-gallery-slideshow-name + $iota-components-image-gallery-slideshow-slide-active-name} {
+      @extend .#{$iota-global-components-namespace + $iota-components-image-gallery-namespace + $iota-global-separator + $iota-components-image-gallery-slideshow-name + $iota-components-image-gallery-slideshow-slide-name};
+
+      img {
+        width  : 100%;
+        opacity: 0.3;
+      }
+    }
+  }
+}

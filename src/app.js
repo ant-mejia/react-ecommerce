@@ -63,6 +63,30 @@ class App extends Component {
       this.setState({ waiting: true });
       this.socket.emit('auth/authenticate', this.getStorage('jtk'));
     };
+    console.log(this.getStorage('jtk'), this.getStore('user'));
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.getStore('cart') === undefined) {
+      if (this.getStorage('jtk') === undefined && this.getStorage('gct') === undefined) {
+        // get a token for a guest user cart
+        // store it via localstorage
+        // set cart to empty Object
+      } else if (this.getStorage('jtk') === undefined && this.getStorage('gct')) {
+        // emit token to server to get guest cart
+        // upon retrival, set store - cart - to response object
+      } else if (this.getStorage('jtk') !== undefined) {
+        this.socket.emit('cart', { action: 'get', data: { userToken: this.getStorage('jtk') } })
+        this.setStore('cart', null)
+        // emit token to server to verify user
+        // if response is successful, set cart to response data
+        // if response is an error, make sure to remove the token and leave cart store undefined
+      }
+    } else if (this.getStore('cart')) {
+      if (this.getStorage('jtk') === undefined) {
+        this.setStore('cart', undefined)
+      }
+    }
   }
 
   componentDidMount() {}
@@ -209,7 +233,6 @@ class App extends Component {
   }
 
   addToCart = (productId) => {
-    console.log(productId);
     let parcel = {
       action: 'add',
       data: {
@@ -219,6 +242,21 @@ class App extends Component {
       }
     };
     this.socket.emit('cart', parcel)
+  }
+  removeFromCart = (cartId) => {
+    let parcel = {
+      action: 'remove',
+      data: {
+        cart: {
+          uid: cartId
+        }
+      }
+    };
+    this.socket.emit('cart', parcel)
+  }
+
+  checkoutUser = () => {
+    console.log('boo');
   }
 
   componentWillUnmount() {

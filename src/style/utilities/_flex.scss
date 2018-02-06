@@ -59,8 +59,12 @@ $iota-utils-flex-breakpoints: $iota-global-breakpoints;
   -webkit-justify-content: space-around;
   justify-content        : space-around;
 }
+
+.#{$iota-global-utilities-namespace + $iota-utils-flex-namespace + $iota-utils-flex-namespace-separator + 'col-reverse'} {
+  flex-direction: column-reverse;
+}
 @each $iota-utils-flex-var-breakpoint-name, $iota-utils-flex-var-breakpoint-size in $iota-utils-flex-breakpoints {
-   @media #{$iota-utils-flex-var-breakpoint-size}{
+  @media #{$iota-utils-flex-var-breakpoint-size} {
     .#{$iota-global-utilities-namespace + $iota-utils-flex-namespace + $iota-global-breakpoint-separator + $iota-utils-flex-var-breakpoint-name} {
       display: -webkit-flex;
       display: -ms-flex;
@@ -117,6 +121,10 @@ $iota-utils-flex-breakpoints: $iota-global-breakpoints;
       -ms-flex-pack          : distribute;
       -webkit-justify-content: space-around;
       justify-content        : space-around;
+    }
+
+    .#{$iota-global-utilities-namespace + $iota-utils-flex-namespace + $iota-utils-flex-namespace-separator + 'col-reverse' + $iota-global-breakpoint-separator + $iota-utils-flex-var-breakpoint-name} {
+      flex-direction: column-reverse;
     }
   }
 }

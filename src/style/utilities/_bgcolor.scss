@@ -3,17 +3,15 @@
  *
  * Type: Map
  */
-
-$iota-utils-bgcolor-names: ();
-
-
+$iota-utils-bgcolor-names: (
+  white   : #ffffff,
+  offwhite: #eeeeee,
+  black   : #000000,
+);
 /**
  * Namespace classes
  *
  * Type: String
  */
-
 $iota-utils-bgcolor-namespace: 'bgcolor-';
-
-
 @import 'node_modules/iotacss/utilities/bgcolor';
