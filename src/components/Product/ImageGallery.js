@@ -10,8 +10,7 @@ class ImageGallery extends Component {
 
   handleSlideClick = (a) => {
     if (this.props.children.indexOf(a) !== this.state.index) {
-      this.setState({ index: this.props.children.indexOf(a) })
-      console.log('boom');
+      this.setState({ index: this.props.children.indexOf(a) });
     }
   }
 
@@ -24,7 +23,7 @@ class ImageGallery extends Component {
           </div>
           {this.props.children[this.state.index]}
         </div>
-        <div className="c-image-gallery_slideshow">
+        <div className="c-image-gallery_slideshow u-bgcolor-offwhite">
           {this.props.children.map((item) => {
             let active = this.props.children.indexOf(item) === this.state.index
             return (

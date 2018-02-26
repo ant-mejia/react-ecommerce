@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Router, Redirect, Link } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import store from 'store';
 import Routes from './routes';
 import './style/main.css';
-import _ from 'lodash'
 import io from 'socket.io-client';
 import createHistory from 'history/createBrowserHistory';
 

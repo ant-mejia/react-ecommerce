@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router';
 import _ from 'lodash';
 import ProductUnavailable from '../views/product/ProductUnavailable';
 import NotFound from '../views/NotFound';
 import ProductViewContainer from './ProductViewContainer';
+import ProductReviews from '../views/product/reviews/ProductReviews';
 
 class ProductContainer extends Component {
   constructor(props) {
@@ -30,6 +32,7 @@ class ProductContainer extends Component {
   }
 
   componentDidMount() {
+    console.log('ooh mounted!', this.props.match);
     this.mounted = true;
     this.getProduct();
     if (this.preState !== undefined) {
@@ -38,7 +41,10 @@ class ProductContainer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.props.match.params.product !== nextProps.match.params.product || this.state !== nextState;
+    let productMatch = this.props.match.params.product !== nextProps.match.params.product;
+    let stateMatch = this.state !== nextState;
+    let locationMatch = this.props.location !== nextProps.location;
+    return productMatch || stateMatch || locationMatch;
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,6 +64,7 @@ class ProductContainer extends Component {
   }
 
   render() {
+    console.log(this.props.match);
     if (this.state.product === undefined) {
       return <div className="c-page"/>
     } else if (typeof this.state.product === 'object') {
@@ -67,7 +74,13 @@ class ProductContainer extends Component {
         return <ProductUnavailable product={this.state.product}/>
       }
     }
-    return <ProductViewContainer addToCart={this.addToCart} product={this.state.product}/>
+    return (
+      <Switch location={this.props.location}>
+        <Route exact path={this.props.match.path} component={() =>  <ProductViewContainer addToCart={this.addToCart} product={this.state.product}/>}/>
+        <Route path={this.props.match.path + '/:param'} component={ProductReviews}/>
+      </Switch>
+    )
+
   }
 
 }

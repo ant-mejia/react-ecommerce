@@ -9,9 +9,6 @@ const bcrypt = require('bcryptjs');
 const passportLocal = require('./auth/local');
 const db = require('../db/index');
 const app = express();
-const appAdmin = express();
-const appClient = express();
-const appVendor = express();
 const models = require('../db/models/index');
 const passport = require('passport');
 require('dotenv').config();
@@ -29,9 +26,8 @@ const cartManager = require('./managers/cartManager');
 const helpers = require('./helpers');
 const stripe = require('stripe')('pk_test_6NW0ufnPuIGneWb88nmNDvqR');
 const Sifter = require('sifter');
-const get_ip = require('ipware')().get_ip;
-const useragent = require('useragent');
-const subdomain = require('express-subdomain');
+var get_ip = require('ipware')().get_ip;
+var useragent = require('useragent');
 
 // Setup logger
 var logDirectory = path.join(__dirname, 'logs');
@@ -314,22 +310,8 @@ io.on('connection', (socket) => {
   });
 });
 
-var apiRouter = express.Router();
-
-//api specific routes
-apiRouter.get('/', function(req, res) {
-  res.send('Welcome to our API!');
-});
-
-apiRouter.get('/users', function(req, res) {
-  res.json([
-    { name: "Brian" }
-  ]);
-});
-
-app.use(subdomain('admin', express.static(path.resolve(__dirname, '..', 'build'))));
-
-
+// Setup logger
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 //json parser

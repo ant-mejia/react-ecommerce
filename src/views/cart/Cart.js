@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import View from '../../containers/View';
+import { Link } from 'react-router-dom';
 
 class Cart extends Component {
   constructor(props) {
@@ -14,10 +15,10 @@ class Cart extends Component {
   render() {
     if (this.state.cart) {
       return (
-        <div className="c-page">
+        <View>
           <h1>My Cart!</h1>
           {this.state.cart.map((item) => {
-            let keys = Object.keys(item);
+
             return (
               <div key={item.uid} className="c-container">
                 <h1>{item.product.title}</h1>
@@ -32,13 +33,13 @@ class Cart extends Component {
             )
           })}
           <Link to="/checkout"><button>Checkout</button></Link>
-        </div>
+        </View>
       );
     } else {
       return (
-        <div className="c-page">
+        <View>
           <h1>My Cart!</h1>
-        </div>
+        </View>
       )
     }
   }

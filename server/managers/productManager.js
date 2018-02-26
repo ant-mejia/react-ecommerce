@@ -13,7 +13,10 @@ this.getProduct = (method, data, userId) => {
               obj.dataValues.promotion = promo[0];
               obj.dataValues.promoPrice = `$${this.getPromoPrice(obj.dataValues)}`
               obj.dataValues.price = `$${obj.dataValues.price}`
-              resolve(obj.dataValues);
+              this.getReviews({ productId: obj.dataValues.uid }).then((reviews) => {
+                obj.dataValues.reviews = reviews
+                resolve(obj.dataValues);
+              });
             });
           } else {
             reject(helpers.error('Server', 'Product does not exist', message = 'This product does not exist'))
@@ -96,6 +99,29 @@ this.getPromoByProductId = async (productId, userId) => {
       })
     });
     console.log("privilege ::: ", privilege);
+  });;
+}
+
+this.getReviews = (obj) => {
+  return new Promise(function(resolve, reject) {
+    if (obj.productId) {
+      models.products.Review.findAll({
+        where: { productUid: obj.productId }
+      }).then((data) => {
+        let reviews = data.map((item) => {
+          let values = item.dataValues;
+          console.log("VALUE: ", values);
+          if (moment(values.createdAt).isSame(values.updatedAt)) {
+            values.edited = false;
+          } else {
+            values.edited = true;
+          }
+          return values;
+        });
+        console.log("REVIEWS ::: ", reviews);
+        resolve(reviews);
+      })
+    }
   });;
 }
 

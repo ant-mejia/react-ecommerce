@@ -1,0 +1,30 @@
+$iota-components-tab-name: 'tab';
+$iota-components-tab-active-name: 'active';
+$iota-components-tab-nav-name: 'header';
+$iota-components-tab-nav-item-name: 'item';
+$iota-components-tab-separator: '-'; // .c-tab
+
+.#{$iota-global-components-namespace + $iota-components-tab-name} {
+  // .c-tab_header
+  .#{$iota-global-components-namespace + $iota-components-tab-name + $iota-global-separator + $iota-components-tab-nav-name} {
+    list-style     : none;
+    display        : -webkit-flex;
+    display        : -ms-flex;
+    display        : flex;
+    justify-content: space-around;
+    flex-direction : column;
+    @include iota-breakpoint(sm) {
+      flex-direction: row;
+    }
+    // .c-tab_header-item
+    .#{$iota-global-components-namespace + $iota-components-tab-name + $iota-global-separator + $iota-components-tab-nav-name + $iota-components-tab-separator + $iota-components-tab-nav-item-name} {
+      color  : green;
+      cursor : pointer;
+      padding: 10px;
+
+      &.#{$iota-global-components-namespace + $iota-components-tab-name + $iota-global-separator + $iota-components-tab-nav-name + $iota-components-tab-separator + $iota-components-tab-nav-item-name + $iota-global-separator + $iota-components-tab-active-name} {
+        color: navy;
+      }
+    }
+  }
+}

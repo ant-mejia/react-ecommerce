@@ -17,9 +17,14 @@ $iota-components-image-gallery-container-background: rgb(255, 255, 255) !default
   display           : -ms-flex;
   display           : flex;
   flex-direction    : row;
-  -webkit-box-shadow: -29px 40px 116px -46px rgba(0,0,0,0.4);
-  -moz-box-shadow   : -29px 40px 116px -46px rgba(0,0,0,0.4);
-  box-shadow        : -29px 40px 116px -46px rgba(0,0,0,0.4);
+  -webkit-box-shadow: -29px 40px 87px -46px rgba(0,0,0,0.4);
+  -moz-box-shadow   : -29px 40px 87px -46px rgba(0,0,0,0.4);
+  box-shadow        : -29px 40px 87px -46px rgba(0,0,0,0.4);
+  @include iota-breakpoint(sm) {
+    -webkit-box-shadow: -29px 40px 116px -46px rgba(0,0,0,0.4);
+    -moz-box-shadow   : -29px 40px 116px -46px rgba(0,0,0,0.4);
+    box-shadow        : -29px 40px 116px -46px rgba(0,0,0,0.4);
+  };
   // .c-image-gallery_main-image
   .#{$iota-global-components-namespace + $iota-components-image-gallery-namespace + $iota-global-separator + $iota-components-image-gallery-image-name} {
     background: $iota-components-image-gallery-background;
@@ -30,10 +35,10 @@ $iota-components-image-gallery-container-background: rgb(255, 255, 255) !default
     display       : -ms-flex;
     display       : flex;
     flex-direction: column;
-    border-left   : 2px solid rgba(0,0,0,0.075);
     // .c-image-gallery_slideshow-slide
     .#{$iota-global-components-namespace + $iota-components-image-gallery-namespace + $iota-global-separator + $iota-components-image-gallery-slideshow-name + $iota-components-image-gallery-slideshow-slide-name} {
       width        : 50px;
+      border-left  : 2px solid rgba(0,0,0,0.075);
       border-bottom: 2px solid rgba(0,0,0,0.075);
 
       &:last-of-type {

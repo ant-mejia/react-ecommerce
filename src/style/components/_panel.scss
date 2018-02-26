@@ -1,0 +1,13 @@
+$iota-components-panel-name: 'panel';
+$iota-components-panel-active-name: 'active';
+$iota-components-panel-nav-name: 'header';
+$iota-components-panel-nav-item-name: 'item';
+$iota-components-panel-separator: '-'; // .c-panel
+
+.#{$iota-global-components-namespace + $iota-components-panel-name} {
+  flex-direction: column;
+  flex-wrap     : nowrap;
+  @include iota-breakpoint(sm) {
+    flex-direction: row;
+  };
+}

@@ -31,23 +31,23 @@ class TabContainer extends Component {
 
   render() {
     return (
-      <Tabs className={this.props.className}>
-        <TabList>
+      <Tabs className={this.props.className} selectedTabClassName={this.props.selectedTabClassName}>
+        <TabList className={this.props.navClass}>
           {
-            this.props.children.map((child) => {
+            this.props.children.map((child, index) => {
               if (child.type === TabPane && child.props.title.length > 0) {
                 return (
-                  <Tab>{child.props.title}</Tab>
+                  <Tab key={index} className={this.props.listClass}>{child.props.title}</Tab>
                 )
               }
             })
           }
         </TabList>
         {
-          this.props.children.map((child) => {
+          this.props.children.map((child, index) => {
             if (child.type === TabPane) {
               return (
-                <TabPanel>{child}</TabPanel>
+                <TabPanel key={index} className={child.props.className}>{child}</TabPanel>
               )
             } else {
               return (

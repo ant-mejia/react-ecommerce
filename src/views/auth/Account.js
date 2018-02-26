@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import View from '../../containers/View';
 
 class Account extends Component {
 
@@ -8,7 +9,7 @@ class Account extends Component {
 
   render() {
     return (
-      <div className="c-page">
+      <View>
         <h1>My Account</h1>
         <h2>This is my account</h2>
         <p>User ID: {this.getUser().uid}</p>
@@ -19,7 +20,7 @@ class Account extends Component {
         <p>First Name: {this.getUser().profile.firstName}</p>
         <p>Last Name: {this.getUser().profile.lastName}</p>
         <button onClick={this.props.actions.logoutUser}>Log Out</button>
-      </div>
+      </View>
     );
   }
 
