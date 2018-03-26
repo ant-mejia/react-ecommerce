@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from './components/Header'
 import Footer from './components/Footer';
-import Page from './components/Page';
 import About from './views/About';
 import Index from './views/Index';
 import NotFound from './views/NotFound';
@@ -11,6 +10,7 @@ import Login from './views/auth/Login';
 import Register from './views/auth/Register';
 import AuthRoute from './containers/AuthRoute';
 import Account from './views/auth/Account';
+import Orders from './views/auth/Orders';
 import Collections from './views/product/Collections';
 import Cart from './views/cart/Cart';
 import Search from './views/Search';
@@ -19,10 +19,6 @@ import ProductContainer from './containers/ProductContainer';
 import CheckoutContainer from './containers/CheckoutContainer';
 import Helmet from 'react-helmet';
 class Routes extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     // console.log('routes mounted!');
   }
@@ -57,7 +53,8 @@ class Routes extends Component {
               <Route exact path="/login" component={({location, history}) => <Login location={location} actions={this.props.actions}/>} />
               <Route exact path="/register" component={({location, history}) => <Register location={location} actions={this.props.actions}/>} />
               <AuthRoute path="/account" actions={this.props.actions} store={this.props.store} component={() => <Account actions={this.props.actions} store={this.props.store}/>}/>
-              <AuthRoute path="/checkout" actions={this.props.actions} store={this.props.store} component={() => <CheckoutContainer actions={this.props.actions} store={this.props.store}/>}/>
+              <AuthRoute path="/orders" actions={this.props.actions} store={this.props.store} component={() => <Orders actions={this.props.actions} store={this.props.store}/>}/>
+              <AuthRoute path="/checkout" actions={this.props.actions} store={this.props.store} component={CheckoutContainer}/>
               <Route component={NotFound}/>
             </Switch>
             <Footer/>

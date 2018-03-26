@@ -21,7 +21,8 @@ class Login extends Component {
       'You have to Login!' :
       'Please Login';
     if (this.props.actions.isUserAuth()) {
-      return (<Redirect to={'/account'}/>)
+      let pathTo = this.props.location.state ? this.props.location.state.from.pathname : '/account';
+      return (<Redirect to={pathTo}/>)
     }
     return (
       <div className="c-page">

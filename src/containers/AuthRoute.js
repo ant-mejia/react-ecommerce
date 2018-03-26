@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { Route, Redirect } from 'react-router-dom';
 
 
-const AuthRoute = ({ component: Component, ...rest }) => {
-  return (
-    <Route {...rest} render={props => {
-      let p = { ...rest };
-      return (p.actions.isUserAuth() ? (<Component {...rest}/>): (true ? (
-    <Redirect to={{pathname: '/login', state: { from: props.location } }}/>
-  ) : (<Component {...rest}/>))
-)
-}
-}
-/>)
+class AuthRoute extends React.Component {
+
+  handleRender = () => {
+    let p = this.props;
+    let Component = this.props.component;
+    return (p.actions.isUserAuth() ? (<Component {...p}/>) : (
+      <Redirect to={{pathname: '/login', state: { from: this.props.location } }}/>
+    ))
+  }
+  render() {
+    return (
+      <Route children={this.handleRender}/>
+    )
+  }
 };
 
 AuthRoute.propTypes = {

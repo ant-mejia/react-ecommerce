@@ -38,7 +38,7 @@ this.addToCart = (productId, socketId) => {
           let userId = session.dataValues.userUid;
           if (userId) {
             this.isProductAvailable(userId, productId).then((response) => {
-              console.log(response);
+              console.log("RESPONSE :: ", response);
               if (response === true) {
                 models.users.Cart.create({
                   uid: helpers.generateUid(),

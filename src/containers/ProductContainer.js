@@ -4,6 +4,7 @@ import _ from 'lodash';
 import ProductUnavailable from '../views/product/ProductUnavailable';
 import NotFound from '../views/NotFound';
 import ProductViewContainer from './ProductViewContainer';
+import ProductReview from '../views/product/reviews/ProductReview';
 import ProductReviews from '../views/product/reviews/ProductReviews';
 
 class ProductContainer extends Component {
@@ -32,7 +33,6 @@ class ProductContainer extends Component {
   }
 
   componentDidMount() {
-    console.log('ooh mounted!', this.props.match);
     this.mounted = true;
     this.getProduct();
     if (this.preState !== undefined) {
@@ -64,7 +64,6 @@ class ProductContainer extends Component {
   }
 
   render() {
-    console.log(this.props.match);
     if (this.state.product === undefined) {
       return <div className="c-page"/>
     } else if (typeof this.state.product === 'object') {
@@ -76,8 +75,9 @@ class ProductContainer extends Component {
     }
     return (
       <Switch location={this.props.location}>
-        <Route exact path={this.props.match.path} component={() =>  <ProductViewContainer addToCart={this.addToCart} product={this.state.product}/>}/>
-        <Route path={this.props.match.path + '/:param'} component={ProductReviews}/>
+        <Route exact path={this.props.match.path + '/reviews'} component={({match}) => <ProductReviews match={match} reviews={this.state.product.reviews}/>}/>
+        <Route exact path={this.props.match.path + '/reviews/:review'} component={({match}) => <ProductReview match={match} reviews={this.state.product.reviews}/>}/>
+        <Route path={this.props.match.path} component={() =>  <ProductViewContainer addToCart={this.addToCart} product={this.state.product}/>}/>
       </Switch>
     )
 

@@ -21,18 +21,12 @@ const User = db.define('users', {
     allowNull: false
   },
   privilege: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+    type: Sequelize.INTEGER,
+    defaultValue: 1
   },
-
-}, {
-  validate: {
-    validEmail() {
-      let validity = helpers.validateEmail(this.email, process.env.Blacklist, true);
-      if (validity !== true) {
-        throw new Error(validity.message)
-      }
-      return true;
-    }
+  customerId: {
+    type: Sequelize.STRING,
+    unique: true
   }
 });
 

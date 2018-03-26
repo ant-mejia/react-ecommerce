@@ -1,16 +1,47 @@
 const models = require('../../db/models/index');
+const paymentManager = require('./paymentManager');
 const helpers = require('../helpers');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const passport = require('../auth/local');
 const Sifter = require('sifter');
+
 let validUserObj = (obj) => {
   // console.log(obj);
   let returnValue = true;
-
   return returnValue;
 }
+
+this.getUserProfile = (obj) => {
+  console.log('getting user profile..');
+  return new Promise(function(resolve, reject) {
+    if (typeof obj === 'object') {
+      models.users.userProfile.findOne({
+        where: obj
+      }).then((profile) => {
+        console.log("ADDRESS DATA LOADING>>>");
+        if (profile !== null && profile.hasOwnProperty('dataValues')) {
+          let profileData = profile.dataValues;
+          models.users.userAddress.findAll({
+            where: {
+              userUid: profile.userUid
+            }
+          }).then((addressData) => {
+            if (addressData !== null) {
+              let addresses = addressData.map(item => item.dataValues);
+              profileData.address = addresses;
+            }
+            resolve(profileData)
+          })
+        } else {
+          return reject(helpers.error('Authentication', "Invalid Email", "The email address provided is invalid"));
+        }
+      });
+    }
+  });
+}
+
 
 this.loginUser = (cred, method = 'email') => {
   return new Promise((resolve, reject) => {
@@ -21,22 +52,17 @@ this.loginUser = (cred, method = 'email') => {
         }
       }).then((user) => {
         // console.log('Password Verification: ::: ', helpers.comparePass(cred.password, user.password));
+        console.log("USER: ", user);
         if (validUserObj(user.dataValues) && cred.email === user.dataValues.email) {
-          console.log('kill');
           user = user.dataValues;
           if (this.comparePass(cred.password, user.password)) {
-            models.users.userProfile.findOne({
-              where: {
-                userUid: user.uid
-              }
-            }).then((profile) => {
-              if (profile !== null && profile.hasOwnProperty('dataValues')) {
-                console.log('profile found!');
-                user['profile'] = profile.dataValues;
-                let token = helpers.generateToken(user);
-                user['token'] = token;
-                resolve(user);
-              }
+            console.log('line 60: executed');
+            this.getUserProfile({ userUid: user.uid }).then((profile) => {
+              console.log('profile found!');
+              user['profile'] = profile;
+              let token = helpers.generateToken(user);
+              user['token'] = token;
+              resolve(user);
             });
           } else {
             return reject(helpers.error('Authentication', "Invalid Password", "The password provided is invalid"));
@@ -52,20 +78,14 @@ this.loginUser = (cred, method = 'email') => {
         }
       }).then((user) => {
         // console.log('Password Verification: ::: ', helpers.comparePass(cred.password, user.password));
-        if (validUserObj(user)) {
+        if (validUserObj(user) && user !== undefined && user !== null) {
           user = user.dataValues;
           if (cred.password === user.password) {
-            models.users.userProfile.findOne({
-              where: {
-                userUid: user.uid
-              }
-            }).then((profile) => {
-              if (profile !== null && profile.hasOwnProperty('dataValues')) {
-                user['profile'] = profile.dataValues;
-                let token = helpers.generateToken(user);
-                user['token'] = token;
-                resolve(user);
-              }
+            this.getUserProfile({ userUid: user.uid }).then((profile) => {
+              user['profile'] = profile;
+              let token = helpers.generateToken(user);
+              user['token'] = token;
+              resolve(user);
             });
           } else {
             return reject(helpers.error('Authentication', "Invalid Password", "The password provided is invalid"));
@@ -117,6 +137,15 @@ this.createUser = (user) => {
         userData.profile = profile.dataValues;
         let token = helpers.generateToken(userData);
         userData.token = token;
+        if (user.accountType === undefined || user.accountType === 'customer') {
+          paymentManager.createCustomer(userData.uid).then((customer) => {
+            models.users.User.update({ customerId: customer.id }, { where: { uid: userData.uid } }).then((rsp) => {
+              console.log("RSPAA <<<>>> ", rsp);
+              userData.customerId = customer.id
+              resolve(userData);
+            })
+          })
+        }
         resolve(userData);
       }).catch((err) => {
         // Reject error

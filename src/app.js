@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Router } from 'react-router-dom';
 import store from 'store';
+import actions from './actions/index';
 import Routes from './routes';
 import './style/main.css';
 import io from 'socket.io-client';
@@ -10,9 +11,11 @@ class App extends Component {
   history = createHistory();
   constructor(props) {
     super(props);
+    Object.assign(this, actions)
     this.state = {
       activeHeader: false,
       store: {},
+      cache: {},
       notifications: []
     };
     this.history.listen(this.listenHistory);
@@ -38,7 +41,6 @@ class App extends Component {
     });
 
     this.socket.on('update/cart', (response) => {
-      console.log(response.data);
       if (response.type === 'success') {
         this.setStore('cart', response.data)
       }
@@ -57,12 +59,12 @@ class App extends Component {
       console.log(cart);
     })
   }
+
   componentWillMount() {
     if (this.getStorage('jtk') !== undefined && this.getStore('user') === undefined) {
       this.setState({ waiting: true });
       this.socket.emit('auth/authenticate', this.getStorage('jtk'));
     };
-    console.log(this.getStorage('jtk'), this.getStore('user'));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -90,28 +92,40 @@ class App extends Component {
 
   componentDidMount() {}
 
-  setStorage = (key, value) => {
-    if (value === null) {
-      store.remove(key);
+  setCache = (obj, temp) => {
+    if (temp !== undefined || temp !== null) {
+      let newCache = { ...this.state.cache };
+      newCache[obj] = temp;
+      this.setState({ cache: newCache })
     } else {
-      store.set(key, value);
-    }
-  }
-
-  removeStorage = (item) => {
-    store.remove(item);
-  }
-
-  getStorage = (key) => {
-    if (key === undefined) {
-      let allKeys = [];
-      store.each(function(value, key) {
-        allKeys.push({ key, value })
+      let keys = Object.keys(obj);
+      let newCache = { ...this.state.cache };
+      keys.map((key) => {
+        newCache[key] = obj[key];
+      });
+      this.setState({
+        cache: newCache
       })
-      return allKeys;
     }
-    return store.get(key);
   }
+
+  getCache = (prop) => {
+    //if property has a dot "." in the string
+    //  map through each one
+    if (~prop.indexOf(".")) {
+      let subProps = prop.split('.');
+      let result = this.state.cache;
+      subProps.map((item, iterator) => {
+        if (result[item] !== undefined) {
+          result = result[item];
+        }
+      });
+      return result;
+    }
+    return this.state.cache[prop];
+  }
+
+
 
   setStore = (obj, temp) => {
     if (temp !== undefined || temp !== null) {
@@ -131,6 +145,18 @@ class App extends Component {
   }
 
   getStore = (prop) => {
+    //if property has a dot "." in the string
+    //  map through each one
+    if (~prop.indexOf(".")) {
+      let subProps = prop.split('.');
+      let result = this.state.store;
+      subProps.map((item, iterator) => {
+        if (result[item] !== undefined) {
+          result = result[item];
+        }
+      });
+      return result;
+    }
     return this.state.store[prop];
   }
 
@@ -254,8 +280,11 @@ class App extends Component {
     this.socket.emit('cart', parcel)
   }
 
-  checkoutUser = () => {
+  userCheckout = () => {
     console.log('boo');
+    this.socket.emit('checkout', {
+      data: 'vars!'
+    })
   }
 
   componentWillUnmount() {
@@ -269,7 +298,7 @@ class App extends Component {
     return (
       <div id="app" className={this.state.activeHeader ? 'header_active' : ''}>
         <Router history={this.history}>
-          <Routes actions={this.actions()} activeHeader={this.state.activeHeader} store={this.state.store} socket={this.socket} notifications={this.state.notifications} history={this.history}/>
+          <Routes actions={this.actions()} store={this.state.store} socket={this.socket} notifications={this.state.notifications} history={this.history}/>
         </Router>
       </div>
     );

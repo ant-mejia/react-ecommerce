@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PageHeader from '../components/PageHeader';
+import Jumbotron from '../components/Jumbotron/Jumbotron';
+
 class Index extends Component {
 
   render() {
-    const { className, ...props } = this.props;
     return (
       <div>
+        {/* <PageHeader/> */}
         <div className="c-page_jumbotron">
-          <PageHeader/>
-          <h2>Jumbotron with Image</h2>
-          <img src="http://s3.amazonaws.com/contemporaryartgroup/wp-content/uploads/2012/06/02-Minimal-Myth-foto_photo-Lotte-Stekelenburg.jpg"/>
+          <Jumbotron/>
         </div>
         <div className="c-page">
           <h1>Welcome to React!! This is the index page!</h1>

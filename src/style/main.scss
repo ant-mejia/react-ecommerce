@@ -32,6 +32,7 @@
 @import "assets/fonts/config";
 @import "partials/partials";
 @import "components/components";
+@import "./extensions/extensions";
 
 #app {
   background: $iota-global-off-white;
@@ -707,8 +708,8 @@ html.js {
 //   font-family: 'bpicons';
 //   font-weight: normal;
 //   font-style : normal;
-//   src        : url('../fonts/bpicons/bpicons.eot');
-//   src        : url('../fonts/bpicons/bpicons.eot?#iefix') format("embedded-opentype"), url('../fonts/bpicons/bpicons.woff') format("woff"), url('../fonts/bpicons/bpicons.ttf') format("truetype"), url('../fonts/bpicons/bpicons.svg#bpicons') format("svg");
+//   src        : url('extensions/slider-revolution/fonts/bpicons/bpicons.eot');
+//   src        : url('extensions/slider-revolution/fonts/bpicons/bpicons.eot?#iefix') format("embedded-opentype"), url('extensions/slider-revolution/fonts/bpicons/bpicons.woff') format("woff"), url('extensions/slider-revolution/fonts/bpicons/bpicons.ttf') format("truetype"), url('extensions/slider-revolution/fonts/bpicons/bpicons.svg#bpicons') format("svg");
 // }
 /* Made with http://icomoon.io/ */
 /* Resets */
@@ -903,4 +904,27 @@ a {
   .bp-header__title {
     font-size: 1.8em;
   }
+}
+
+.carousel {
+  background: #FAFAFA;
+  overflow-x: hidden;
+  outline   : none;
+}
+
+.carousel-cell {
+  width            : 100%;
+  height           : 100vh;
+  margin-right     : 10px;
+  background       : #8C8;
+  counter-increment: carousel-cell;
+}
+/* cell number */
+.carousel-cell:before {
+  display    : block;
+  text-align : center;
+  content    : counter(carousel-cell);
+  line-height: 200px;
+  font-size  : 80px;
+  color      : white;
 }

@@ -11,7 +11,7 @@ this.getProduct = (method, data, userId) => {
             this.getPromoByProductId(obj.dataValues.uid, userId).then((promo) => {
               console.log("PROMOTION ::: ::: ::: ", promo);
               obj.dataValues.promotion = promo[0];
-              obj.dataValues.promoPrice = `$${this.getPromoPrice(obj.dataValues)}`
+              obj.dataValues.promoPrice = this.getPromoPrice(obj.dataValues)
               obj.dataValues.price = `$${obj.dataValues.price}`
               this.getReviews({ productId: obj.dataValues.uid }).then((reviews) => {
                 obj.dataValues.reviews = reviews
@@ -46,15 +46,15 @@ this.getPromoPrice = (product) => {
   if (promoPrice === product.price) {
     return undefined;
   } else {
-
     let dec = promoPrice.toFixed(2);
     let points = dec.toString().split('.')[1];
+    let finalPrice = product.price;
     if (points === '00') {
-      return promoPrice;
+      finalPrice = promoPrice;
     } else {
-      return dec;
+      finalPrice = dec;
     }
-    console.log(points);
+    return `$${finalPrice}`;
   }
 }
 

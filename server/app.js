@@ -26,6 +26,7 @@ const authManager = require('./managers/authManager');
 const socketManager = require('./managers/socketManager');
 const productManager = require('./managers/productManager');
 const cartManager = require('./managers/cartManager');
+const paymentManager = require('./managers/paymentManager');
 const helpers = require('./helpers');
 const stripe = require('stripe')('pk_test_6NW0ufnPuIGneWb88nmNDvqR');
 const Sifter = require('sifter');
@@ -256,11 +257,9 @@ io.on('connection', (socket) => {
 
   socket.on('cart', (cart) => {
     let rooms = Object.keys(socket.rooms);
-    console.log("ROOMS: ", rooms);
     if (cart.action === 'add') {
-      // console.log(cart);
+      console.log("CART:: ", cart);
       cartManager.addToCart(cart.data.product.uid, socket.id).then((a) => {
-        // console.log(a);
         cartManager.getCartbyUserId(a.userUid).then((data) => {
           // console.log(data);
           socket.emit('update/cart', socketManager.sendData('success', data));
@@ -288,7 +287,13 @@ io.on('connection', (socket) => {
         }
       }
     }
-  })
+  });
+
+  socket.on('checkout', (data) => {
+    console.log(data);
+    paymentManager.testFeature();
+    // paymentManager.checkoutUser(socket.id);
+  });
 
   socket.on('action', (action) => {
     if (action.type === 'auth/hello') {
