@@ -8,11 +8,11 @@ class Checkout extends Component {
   }
   render() {
     return (
-      <View title='Checkout!'>
+      <View wrap title='Checkout!'>
         <h1>Checkout!</h1>
         <h2>Choose Shipping Address</h2>
         {
-          this.props.actions.getStore('user.profile.address').map((item) => {
+          this.props.actions.getStore('user.address').map((item) => {
             return (
               <div key={item.uid}>
                 <p>{`${item.buildingNumber} ${item.streetName}`}</p>

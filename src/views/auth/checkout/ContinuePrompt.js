@@ -11,11 +11,11 @@ class ContinuePrompt extends Component {
   }
   render() {
     return (
-      <View>
+      <div> 
         <h1>Would you like to continue your previous order?</h1>
         <button onClick={this.handleConfirm}>Yes</button>
         <button onClick={this.handleReject}>No</button>
-      </View>
+      </div>
     );
   }
 

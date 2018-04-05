@@ -1,0 +1,24 @@
+$iota-components-sideTab-name: 'sideTab';
+$iota-components-sideTab-active-name: 'active';
+$iota-components-sideTab-nav-name: 'header';
+$iota-components-sideTab-nav-item-name: 'item';
+$iota-components-sideTab-separator: '-'; // .c-sideTab
+
+.#{$iota-global-components-namespace + $iota-components-sideTab-name} {
+  position : absolute;
+  transform: rotate(-90deg);
+  top      : 40px;
+  @include iota-breakpoint(sm) {
+    top : 50px;
+    left: 50px;
+  };
+}
+
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity   : 1;
+  transition: opacity 0.5s ease-in;
+}

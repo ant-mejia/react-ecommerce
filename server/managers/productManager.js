@@ -1,6 +1,25 @@
+const stripe = require('stripe')('sk_test_pt5W3nh0S1VIkw3gREYacV1B');
 const models = require('../../db/models/index');
 const helpers = require('../helpers');
 const moment = require('moment');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
+this.createProduct = (obj) => {
+  let requiredProps = ['path', 'title', 'summary', 'description', 'category', 'tags', 'price', 'clearance', 'reelaseDate', 'dimensions'];
+  productUid = helpers.generateUid();
+  stripe.products.create({
+    id: productUid,
+    name: 'T-shirt',
+    type: 'good',
+    description: 'Comfortable cotton t-shirt',
+    attributes: ['size', 'gender'],
+    metadata: { path: '/path', uid: productUid },
+    url: 'https://example.com/path'
+  }).then((product) => {
+    console.log('PRO DUCT: ', product);
+  })
+}
 
 this.getProduct = (method, data, userId) => {
   return new Promise((resolve, reject) => {
@@ -12,7 +31,27 @@ this.getProduct = (method, data, userId) => {
               console.log("PROMOTION ::: ::: ::: ", promo);
               obj.dataValues.promotion = promo[0];
               obj.dataValues.promoPrice = this.getPromoPrice(obj.dataValues)
-              obj.dataValues.price = `$${obj.dataValues.price}`
+              obj.dataValues.price = obj.dataValues.price
+              this.getReviews({ productId: obj.dataValues.uid }).then((reviews) => {
+                obj.dataValues.reviews = reviews
+                resolve(obj.dataValues);
+              });
+            });
+          } else {
+            reject(helpers.error('Server', 'Product does not exist', message = 'This product does not exist'))
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    } else if (method === 'productId') {
+      models.products.Product.findById(data.productId)
+        .then((obj) => {
+          if (obj !== null && obj.dataValues !== undefined) {
+            this.getPromoByProductId(obj.dataValues.uid, userId).then((promo) => {
+              obj.dataValues.promotion = promo[0];
+              obj.dataValues.promoPrice = this.getPromoPrice(obj.dataValues)
+              obj.dataValues.price = obj.dataValues.price
               this.getReviews({ productId: obj.dataValues.uid }).then((reviews) => {
                 obj.dataValues.reviews = reviews
                 resolve(obj.dataValues);
@@ -31,14 +70,12 @@ this.getProduct = (method, data, userId) => {
 
 this.getPromoPrice = (product) => {
   let promoPrice = product.price
-  console.log(product);
   if (product.promotion) {
     if (product.promotion.promotion.amount) {
       promoPrice = promoPrice - product.promotion.promotion.amount;
     }
     if (product.promotion.promotion.percent) {
       promoPrice = (promoPrice - (promoPrice * (product.promotion.promotion.percent / 100)));
-      console.log("PROMO ::: ", promoPrice);
     }
   } else {
     return undefined;
@@ -54,7 +91,7 @@ this.getPromoPrice = (product) => {
     } else {
       finalPrice = dec;
     }
-    return `$${finalPrice}`;
+    return finalPrice;
   }
 }
 
@@ -67,18 +104,17 @@ this.getPromoByProductId = async (productId, userId) => {
       } else {
         // user was not found by id
       }
-      console.log(privilege);
       models.products.Promo.findAll({
         where: {
           clearance: {
-            $lt: privilege
+            [Op.lte]: privilege
           },
           active: true,
           startDate: {
-            $lt: moment().toDate()
+            [Op.lt]: moment().toDate()
           },
           endDate: {
-            $gt: moment().toDate()
+            [Op.gt]: moment().toDate()
           }
         }
       }).then((data) => {
@@ -110,7 +146,6 @@ this.getReviews = (obj) => {
       }).then((data) => {
         let reviews = data.map((item) => {
           let values = item.dataValues;
-          console.log("VALUE: ", values);
           if (moment(values.createdAt).isSame(values.updatedAt)) {
             values.edited = false;
           } else {
@@ -118,7 +153,6 @@ this.getReviews = (obj) => {
           }
           return values;
         });
-        console.log("REVIEWS ::: ", reviews);
         resolve(reviews);
       })
     }

@@ -4208,7 +4208,7 @@ select {
   transition: opacity 250ms ease-in; }
 
 p {
-  color: red; }
+  color: initial; }
 
 .c-jumbotron {
   background: #744878;
@@ -4610,6 +4610,22 @@ header.c-header {
   @media screen and (min-width: 768px) {
     .c-panel {
       flex-direction: row; } }
+
+.c-sideTab {
+  position: absolute;
+  transform: rotate(-90deg);
+  top: 40px; }
+  @media screen and (min-width: 768px) {
+    .c-sideTab {
+      top: 50px;
+      left: 50px; } }
+
+.example-appear {
+  opacity: 0.01; }
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in; }
 
 .c-image-gallery {
   display: -webkit-flex;

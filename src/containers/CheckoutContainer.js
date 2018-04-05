@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import _ from 'lodash';
 import Checkout from '../views/auth/checkout/Checkout';
+import SideNav from '../components/SideNav';
 import ContinuePrompt from '../views/auth/checkout/ContinuePrompt';
 import Shipping from '../views/auth/checkout/Shipping';
 import Billing from '../views/auth/checkout/Billing';
 import View from './View';
 
 class Order {
-  constructor() {}
+  constructor() {
+    this.refs = {};
+  }
+
+  inProgress() {
+    if (!_.isEmpty(this.refs) || this.shippingValid()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   shippingValid() {
     let response = false;
@@ -26,6 +38,18 @@ class Order {
 
   hasId() {
     return false;
+  }
+
+  setActiveRef(ref) {
+    this.activeRef = ref
+  }
+
+  getRef(ref) {
+    return this.refs[ref];
+  }
+
+  setRefVal(ref, val) {
+    this.refs[ref] = val
   }
 
   submitOrder() {}
@@ -54,16 +78,16 @@ class CheckoutContainer extends Component {
 
   checkoutStep = () => {
     if (this.state.order.shipping === undefined && this.state.order.billing === undefined) {
-      return 1;
+      return 'Shipping';
     } else if (this.state.order.shippingValid() && this.state.order.billing === undefined) {
-      return 2;
+      return 'Billing';
     } else if (this.state.order.shippingValid() && this.state.order.billingValid()) {
-      return 3;
+      return 'Review';
     }
   }
   cacheOrder = () => {
     const order = this.state.order;
-    if (order.shippingValid()) {
+    if (order.inProgress()) {
       this.props.actions.setCache('order', order);
     }
   }
@@ -90,9 +114,9 @@ class CheckoutContainer extends Component {
     if (this.props.actions.getCache('order') !== undefined) {
       return <ContinuePrompt respond={this.propmtResponse}/>
     }
-    let shippingView = <Shipping handleShipping={this.handleShipping}/>;
-    let billingView = <Billing handleBilling={this.handleBilling}/>;
-    let reviewView = <Checkout actions={this.props.actions} store={this.props.store}/>
+    let shippingView = <Shipping order={this.state.order} handleShipping={this.handleShipping}/>;
+    let billingView = <Billing order={this.state.order} handleBilling={this.handleBilling}/>;
+    let reviewView = <Checkout order={this.state.order} actions={this.props.actions} store={this.props.store}/>
     if (this.state.order.shipping === undefined && this.state.order.billing === undefined) {
       return shippingView;
     } else if (this.state.order.shippingValid() && this.state.order.billing === undefined) {
@@ -105,10 +129,23 @@ class CheckoutContainer extends Component {
   }
 
   render() {
+    let step = (<SideNav text={this.checkoutStep()}/>);
+    if (this.props.actions.getCache('order') !== undefined) {
+      step = undefined
+    }
     return (
       <View mini>
-        <div>Step: {this.checkoutStep()}</div>
-        {this.handleRender()}
+        {/* {step} */}
+        <View>
+          <div className="u-flex@sm">
+            <div className="u-1/2@sm">
+              {this.handleRender()}
+            </div>
+            <div className="u-1/2@sm">
+              <h1>My Cart</h1>
+            </div>
+          </div>
+        </View>
       </View>
     )
   }

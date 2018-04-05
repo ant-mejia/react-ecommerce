@@ -260,6 +260,7 @@ io.on('connection', (socket) => {
     if (cart.action === 'add') {
       console.log("CART:: ", cart);
       cartManager.addToCart(cart.data.product.uid, socket.id).then((a) => {
+        console.log('successful adding!');
         cartManager.getCartbyUserId(a.userUid).then((data) => {
           // console.log(data);
           socket.emit('update/cart', socketManager.sendData('success', data));

@@ -5,7 +5,7 @@ class Jumbotron extends Component {
 
   render() {
     return (
-      <div>
+      <div className="u-vh-1">
         {/* <CreativeJumbo/> */}
         <img src="./assets/images/city_bg.jpg"/>
       </div>

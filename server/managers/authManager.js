@@ -13,7 +13,7 @@ let validUserObj = (obj) => {
   return returnValue;
 }
 
-this.getUserProfile = (obj) => {
+this.getUser = (obj) => {
   console.log('getting user profile..');
   return new Promise(function(resolve, reject) {
     if (typeof obj === 'object') {
@@ -44,26 +44,26 @@ this.getUserProfile = (obj) => {
 
 
 this.loginUser = (cred, method = 'email') => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if (method === 'email') {
       models.users.User.findOne({
         where: {
           email: cred.email
-        }
+        },
+        include: [{ model: models.users.userProfile, as: 'profile' }]
       }).then((user) => {
         // console.log('Password Verification: ::: ', helpers.comparePass(cred.password, user.password));
         console.log("USER: ", user);
+        if (user === null) {
+          return reject(helpers.error('Authentication', "Invalid Email", "The email address provided is invalid"));
+        }
         if (validUserObj(user.dataValues) && cred.email === user.dataValues.email) {
           user = user.dataValues;
           if (this.comparePass(cred.password, user.password)) {
             console.log('line 60: executed');
-            this.getUserProfile({ userUid: user.uid }).then((profile) => {
-              console.log('profile found!');
-              user['profile'] = profile;
-              let token = helpers.generateToken(user);
-              user['token'] = token;
-              resolve(user);
-            });
+            let token = helpers.generateToken(user);
+            user['token'] = token;
+            resolve(user);
           } else {
             return reject(helpers.error('Authentication', "Invalid Password", "The password provided is invalid"));
           }
@@ -75,18 +75,22 @@ this.loginUser = (cred, method = 'email') => {
       models.users.User.findOne({
         where: {
           email: cred.email
-        }
-      }).then((user) => {
+        },
+        include: [{ model: models.users.userProfile, as: 'profile' }]
+      }).then(async (user) => {
         // console.log('Password Verification: ::: ', helpers.comparePass(cred.password, user.password));
         if (validUserObj(user) && user !== undefined && user !== null) {
           user = user.dataValues;
           if (cred.password === user.password) {
-            this.getUserProfile({ userUid: user.uid }).then((profile) => {
-              user['profile'] = profile;
-              let token = helpers.generateToken(user);
-              user['token'] = token;
-              resolve(user);
-            });
+            let addressData = await this.getUserAddress(user.uid);
+            console.log(addressData);
+            console.log('USER::: ', user);
+            if (user.address === undefined) {
+              user.address = addressData;
+            }
+            let token = helpers.generateToken(user);
+            user['token'] = token;
+            resolve(user);
           } else {
             return reject(helpers.error('Authentication', "Invalid Password", "The password provided is invalid"));
           }
@@ -97,6 +101,20 @@ this.loginUser = (cred, method = 'email') => {
     } else {
       resolve({ data: "Stuff worked!" });
     }
+  });
+}
+
+this.getUserAddress = (userId) => {
+  return new Promise(function(resolve, reject) {
+    if (userId === null || userId === undefined || typeof userId !== 'string') {
+      reject('no user');
+      return;
+    }
+    models.users.userAddress.findAll({ where: { userUid: userId } }).then((data) => {
+      let addressArr = data.map(addr => addr.dataValues);
+      console.log("ADDRESSES: ::: ", addressArr);
+      resolve(addressArr);
+    })
   });
 }
 

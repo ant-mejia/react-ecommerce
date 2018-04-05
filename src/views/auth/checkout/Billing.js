@@ -7,10 +7,10 @@ class Billing extends Component {
   }
   render() {
     return (
-      <View>
+      <div>
         Billing Container
         <button onClick={this.handleSubmit}>Add Shipping</button>
-      </View>
+      </div>
     );
   }
 

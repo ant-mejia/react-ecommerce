@@ -12,8 +12,14 @@ class View extends Component {
         </Helmet>
       )
     }
+    let className = 'c-page';
+    if (this.props.mini) {
+      className = 'c-page_min'
+    } else if (this.props.wrap) {
+      className = 'c-page_wrap'
+    }
     return (
-      <div className={this.props.mini ? 'c-page_min' : 'c-page'}>
+      <div className={className}>
         {title}
         {this.props.children}
       </div>

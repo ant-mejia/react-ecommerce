@@ -6,7 +6,7 @@ const Cart = require('./cart');
 const Notification = require('./notification');
 const userAddress = require('./address');
 
-userProfile.belongsTo(User);
+User.belongsTo(userProfile, { as: 'profile' });
 userAddress.belongsTo(User);
 Cart.belongsTo(User);
 Notification.belongsTo(User);

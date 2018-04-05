@@ -195,4 +195,22 @@ this.createCard = (userId, card = {}) => {
   });
 }
 
+this.getCardById = (sourceId) => {
+  return new Promise(async (resolve, reject) => {
+    let cardData = await models.payment.paymentSource.findById(sourceId);
+    if (cardData === null) {
+      reject('card not found');
+      return;
+    } else {
+      resolve(cardData.dataValues);
+    }
+  });
+}
+
+this.getWallet = (userId) => {
+  return new Promise(function(resolve, reject) {
+
+  });
+}
+
 module.exports = this;

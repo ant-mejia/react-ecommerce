@@ -2,6 +2,7 @@ const sessionManager = require('./sessionManager');
 const helpers = require('../helpers');
 const models = require('../../db/models');
 const moment = require('moment');
+const productManager = require('./productManager');
 
 this.isProductAvailable = async (userId, productId) => {
   console.log('boo');
@@ -75,7 +76,7 @@ this.removeFromCart = (cartId, socketId) => {
 }
 
 this.getCartbyUserId = (userId) => {
-  return new Promise(function(resolve, reject) {
+  return new Promise(async (resolve, reject) => {
     // make sure that the userId is currently valid.
     if (userId === undefined || userId === '' || userId === null) {
       reject('terrible error!')
@@ -90,8 +91,14 @@ this.getCartbyUserId = (userId) => {
           ['addedAt', 'DESC']
         ],
         include: [{ model: models.products.Product, required: true }]
-      }).then((cart) => {
-        resolve(cart);
+      }).then((cartData) => {
+        let cart = cartData.map(async (item) => {
+          let cartItem = item.dataValues;
+          let product = await productManager.getProduct('productId', { productId: item.productUid }, userId);
+          cartItem.product = product;
+          return cartItem;
+        });
+        Promise.all(cart).then((userCart) => resolve(userCart))
       })
     })
     // find all items in cart directory that have a userUid of the paramter above

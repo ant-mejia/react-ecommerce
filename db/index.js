@@ -16,6 +16,7 @@ const db = module.exports = new Sequelize(url, {
     underscored: false, // use snake_case rather than camelCase column names
     freezeTableName: true, // don't change table names from the one specified
     timestamps: true, // automatically include timestamp columns
+    operatorsAliases: false
   }
 })
 
