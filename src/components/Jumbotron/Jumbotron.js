@@ -4,14 +4,19 @@ import CreativeJumbo from './CreativeJumbo';
 class Jumbotron extends Component {
 
   render() {
+    let Jumbo = <CreativeJumbo content={this.props.content}/>
+    if (this.props.type === 'creative') {
+      Jumbo = <CreativeJumbo content={this.props.content}/>
+    }
     return (
-      <div className="u-vh-1">
-        {/* <CreativeJumbo/> */}
-        <img src="./assets/images/city_bg.jpg"/>
+      <div className="u-vh-1 c-jumbotron">
+        {Jumbo}
       </div>
     );
   }
-
 }
 
+Jumbotron.defaultProps = {
+  type: 'creative'
+};
 export default Jumbotron;

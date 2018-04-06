@@ -1,0 +1,138 @@
+$iota-components-jumbotron-creative: $iota-components-jumbotron-name + $iota-global-separator + 'creative';
+$iota-creative-title: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-title-name;
+$iota-creative-heading: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-heading-name;
+$iota-creative-side: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-side-name;
+$iota-creative-summary: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-summary-name;
+$iota-creative-wrapper: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-wrapper-name;
+$iota-creative-button: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-button-name;
+$iota-creative-controls: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-controls-name;
+$iota-creative-background: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-background-name;
+
+.#{$iota-components-jumbotron-creative} {
+  border        : 25px solid white;
+  display       : -webkit-flex;
+  display       : -ms-flex;
+  display       : flex;
+  flex-direction: column;
+  height        : 100%;
+  background    : rgb(245, 245, 245);
+  position      : relative;
+  overflow      : hidden;
+
+  .#{$iota-creative-side} {
+    background    : #fff;
+    position      : absolute;
+    z-index       : 2;
+    display       : -webkit-flex;
+    display       : -ms-flex;
+    display       : flex;
+    flex-direction: column-reverse;
+    text-transform: uppercase;
+    @include iota-breakpoint(xs) {
+      flex-direction  : row;
+      transform       : rotate(90deg);
+      transform-origin: left;
+      left            : 10px;
+
+      p {
+        margin: 5px 15px 30px;
+      }
+    };
+    @include iota-breakpoint(sm) {
+      top: 110px;
+    }
+  }
+
+  .#{$iota-creative-background} {
+    position: absolute;
+    width   : 100%;
+    height  : 100%;
+
+    img {
+      display   : block;
+      width     : 100vw;
+      height    : 100vh;
+      object-fit: cover;
+    }
+  }
+
+  .#{$iota-creative-controls} {
+    margin-right   : -4px;
+    z-index        : 10;
+    display        : -webkit-flex;
+    display        : -ms-flex;
+    display        : flex;
+    justify-content: flex-end;
+
+    button {
+      border-radius: 0;
+      border       : none;
+      background   : #fff;
+      cursor       : pointer;
+      margin       : 10px 0 -2px;
+      padding      : 8px 26px;
+      font-size    : 18px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .#{$iota-creative-wrapper} {
+    z-index        : 2;
+    display        : -webkit-flex;
+    display        : -ms-flex;
+    display        : flex;
+    flex           : 1;
+    flex-direction : column;
+    justify-content: center;
+    padding-left   : 6vw;
+    padding-right  : $iota-components-header-menu-width;
+    @include iota-breakpoint(xs) {
+      padding-left: 18vw;
+    };
+    @include iota-breakpoint(sm) {
+      padding-left   : 137px;
+      flex-direction : row;
+      justify-content: space-between;
+      align-items    : center;
+
+      div {
+        margin: 0;
+        @include iota-breakpoint(md) {
+          margin: 40px;
+        }
+
+        &.secondary {
+          align-self: flex-end;
+        }
+      }
+    };
+
+    .#{$iota-creative-title} {
+      text-transform: uppercase;
+      margin        : 20px 0;
+      font-weight   : 400;
+      @include iota-type((null : 34px, xs : 46px, sm : 52px));
+      letter-spacing: 5px;
+      word-spacing  : 15px;
+
+      &:after {
+        margin-top   : 17px;
+        content      : '';
+        display      : block;
+        width        : 43px;
+        height       : 2px;
+        border-radius: 4px;
+        background   : #000;
+      }
+    }
+
+    .#{$iota-creative-button} {
+      margin-top: 40px;
+
+      a {}
+    }
+  }
+}

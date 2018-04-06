@@ -1,0 +1,19 @@
+$iota-utils-font-config-comfortaa: true;
+@font-face {
+  font-family: 'Comfortaa';
+  src        : url('assets/fonts/comfortaa/Comfortaa-Regular.ttf') format('ttf');
+  font-weight: normal;
+  font-style : normal;
+}
+@font-face {
+  font-family: 'Comfortaa';
+  src        : url('assets/fonts/comfortaa/Comfortaa-Light.ttf') format('ttf');
+  font-weight: 200;
+  font-style : italic;
+}
+@font-face {
+  font-family: 'Comfortaa';
+  src        : url('assets/fonts/comfortaa/Comfortaa-Bold.ttf') format('ttf');
+  font-weight: bold;
+  font-style : normal;
+}

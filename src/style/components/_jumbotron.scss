@@ -1,45 +1,15 @@
 // Options
-$iota-components-jumbotron: true;
-$iota-components-jumbotron-namespace: 'jumbotron' !default;
-$iota-components-jumbotron-container-name: 'container' !default;
-$iota-components-jumbotron-image-name: 'image' !default;
-$iota-components-jumbotron-icon-name: 'icon' !default;
-$iota-components-jumbotron-padding: $iota-global-gutter-default !default;
-$iota-components-jumbotron-background: $iota-global-primary-color !default;
-$iota-components-jumbotron-container-background: rgb(255, 255, 255) !default; // Helper Local Variables
-//
-$iota-components-jumbotron-var-jumbotron: $iota-global-components-namespace + $iota-components-jumbotron-namespace;
-$iota-components-jumbotron-var-jumbotron-container: $iota-components-jumbotron-var-jumbotron + $iota-global-separator + $iota-components-jumbotron-container-name;
-$iota-components-jumbotron-var-jumbotron-image: $iota-components-jumbotron-var-jumbotron + $iota-global-separator + $iota-components-jumbotron-image-name;
-$iota-components-jumbotron-var-jumbotron-icon: $iota-components-jumbotron-var-jumbotron + $iota-global-separator + $iota-components-jumbotron-icon-name;
-
-.#{$iota-components-jumbotron-var-jumbotron} {
-  background: $iota-components-jumbotron-background;
-  margin-top: -80px;
-}
-
-.#{$iota-components-jumbotron-var-jumbotron-container} {
-  text-align: center;
-
-  h1 {
-    font-family: $iota-global-heading-font;
-    white-space: nowrap;
-    @extend .u-color-white;
-    @include iota-type( ( null : (11.7vw), sm : (90px) ) );
-  }
-
-  h2 {
-    font-family: $iota-global-heading-font;
-    white-space: nowrap;
-    @extend .u-color-white;
-    @include iota-type( ( null : (5.85vw), sm : (45px) ) );
-  }
-}
-
-.#{$iota-components-jumbotron-var-jumbotron-icon} {
-  font-size: 30px;
-}
-
-.#{$iota-components-jumbotron-var-jumbotron-image} {
-  opacity: 0.2;
-}
+$iota-components-jumbotron                : true;
+$iota-components-jumbotron-namespace      : 'jumbotron' !default;
+$iota-components-jumbotron-container-name : 'container' !default;
+$iota-components-jumbotron-background-name: 'background' !default;
+$iota-components-jumbotron-wrapper-name   : 'wrapper' !default;
+$iota-components-jumbotron-title-name     : 'title' !default;
+$iota-components-jumbotron-image-name     : 'image' !default;
+$iota-components-jumbotron-side-name      : 'side' !default;
+$iota-components-jumbotron-heading-name   : 'heading' !default;
+$iota-components-jumbotron-summary-name   : 'summary' !default;
+$iota-components-jumbotron-button-name    : 'button' !default;
+$iota-components-jumbotron-controls-name  : 'controls' !default;
+$iota-components-jumbotron-name           : $iota-global-components-namespace + $iota-components-jumbotron-namespace;
+@import "jumbotron/creative";

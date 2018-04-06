@@ -9,7 +9,7 @@ class AuthRoute extends React.Component {
   handleRender = () => {
     let p = this.props;
     let Component = this.props.component;
-    return (p.actions.isUserAuth() ? (<Component {...p}/>) : (
+    return (p.actions.isUserAuth() ? (<Component {...p}/>) : p.actions.getStorage('jtk') ? <div/> : (
       <Redirect to={{pathname: '/login', state: { from: this.props.location } }}/>
     ))
   }
