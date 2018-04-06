@@ -1,0 +1,52 @@
+$iota-pages-notFound-name: $iota-pages-prefix + 'notFound';
+$iota-pages-notFound-title: $iota-pages-notFound-name + $iota-global-separator + 'title';
+$iota-pages-notFound-summary: $iota-pages-notFound-name + $iota-global-separator + 'summary';
+$iota-pages-notFound-button: $iota-pages-notFound-name + $iota-global-separator + 'button';
+
+.#{$iota-pages-notFound-name} {
+  margin-bottom  : -50px;
+  padding-bottom : 50px;
+  align-items    : center;
+  justify-content: center;
+
+  .p-notFound_wrapper {
+    display       : -webkit-flex;
+    display       : -ms-flex;
+    display       : flex;
+    flex-direction: column;
+    width         : 100%;
+    text-align    : center;
+
+    .#{$iota-pages-notFound-title} {
+      color      : rgba(0,0,0,0.3);
+      @include iota-type((null : 170px, sm : 320px));
+      margin-left: -20px;
+      @include iota-breakpoint(sm) {
+        margin-left: 0;
+      }
+    }
+
+    .#{$iota-pages-notFound-summary} {
+      color: rgba(0,0,0,0.3);
+      @include iota-type((null : 20px, sm : 25px));
+    }
+
+    .#{$iota-pages-notFound-button} {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      background    : #5c5edc;
+      color         : #fff;
+      display       : inline-block;
+      padding       : 7px 15px;
+      border-radius : 50px;
+      margin        : 40px 0;
+      @include iota-type((null : 12px, sm : 16px));
+      @include iota-breakpoint(sm) {
+        margin-left  : 100px;
+        margin-right : 100px;
+        padding-left : 19px;
+        padding-right: 19px;
+      }
+    }
+  }
+}

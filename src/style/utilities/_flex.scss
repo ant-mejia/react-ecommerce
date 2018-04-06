@@ -63,6 +63,10 @@ $iota-utils-flex-breakpoints: $iota-global-breakpoints;
 .#{$iota-global-utilities-namespace + $iota-utils-flex-namespace + $iota-utils-flex-namespace-separator + 'col-reverse'} {
   flex-direction: column-reverse;
 }
+
+.#{$iota-global-utilities-namespace + $iota-utils-flex-namespace + $iota-utils-flex-namespace-separator + 'col'} {
+  flex-direction: column;
+}
 @each $iota-utils-flex-var-breakpoint-name, $iota-utils-flex-var-breakpoint-size in $iota-utils-flex-breakpoints {
   @media #{$iota-utils-flex-var-breakpoint-size} {
     .#{$iota-global-utilities-namespace + $iota-utils-flex-namespace + $iota-global-breakpoint-separator + $iota-utils-flex-var-breakpoint-name} {
@@ -125,6 +129,10 @@ $iota-utils-flex-breakpoints: $iota-global-breakpoints;
 
     .#{$iota-global-utilities-namespace + $iota-utils-flex-namespace + $iota-utils-flex-namespace-separator + 'col-reverse' + $iota-global-breakpoint-separator + $iota-utils-flex-var-breakpoint-name} {
       flex-direction: column-reverse;
+    }
+
+    .#{$iota-global-utilities-namespace + $iota-utils-flex-namespace + $iota-utils-flex-namespace-separator + 'col' + $iota-global-breakpoint-separator + $iota-utils-flex-var-breakpoint-name} {
+      flex-direction: column;
     }
   }
 }

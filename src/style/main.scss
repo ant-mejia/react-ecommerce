@@ -32,6 +32,7 @@
 @import "assets/fonts/config";
 @import "partials/partials";
 @import "components/components";
+@import "pages/pages";
 @import "./extensions/extensions";
 
 #app {
@@ -750,7 +751,7 @@ a {
   outline        : none;
 
   &:hover {
-    color: #fff;
+    color: #b5b5b5;
   }
 }
 /* Blueprint header */
@@ -873,7 +874,7 @@ a {
   }
 
   a:hover:after {
-    color: #fff;
+    // color: #fff;
   }
 }
 

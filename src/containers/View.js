@@ -18,6 +18,9 @@ class View extends Component {
     } else if (this.props.wrap) {
       className = 'c-page_wrap'
     }
+    if (this.props.classNames) {
+      className += ` ${this.props.classNames}`;
+    }
     return (
       <div className={className}>
         {title}
