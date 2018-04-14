@@ -1,2 +1,13 @@
-$iota-pages-prefix: 'p-';
+////
+/// This is a poster comment.
+/// It will apply annotations to all items from file.
+/// @group API
+/// @author Anthony Mejia
+////
+$iota-pages-prefix      : 'p-';
+$iota-pages-section-name: 'section';
 @import 'notFound';
+@import "index";
+@import "about";
+@import "productGallery";
+@import "collection";

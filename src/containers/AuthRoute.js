@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Route, Redirect } from 'react-router-dom';
+import View from './View';
 
 
 class AuthRoute extends React.Component {
@@ -9,7 +10,7 @@ class AuthRoute extends React.Component {
   handleRender = () => {
     let p = this.props;
     let Component = this.props.component;
-    return (p.actions.isUserAuth() ? (<Component {...p}/>) : p.actions.getStorage('jtk') ? <div/> : (
+    return (p.actions.isUserAuth() ? (<Component {...p}/>) : p.actions.getStorage('jtk') ? <View/> : (
       <Redirect to={{pathname: '/login', state: { from: this.props.location } }}/>
     ))
   }

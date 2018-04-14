@@ -1,0 +1,132 @@
+$iota-p-coll-name: 'coll';
+$iota-p-coll: $iota-pages-prefix + $iota-p-coll-name;
+$iota-p-coll-gallery: $iota-p-coll + $iota-global-separator +'gallery';
+$iota-p-coll-product: $iota-p-coll + $iota-global-separator +'product';
+
+.#{$iota-p-coll} {
+  .p-coll_container {
+    min-height   : calc(100vh - 50px);
+    margin-bottom: 200px;
+    padding      : 20px;
+  }
+
+  .p-coll_title-container {
+    @extend .p-coll_container;
+    display        : -webkit-flex;
+    display        : -ms-flex;
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    text-transform : uppercase;
+    letter-spacing : 4px;
+    padding-top    : 40px;
+    padding-bottom : 40px;
+    margin-top     : -50px;
+
+    .p-coll_title-wrapper {
+      width      : 100%;
+      user-select: none;
+
+      .p-coll_title {
+        margin-bottom: 50px;
+        font-variant : unicase;
+        word-wrap    : break-word;
+        @include iota-type((null : 13vw, sm : 17vw, md: 190px));
+      }
+    }
+
+    .p-coll_tagline {
+      width         : 100%;
+      letter-spacing: 4px;
+      @include iota-type((null : 3vw, sm : 5vw, md: 34px));
+    }
+  }
+
+  .p-coll_detail-container {
+    @extend .p-coll_container;
+    display        : -webkit-flex;
+    display        : -ms-flex;
+    display        : flex;
+    flex-direction : column;
+    justify-content: space-between;
+    align-items    : stretch;
+    padding        : 5px;
+    @include iota-breakpoint(sm) {
+      flex-direction: row;
+    };
+
+    .p-coll_detail-wrapper {
+      flex  : 1;
+      margin: 5px;
+
+      .p-coll_detail-description {
+        padding: 15px 0;
+      }
+
+      .p-coll_detail-meta-wrapper {
+        display      : -webkit-flex;
+        display      : -ms-flex;
+        display      : flex;
+        flex-wrap    : wrap;
+        margin-bottom: 50px;
+
+        .p-coll_detail-meta {
+          width          : calc(50% - 10px);
+          max-width      : 275px;
+          padding        : 16px;
+          margin         : 5px;
+          border-radius  : 10px;
+          min-height     : 30vmin;
+          display        : -webkit-flex;
+          display        : -ms-flex;
+          display        : flex;
+          flex-direction : column;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  .#{$iota-p-coll-gallery} {
+    display        : -webkit-flex;
+    display        : -ms-flex;
+    display        : flex;
+    flex-direction : row;
+    flex-wrap      : wrap;
+    justify-content: flex-start;
+
+    .#{$iota-p-coll-product} {
+      margin         : 6px;
+      padding        : 12px;
+      width          : calc(50% - 12px);
+      max-width      : 200px;
+      height         : 30vmax;
+      max-height     : 300px;
+      display        : -webkit-flex;
+      display        : -ms-flex;
+      display        : flex;
+      justify-content: space-between;
+      flex-direction : column;
+      transition     : all 0.25s linear;
+      background     : #fbfbfb;
+
+      &:hover {
+        box-shadow: 0 5px 20px #dedede;
+      }
+
+      .p-pgal_product-image {
+        flex: 1;
+      }
+
+      .p-pgal_product-wrapper {
+        flex           : 1;
+        display        : -webkit-flex;
+        display        : -ms-flex;
+        display        : flex;
+        flex-direction : column;
+        justify-content: center;
+      }
+    }
+  }
+}

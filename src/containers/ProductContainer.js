@@ -11,6 +11,7 @@ class ProductContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.preState = {};
     this.path = `/${this.props.match.params.product}`;
     this.props.socket.on('product/view', (response) => {
       if (response.type === 'success') {
@@ -23,6 +24,7 @@ class ProductContainer extends Component {
   }
   setStateOnMount = (obj) => {
     if (this.mounted !== true) {
+      console.log('not mounted');
       let keys = Object.keys(obj);
       keys.map((key) => {
         this.preState[key] = obj[key];
@@ -38,6 +40,9 @@ class ProductContainer extends Component {
     if (this.preState !== undefined) {
       this.setState(this.preState);
     };
+  }
+  componentWillUnmount() {
+    this.mounted = undefined;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -56,7 +61,7 @@ class ProductContainer extends Component {
 
   getProduct = () => {
     this.setState({ product: undefined });
-    this.props.actions.getProduct(this.path);
+    this.props.actions.getProductByPath(this.path);
   }
 
   addToCart = () => {
@@ -75,9 +80,9 @@ class ProductContainer extends Component {
     }
     return (
       <Switch location={this.props.location}>
-        <Route exact path={this.props.match.path + '/reviews'} component={({match}) => <ProductReviews match={match} reviews={this.state.product.reviews}/>}/>
-        <Route exact path={this.props.match.path + '/reviews/:review'} component={({match}) => <ProductReview match={match} reviews={this.state.product.reviews}/>}/>
-        <Route path={this.props.match.path} component={() =>  <ProductViewContainer addToCart={this.addToCart} product={this.state.product}/>}/>
+        <Route exact path={this.props.match.path + '/reviews'} component={({match}) => <ProductReviews match={match} reviews={this.state.product.productReviews}/>}/>
+        <Route exact path={this.props.match.path + '/reviews/:review'} component={({match}) => <ProductReview match={match} reviews={this.state.product.productReviews}/>}/>
+        <Route path={this.props.match.path} component={() =>  <ProductViewContainer actions={this.props.actions} addToCart={this.addToCart} product={this.state.product}/>}/>
       </Switch>
     )
 

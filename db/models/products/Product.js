@@ -58,6 +58,12 @@ const Product = db.define('products', {
   images: {
     type: Sequelize.JSON
   }
+}, {
+  defaultScope: {
+    where: {
+      availability: true
+    }
+  }
 });
 
 module.exports = Product;

@@ -40,6 +40,14 @@ class App extends Component {
       }
     });
 
+    this.socket.on('user/verify', (data) => {
+      if (data.request === 'token') {
+        if (this.getStorage('jtk') !== undefined && this.getStore('user') !== undefined) {
+          this.socket.emit('auth/authenticate', this.getStorage('jtk'));
+        };
+      }
+    })
+
     this.socket.on('update/cart', (response) => {
       if (response.type === 'success') {
         this.setStore('cart', response.data)
@@ -253,8 +261,29 @@ class App extends Component {
 
   }
 
-  getProduct = (path) => {
-    this.socket.emit('session/:param', { parameter: "products", path })
+  getProductByPath = (path) => {
+    this.socket.emit('session/:param', { parameter: "product", path })
+  }
+  getProducts = () => {
+    this.socket.emit('session/:param', { parameter: "products", data: {} })
+  }
+  getCollectionByPath = (path) => {
+    this.socket.emit('session/:param', { parameter: "collection", data: { path } })
+  }
+  getCollections = () => {
+    this.socket.emit('session/:param', { parameter: "collections", data: {} })
+  }
+
+  formatPrice = (price) => {
+    if (price === undefined) {
+      return undefined;
+    }
+    let p = price / 100;
+    let fixedPrice = p.toFixed(0);
+    if (p.toFixed(2).toString().split('.')[1] !== '00') {
+      fixedPrice = p.toFixed(2);
+    }
+    return `$${fixedPrice}`;
   }
 
   addToCart = (productId) => {

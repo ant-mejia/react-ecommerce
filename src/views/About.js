@@ -5,13 +5,11 @@ class About extends Component {
 
   render() {
     return (
-      <View>
-        <div>
-          <Link to="/"><p className="u-inline-block u-mr-small">Home</p></Link>
-          <Link to="/about"><p className="u-inline-block u-mr-small">about</p></Link>
-          <Link to="/asda"><p className="u-inline-block u-mr-small">asda</p></Link>
+      <View classNames="p-about">
+        <div className="p-about_heading-wrapper">
+          <div className="u-text-center"><h1 className="p-about_heading text-gradient-marble-9">About Us</h1></div>
         </div>
-        <h1>This is the about page!!</h1>
+        <div className="u-vh-1"></div>
       </View>
     );
   }

@@ -13,6 +13,10 @@
       overflow  : scroll;
       transition: transform 0.45s, opacity 0.45s;
 
+      &.#{'no-scroll'} {
+        overflow: hidden;
+      }
+
       .#{$iota-components-pages-namespace} {
         background-color: #fff;
         min-height      : 100vh;

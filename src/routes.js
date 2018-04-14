@@ -11,16 +11,41 @@ import Register from './views/auth/Register';
 import AuthRoute from './containers/AuthRoute';
 import Account from './views/auth/Account';
 import Orders from './views/auth/Orders';
-import Collections from './views/product/Collections';
+import Collection from './views/collection/Collection';
+import Collections from './views/collection/Collections';
+import ProductGallery from './views/product/ProductGallery';
 import Cart from './views/cart/Cart';
 import Search from './views/Search';
 import NotificationContainer from './containers/NotificationContainer';
 import ProductContainer from './containers/ProductContainer';
 import CheckoutContainer from './containers/CheckoutContainer';
 import Helmet from 'react-helmet';
+import PageTransition from 'react-router-page-transition';
+
 class Routes extends Component {
-  componentDidMount() {
-    // console.log('routes mounted!');
+  constructor(props) {
+    super(props);
+    this.state = { stopScroll: false };
+  }
+  componentDidUpdate(prevProps, prevState) {
+
+    this.props.history.listen(() => {
+      let sc = this.refs.scrollContainer
+      if (sc !== undefined) {
+        if (sc.scrollTop !== 0) {
+          sc.scrollTop = 0
+        }
+      }
+    });
+
+  }
+
+  preventScroll = (e) => {
+    console.log(e);
+    if (this.state.stopScroll) {
+      e.preventDefault();
+      console.log('e');
+    }
   }
 
   pageStackEnter = () => {
@@ -40,13 +65,14 @@ class Routes extends Component {
             <Page/>
           </div> */}
           <NotificationContainer closeNotification={this.props.actions.closeNotification} notifications={this.props.notifications}/>
-          <div className="c-page_wrapper">
-            <Switch onEnter={() => {console.log('bb');}}>
+          <div ref='scrollContainer' className={`c-page_wrapper ${this.state.stopScroll ? 'no-scroll' : ''}`}>
+            <Switch location={this.props.history.location} className="transition-item">
               <Route exact path="/" component={Index} />
               <Route exact path="/about" component={About} />
               <Route exact path="/app" component={Index} />
-              <Route exact path="/collections" component={Collections} />
-              <Route path="/collections/:collection" component={Collections}/>
+              <Route exact path="/collections" render={({match, location}) => <Collections actions={this.props.actions} socket={this.props.socket}/>} />
+              <Route path="/collections/:collection" render={({match, location}) => <Collection actions={this.props.actions} location={location} actions={this.props.actions} match={match} socket={this.props.socket}/>}/>
+              <Route exact path="/products" render={({match, location}) => <ProductGallery actions={this.props.actions} socket={this.props.socket}/>} />
               <Route path="/products/:product" render={({match, location}) => <ProductContainer location={location} actions={this.props.actions} match={match} socket={this.props.socket}/>}/>
               <Route exact path="/search" render={({match}) => <Search socket={this.props.socket}/> } />
               <Route exact path="/cart" component={({match}) => <Cart store={this.props.store} actions={this.props.actions}/> } />
@@ -64,6 +90,7 @@ class Routes extends Component {
     )
   }
 };
+
 Routes.propTypes = {
   history: PropTypes.object.isRequired
 };

@@ -12,6 +12,7 @@
 @import 'objects/type';
 @import 'utilities/align';
 @import 'utilities/bgcolor';
+@import 'utilities/bggradient';
 @import 'utilities/clearfix';
 @import 'utilities/color';
 @import 'utilities/display';
@@ -40,10 +41,19 @@
   background: $iota-global-off-white;
 }
 
+html {
+  height  : 100%;
+  overflow: auto;
+}
+
+body {
+  height: 100%;
+}
+
 .js body,
 html.js {
   overflow: hidden;
-  height  : 100vh;
+  // height  : 100vh;
 }
 /* Pages nav */
 .pages-nav {
@@ -929,4 +939,14 @@ a {
   line-height: 200px;
   font-size  : 80px;
   color      : white;
+}
+
+img.unloaded {
+  opacity   : 0;
+  transition: all 0.5s linear;
+}
+
+img.loaded {
+  opacity   : 1;
+  transition: all 0.5s linear;
 }

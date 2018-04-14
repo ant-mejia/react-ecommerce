@@ -12,13 +12,45 @@ const Collection = db.define('collection', {
     defaultValue: helpers.generateUid(),
     unique: true
   },
+  path: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      is: /^\/(([A-z0-9\-])+$)/
+    }
+  },
   title: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  tagline: {
+    type: Sequelize.STRING(100),
+    allowNull: false
+  },
+  summary: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
   description: {
     type: Sequelize.STRING,
     allowNull: false
   },
+  availability: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false
+  },
+  clearance: {
+    type: Sequelize.INTEGER
+  },
+  releaseDate: {
+    type: Sequelize.DATE
+  },
+  endDate: {
+    type: Sequelize.DATE
+  },
+  metadata: {
+    type: Sequelize.JSON
+  }
 });
 module.exports = Collection;

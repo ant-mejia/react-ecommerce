@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import ScrollLock from 'react-scrolllock';
 import View from '../containers/View'
 import { Link } from 'react-router-dom';
 import Jumbotron from '../components/Jumbotron/Jumbotron';
 
 class Index extends Component {
 
-  content = [{
+  jumbotronContent = [{
     background: { src: 'https://www.screenaustralia.gov.au/sacms/media/samedialibrary/screenguide/titles/tid33797-mountain/tid33797-web/tid33797-mountain-001-hero.jpg', alt: 'Blah Blah Blah' },
     subheading: 'Tiny ass heading',
     heading: 'Alan Watts',
@@ -40,27 +41,85 @@ class Index extends Component {
       <div>
         {/* <PageHeader/> */}
         <div className="c-page_jumbotron">
-          <Jumbotron type="creative" content={this.content}/>
+          <Jumbotron type="creative" content={this.jumbotronContent}/>
         </div>
-        <View>
-          <h1>Welcome to React!! This is the index page!</h1>
-          <div>
-            <p>Phasellus feugiat dui velit. Integer interdum quis ligula at ultrices. Etiam ac odio a arcu elementum cursus ac id odio. Duis tempus lacus vel suscipit pellentesque. Integer eu metus nec sapien fringilla iaculis non non massa. Mauris mollis risus in felis congue, non ullamcorper lacus posuere. Morbi blandit rutrum ante nec accumsan. Curabitur mollis sit amet odio eget posuere. Duis id turpis vel lectus rutrum blandit. Nam efficitur, erat vitae hendrerit commodo, felis ante blandit turpis, a commodo lacus ipsum ac eros. Nunc ac erat et magna aliquet molestie. Vivamus ut lectus at orci tempor suscipit. Donec efficitur mi sed velit congue luctus. Praesent eu tempus sem, non vehicula libero. Pellentesque nulla massa, consequat eu tortor vitae, consequat egestas nibh.
-            </p>
-            <p>Phasellus feugiat dui velit. Integer interdum quis ligula at ultrices. Etiam ac odio a arcu elementum cursus ac id odio. Duis tempus lacus vel suscipit pellentesque. Integer eu metus nec sapien fringilla iaculis non non massa. Mauris mollis risus in felis congue, non ullamcorper lacus posuere. Morbi blandit rutrum ante nec accumsan. Curabitur mollis sit amet odio eget posuere. Duis id turpis vel lectus rutrum blandit. Nam efficitur, erat vitae hendrerit commodo, felis ante blandit turpis, a commodo lacus ipsum ac eros. Nunc ac erat et magna aliquet molestie. Vivamus ut lectus at orci tempor suscipit. Donec efficitur mi sed velit congue luctus. Praesent eu tempus sem, non vehicula libero. Pellentesque nulla massa, consequat eu tortor vitae, consequat egestas nibh.
-            </p>
-            <p>Phasellus feugiat dui velit. Integer interdum quis ligula at ultrices. Etiam ac odio a arcu elementum cursus ac id odio. Duis tempus lacus vel suscipit pellentesque. Integer eu metus nec sapien fringilla iaculis non non massa. Mauris mollis risus in felis congue, non ullamcorper lacus posuere. Morbi blandit rutrum ante nec accumsan. Curabitur mollis sit amet odio eget posuere. Duis id turpis vel lectus rutrum blandit. Nam efficitur, erat vitae hendrerit commodo, felis ante blandit turpis, a commodo lacus ipsum ac eros. Nunc ac erat et magna aliquet molestie. Vivamus ut lectus at orci tempor suscipit. Donec efficitur mi sed velit congue luctus. Praesent eu tempus sem, non vehicula libero. Pellentesque nulla massa, consequat eu tortor vitae, consequat egestas nibh.
-            </p>
-            <p>Phasellus feugiat dui velit. Integer interdum quis ligula at ultrices. Etiam ac odio a arcu elementum cursus ac id odio. Duis tempus lacus vel suscipit pellentesque. Integer eu metus nec sapien fringilla iaculis non non massa. Mauris mollis risus in felis congue, non ullamcorper lacus posuere. Morbi blandit rutrum ante nec accumsan. Curabitur mollis sit amet odio eget posuere. Duis id turpis vel lectus rutrum blandit. Nam efficitur, erat vitae hendrerit commodo, felis ante blandit turpis, a commodo lacus ipsum ac eros. Nunc ac erat et magna aliquet molestie. Vivamus ut lectus at orci tempor suscipit. Donec efficitur mi sed velit congue luctus. Praesent eu tempus sem, non vehicula libero. Pellentesque nulla massa, consequat eu tortor vitae, consequat egestas nibh.
-            </p>
-            <p>Phasellus feugiat dui velit. Integer interdum quis ligula at ultrices. Etiam ac odio a arcu elementum cursus ac id odio. Duis tempus lacus vel suscipit pellentesque. Integer eu metus nec sapien fringilla iaculis non non massa. Mauris mollis risus in felis congue, non ullamcorper lacus posuere. Morbi blandit rutrum ante nec accumsan. Curabitur mollis sit amet odio eget posuere. Duis id turpis vel lectus rutrum blandit. Nam efficitur, erat vitae hendrerit commodo, felis ante blandit turpis, a commodo lacus ipsum ac eros. Nunc ac erat et magna aliquet molestie. Vivamus ut lectus at orci tempor suscipit. Donec efficitur mi sed velit congue luctus. Praesent eu tempus sem, non vehicula libero. Pellentesque nulla massa, consequat eu tortor vitae, consequat egestas nibh.
-            </p>
-            <p>Phasellus feugiat dui velit. Integer interdum quis ligula at ultrices. Etiam ac odio a arcu elementum cursus ac id odio. Duis tempus lacus vel suscipit pellentesque. Integer eu metus nec sapien fringilla iaculis non non massa. Mauris mollis risus in felis congue, non ullamcorper lacus posuere. Morbi blandit rutrum ante nec accumsan. Curabitur mollis sit amet odio eget posuere. Duis id turpis vel lectus rutrum blandit. Nam efficitur, erat vitae hendrerit commodo, felis ante blandit turpis, a commodo lacus ipsum ac eros. Nunc ac erat et magna aliquet molestie. Vivamus ut lectus at orci tempor suscipit. Donec efficitur mi sed velit congue luctus. Praesent eu tempus sem, non vehicula libero. Pellentesque nulla massa, consequat eu tortor vitae, consequat egestas nibh.
-            </p>
-            <p>Phasellus feugiat dui velit. Integer interdum quis ligula at ultrices. Etiam ac odio a arcu elementum cursus ac id odio. Duis tempus lacus vel suscipit pellentesque. Integer eu metus nec sapien fringilla iaculis non non massa. Mauris mollis risus in felis congue, non ullamcorper lacus posuere. Morbi blandit rutrum ante nec accumsan. Curabitur mollis sit amet odio eget posuere. Duis id turpis vel lectus rutrum blandit. Nam efficitur, erat vitae hendrerit commodo, felis ante blandit turpis, a commodo lacus ipsum ac eros. Nunc ac erat et magna aliquet molestie. Vivamus ut lectus at orci tempor suscipit. Donec efficitur mi sed velit congue luctus. Praesent eu tempus sem, non vehicula libero. Pellentesque nulla massa, consequat eu tortor vitae, consequat egestas nibh.
-            </p>
-            <p>Phasellus feugiat dui velit. Integer interdum quis ligula at ultrices. Etiam ac odio a arcu elementum cursus ac id odio. Duis tempus lacus vel suscipit pellentesque. Integer eu metus nec sapien fringilla iaculis non non massa. Mauris mollis risus in felis congue, non ullamcorper lacus posuere. Morbi blandit rutrum ante nec accumsan. Curabitur mollis sit amet odio eget posuere. Duis id turpis vel lectus rutrum blandit. Nam efficitur, erat vitae hendrerit commodo, felis ante blandit turpis, a commodo lacus ipsum ac eros. Nunc ac erat et magna aliquet molestie. Vivamus ut lectus at orci tempor suscipit. Donec efficitur mi sed velit congue luctus. Praesent eu tempus sem, non vehicula libero. Pellentesque nulla massa, consequat eu tortor vitae, consequat egestas nibh.
-            </p>
+        <View classNames="p-index">
+          <div className="p-index_section">
+            <h1>Featured Collections</h1>
+            <h3>This is just a lil sub heading</h3>
+            <div>
+              <div className="p-index_collections">
+                <div className="p-index_collection-container">
+                  <div className="p-index_collection">
+                    <div className="p-index_collection-background">
+                      <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
+                    </div>
+                    <Link to="/collections">
+                      <div className="p-index_collection-wrapper ">
+                        <h3>Collection 2</h3>
+                        <h4>Sub Title</h4>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="p-index_collection">
+                    <div className="p-index_collection-background">
+                      <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
+                    </div>
+                    <Link to="/collections">
+                      <div className="p-index_collection-wrapper ">
+                        <h3>Collection 3</h3>
+                        <h4>Sub Title</h4>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="p-index_collection p-index_collection-featured">
+                  <div className="p-index_collection-background">
+                    <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
+                  </div>
+                  <Link to="/collections">
+                    <div className="p-index_collection-wrapper ">
+                      <h3>Collection 1</h3>
+                      <h4>Sub Title</h4>
+                    </div>
+                  </Link>
+                </div>
+                <div className="p-index_collection-container">
+                  <div className="p-index_collection">
+                    <div className="p-index_collection-background">
+                      <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
+                    </div>
+                    <Link to="/collections">
+                      <div className="p-index_collection-wrapper ">
+                        <h3>Collection 4</h3>
+                        <h4>Sub Title</h4>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="p-index_collection">
+                    <div className="p-index_collection-background">
+                      <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
+                    </div>
+                    <Link to="/collections">
+                      <div className="p-index_collection-wrapper ">
+                        <h3>Collection 5</h3>
+                        <h4>Sub Title</h4>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <Link to="/collections">
+                <h2>View All Collections</h2>
+              </Link>
+            </div>
+          </div>
+          <div className="p-index_section">
+            <h5>Next Section</h5>
+            <h1>Featured Products</h1>
+            <Link to="/products">
+              <h2>View All Products</h2>
+            </Link>
           </div>
         </View>
       </div>

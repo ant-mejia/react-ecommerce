@@ -24,7 +24,7 @@ class Header extends Component {
               <Link className="c-header-container_menu-item" to="/">Home</Link>
               <Link className="c-header-container_menu-item" to="/collections">Collections</Link>
               <Link className="c-header-container_menu-item" to="/search">Search</Link>
-              <Link className="c-header-container_menu-item" to="/products/beta">Beta</Link>
+              <Link className="c-header-container_menu-item" to="/products">Products</Link>
               <Link className="c-header-container_menu-item" to="/products/test-product">Test Product</Link>
               <Link className="c-header-container_menu-item" to="/products/unavailable">Unavailable</Link>
               <div className="c-header-container_menu-item-alternate-wrapper">

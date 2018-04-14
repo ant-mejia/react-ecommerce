@@ -3,29 +3,58 @@
  *
  * Type: Boolean
  */
-
 $iota-utils-text-res: false;
-
-
 /**
  * Overrides breakpoints map only for position utility
- * 
+ *
  * Type: Map
  */
-
 $iota-utils-text-breakpoints: $iota-global-breakpoints;
-
-
 /**
  * Namespace classes
  *
  * Type: String
  */
+$iota-utils-text-namespace: 'text-';
+$iota-utils-text-left-name: 'left';
+$iota-utils-text-right-name: 'right';
+$iota-utils-text-center-name: 'center';
+$iota-utils-text-gradient-name: $iota-utils-text-namespace + 'gradient'; // $iota-text-backgrounds: (
+$iota-utils-text-gradient-directory: 'assets/images'; // $iota-text-backgrounds: (
+//   holo  : (" assets/images/holo/01.png", "assets/images/holo/02.png", "assets/images/holo/03.png", "assets/images/holo/04.png", "assets/images/holo/05.png"),
+//   marble: ("assets/images/marble/01.jpg", "assets/images/marble/02.jpg", "assets/images/marble/03.jpg", "assets/images/marble/04.jpg", "assets/images/marble/05.jpg", "assets/images/marble/06.jpg"),
+//   wood  : ("assets/images/wood/01.jpg", "assets/images/wood/02.jpg", "assets/images/wood/03.jpg", "assets/images/wood/04.jpg", "assets/images/wood/05.jpg", "assets/images/wood/06.jpg")
+// );
+$iota-text-backgrounds: (
+  holo  : 6,
+  wood  : 13,
+  marble: 16,
+  brick : 7,
+  stone : 10
+);
 
-$iota-utils-text-namespace    : 'text-';
-$iota-utils-text-left-name    : 'left';
-$iota-utils-text-right-name   : 'right';
-$iota-utils-text-center-name  : 'center';
+*[class*=' #{$iota-utils-text-gradient-name}']::selection,
+*[class^='#{$iota-utils-text-gradient-name}']::selection {
+  color     : $iota-global-primary-accent-color;
+  background: transparent;
+}
+@each $bgname, $bgi in $iota-text-backgrounds {
+  @for $a from 1 through $bgi {
+    $index: $a;
+    @if $a < 10 {
+      $index: '0' + $a;
+    }
+    $bgurl: $iota-utils-text-gradient-directory + '/' + $bgname + '/' + $index + '.jpg';
 
-
+    .#{$iota-utils-text-gradient-name + '-' + $bgname + '-' + $a} {
+      color                  : $iota-global-charcoal;
+      -webkit-background-clip: text;
+      background-clip        : text;
+      background-size        : cover;
+      color                  : transparent;
+      cursor                 : default;
+      background-image       : url($bgurl);
+    }
+  }
+}
 @import 'node_modules/iotacss/utilities/text';

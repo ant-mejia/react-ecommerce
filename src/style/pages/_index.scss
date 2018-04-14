@@ -1,0 +1,91 @@
+$iota-p-index-name: $iota-pages-prefix + 'index';
+$iota-p-index-section: $iota-p-index-name + $iota-global-separator + $iota-pages-section-name;
+$iota-p-collection: $iota-p-index-name + $iota-global-separator + 'collection';
+$iota-p-collections: $iota-p-index-name + $iota-global-separator + 'collections';
+/// @name message
+.#{$iota-p-index-name} {
+  .#{$iota-p-index-section} {
+    min-height   : 100vh;
+    margin-bottom: 80px;
+    overflow     : hidden;
+    display      : inline-block;
+    width        : 100%;
+    @include iota-breakpoint(sm) {
+      margin-bottom: 170px;
+    };
+  }
+
+  .#{$iota-p-collections} {
+    display        : -webkit-flex;
+    display        : -ms-flex;
+    display        : flex;
+    flex-direction : column;
+    justify-content: space-between;
+
+    .#{$iota-p-collection} {
+      position  : relative;
+      margin    : 25px 0;
+      height    : calc(100vw - 100px);
+      background: #584ed2;
+
+      .p-index_collection-background {
+        position       : absolute;
+        z-index        : 1;
+        display        : flex;
+        justify-content: center;
+        align-items    : center;
+        overflow       : hidden;
+        width          : 100%;
+        height         : 100%;
+
+        img {
+          flex-shrink: 0;
+          min-width  : 100%;
+          min-height : 100%;
+        }
+      }
+
+      .p-index_collection-wrapper {
+        cursor         : pointer;
+        position       : absolute;
+        width          : 100%;
+        height         : 100%;
+        z-index        : 2;
+        padding        : 20px;
+        height         : 100%;
+        display        : -webkit-flex;
+        display        : -ms-flex;
+        display        : flex;
+        flex-direction : column;
+        justify-content: space-around;
+        align-items    : center;
+      }
+    }
+    @include iota-breakpoint(sm) {
+      flex-direction: row;
+
+      .p-index_collection-featured {
+        width : 50%;
+        height: calc(50vw - 50px);
+      }
+
+      .#{$iota-p-collection} {
+        margin: 5px;
+      }
+
+      .p-index_collection-container {
+        display        : -webkit-flex;
+        display        : -ms-flex;
+        display        : flex;
+        flex-direction : column;
+        justify-content: space-between;
+        flex           : 1;
+
+        .#{$iota-p-collection} {
+          height: auto;
+          flex  : 1;
+        }
+      }
+    }
+  }
+}

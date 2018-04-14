@@ -22,21 +22,44 @@ this.createProduct = (obj) => {
 }
 
 this.getProduct = (method, data, userId) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
+    let userClearance = 0;
+    if (userId !== undefined && typeof userId === 'string') {
+      let userData = await models.users.User.findById(userId);
+      if (userData !== null && userData.dataValues !== undefined) {
+        let user = userData.dataValues;
+        userClearance = user.privilege;
+      }
+    }
     if (method === 'path') {
-      models.products.Product.findOne({ where: { path: data.path } })
+      models.products.Product.findOne({
+          where: { path: data.path },
+          include: [{
+            model: models.products.Promo,
+            required: false,
+            where: {
+              clearance: {
+                [Op.lte]: userClearance
+              },
+              startDate: {
+                [Op.lt]: moment().toDate()
+              },
+              endDate: {
+                [Op.gt]: moment().toDate()
+              },
+              active: true
+            }
+          }, {
+            model: models.products.Review,
+            as: 'productReviews',
+            required: false
+          }]
+        })
         .then((obj) => {
           if (obj !== null && obj.dataValues !== undefined) {
-            this.getPromoByProductId(obj.dataValues.uid, userId).then((promo) => {
-              console.log("PROMOTION ::: ::: ::: ", promo);
-              obj.dataValues.promotion = promo[0];
-              obj.dataValues.promoPrice = this.getPromoPrice(obj.dataValues)
-              obj.dataValues.price = obj.dataValues.price
-              this.getReviews({ productId: obj.dataValues.uid }).then((reviews) => {
-                obj.dataValues.reviews = reviews
-                resolve(obj.dataValues);
-              });
-            });
+            let product = obj.dataValues;
+            product.promoPrice = this.getPrice(product);
+            resolve(product);
           } else {
             reject(helpers.error('Server', 'Product does not exist', message = 'This product does not exist'))
           }
@@ -68,31 +91,84 @@ this.getProduct = (method, data, userId) => {
   });
 }
 
-this.getPromoPrice = (product) => {
-  let promoPrice = product.price
-  if (product.promotion) {
-    if (product.promotion.promotion.amount) {
-      promoPrice = promoPrice - product.promotion.promotion.amount;
+this.getProducts = (filter, userUid) => {
+  return new Promise(async (resolve, reject) => {
+    let user = undefined;
+    if (userUid) {
+      let userData = await models.users.User.findById(userUid);
+      if (userData !== null && userData.dataValues) {
+        user = userData.dataValues;
+      }
     }
-    if (product.promotion.promotion.percent) {
-      promoPrice = (promoPrice - (promoPrice * (product.promotion.promotion.percent / 100)));
+    let userClearance = 0;
+    if (user !== undefined && user !== null) {
+      userClearance = user.privilege;
     }
+    models.products.Product.findAll({
+      where: {
+        availability: true,
+        clearance: {
+          [Op.lte]: userClearance
+        },
+        releaseDate: {
+          [Op.lt]: moment().toDate()
+        }
+      },
+      include: [{
+        model: models.products.Promo,
+        required: false,
+        where: {
+          clearance: {
+            [Op.lte]: userClearance
+          },
+          startDate: {
+            [Op.lt]: moment().toDate()
+          },
+          endDate: {
+            [Op.gt]: moment().toDate()
+          },
+          active: true
+        }
+      }]
+    }).then((productData) => {
+      if (productData === null || productData === undefined) {
+        reject('no products');
+      }
+      let products = productData.map((a) => {
+        let b = a.dataValues
+        b.image = { src: 'https://revolutioncdn-themepunchgbr.netdna-ssl.com/wp-content/uploads/revslider/beforeafteraddon/object_coffee_1.png' };
+        b.promoPrice = this.getPrice(b);
+        return b;
+      });
+      resolve(products);
+    })
+  });
+}
+this.getPrice = (product) => {
+  if (typeof product === 'string') {
+    return undefined
+  }
+  let promoPrice = product.price;
+  if (product.promos) {
+    product.promos.map((promo) => {
+      if (promo.promotion.amount) {
+        promoPrice = promoPrice - promo.promotion.amount;
+      }
+      if (promo.promotion.percent) {
+        promoPrice = (promoPrice - (promoPrice * (promo.promotion.percent / 100)));
+      }
+    })
   } else {
     return undefined;
   }
   if (promoPrice === product.price) {
     return undefined;
   } else {
-    let dec = promoPrice.toFixed(2);
-    let points = dec.toString().split('.')[1];
-    let finalPrice = product.price;
-    if (points === '00') {
-      finalPrice = promoPrice;
-    } else {
-      finalPrice = dec;
-    }
-    return finalPrice;
+    return promoPrice;
   }
+}
+this.getPromoPrice = (product) => {
+  return undefined;
 }
 
 this.getPromoByProductId = async (productId, userId) => {
@@ -134,8 +210,7 @@ this.getPromoByProductId = async (productId, userId) => {
         }
       })
     });
-    console.log("privilege ::: ", privilege);
-  });;
+  });
 }
 
 this.getReviews = (obj) => {

@@ -7,6 +7,9 @@ $iota-creative-wrapper: $iota-components-jumbotron-creative + $iota-global-separ
 $iota-creative-button: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-button-name;
 $iota-creative-controls: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-controls-name;
 $iota-creative-background: $iota-components-jumbotron-creative + $iota-global-separator + $iota-components-jumbotron-background-name;
+$iota-creative-enter: $iota-components-jumbotron-creative + '-' + $iota-components-jumbotron-enter-name;
+$iota-creative-exit: $iota-components-jumbotron-creative + '-' + $iota-components-jumbotron-exit-name;
+$iota-creative-duration: 0.5s;
 
 .#{$iota-components-jumbotron-creative} {
   border        : 25px solid white;
@@ -20,33 +23,47 @@ $iota-creative-background: $iota-components-jumbotron-creative + $iota-global-se
   overflow      : hidden;
 
   .#{$iota-creative-side} {
-    background    : #fff;
-    position      : absolute;
-    z-index       : 2;
-    display       : -webkit-flex;
-    display       : -ms-flex;
-    display       : flex;
-    flex-direction: column-reverse;
-    text-transform: uppercase;
-    @include iota-breakpoint(xs) {
-      flex-direction  : row;
-      transform       : rotate(90deg);
-      transform-origin: left;
-      left            : 10px;
+    z-index : 2;
+    position: relative;
+
+    .c-jumbotron_creative_side_wrapper {
+      transition    : left 0.5s linear 0.2s;
+      display       : -webkit-flex;
+      display       : -ms-flex;
+      display       : flex;
+      flex-direction: column-reverse;
+      text-transform: uppercase;
+      position      : absolute;
 
       p {
-        margin: 5px 15px 30px;
+        background: #fff;
+        padding   : 5px;
       }
-    };
-    @include iota-breakpoint(sm) {
-      top: 110px;
+      @include iota-breakpoint(xs) {
+        background      : #fff;
+        top             : 50%;
+        left            : 50%;
+        padding         : 0;
+        flex-direction  : row;
+        transform       : rotate(90deg);
+        transform-origin: left;
+        left            : 10px;
+
+        p {
+          margin: 5px 15px 30px;
+        }
+      };
+      @include iota-breakpoint(sm) {
+        top: 110px;
+      }
     }
   }
 
   .#{$iota-creative-background} {
-    position: absolute;
-    width   : 100%;
-    height  : 100%;
+    transition: all 0.8s linear;
+    position  : absolute;
+    width     : 100%;
+    height    : 100%;
 
     img {
       display   : block;
@@ -117,6 +134,7 @@ $iota-creative-background: $iota-components-jumbotron-creative + $iota-global-se
       @include iota-type((null : 34px, xs : 46px, sm : 52px));
       letter-spacing: 5px;
       word-spacing  : 15px;
+      transition    : all $iota-creative-duration linear;
 
       &:after {
         margin-top   : 17px;
@@ -135,4 +153,24 @@ $iota-creative-background: $iota-components-jumbotron-creative + $iota-global-se
       a {}
     }
   }
+
+  &.#{$iota-creative-enter} {
+    .c-jumbotron_creative_title {
+      opacity: 1;
+    }
+  };
+
+  &.#{$iota-creative-exit} {
+    .#{$iota-creative-side} {
+      left: -100px;
+    }
+
+    .c-jumbotron_creative_title {
+      opacity: 0;
+    }
+
+    .#{$iota-creative-background} {
+      opacity: 0;
+    }
+  };
 }

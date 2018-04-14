@@ -3,11 +3,7 @@
  *
  * Type: Map
  */
-$iota-utils-bgcolor-names: (
-  white   : #ffffff,
-  offwhite: #f6f6f6,
-  black   : #000000,
-);
+$iota-utils-bgcolor-names    : $iota-global-colors;
 /**
  * Namespace classes
  *

@@ -1,0 +1,23 @@
+$iota-about-name: 'about';
+$iota-about: $iota-pages-prefix + $iota-about-name;
+$iota-about-heading: $iota-about + $iota-global-separator + 'heading';
+$iota-about-heading-wrapper: $iota-about-heading + '-' + 'wrapper';
+
+.#{$iota-about} {
+  .#{$iota-about-heading-wrapper} {
+    padding-bottom : 60px;
+    min-height     : calc(100vh - 50px);
+    display        : -webkit-flex;
+    display        : -ms-flex;
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+
+    .#{$iota-about-heading} {
+      display    : inline-block;
+      font-size  : 200px;
+      text-align : center;
+      text-shadow: -20px 0 0 $iota-global-white;
+    }
+  }
+}

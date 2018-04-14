@@ -83,8 +83,6 @@ this.loginUser = (cred, method = 'email') => {
           user = user.dataValues;
           if (cred.password === user.password) {
             let addressData = await this.getUserAddress(user.uid);
-            console.log(addressData);
-            console.log('USER::: ', user);
             if (user.address === undefined) {
               user.address = addressData;
             }
@@ -112,7 +110,6 @@ this.getUserAddress = (userId) => {
     }
     models.users.userAddress.findAll({ where: { userUid: userId } }).then((data) => {
       let addressArr = data.map(addr => addr.dataValues);
-      console.log("ADDRESSES: ::: ", addressArr);
       resolve(addressArr);
     })
   });

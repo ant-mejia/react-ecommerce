@@ -1,0 +1,89 @@
+$iota-pgal: $iota-pages-prefix + 'pgal';
+$iota-pgal-container: $iota-pgal + $iota-global-separator + 'container';
+$iota-pgal-wrapper: $iota-pgal + $iota-global-separator + 'wrapper';
+$iota-pgal-product: $iota-pgal + $iota-global-separator + 'product';
+$iota-pgal-side: $iota-pgal + $iota-global-separator + 'side';
+$iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
+
+.#{$iota-pgal} {
+  .#{$iota-pgal-container} {
+    display       : -webkit-flex;
+    display       : -ms-flex;
+    display       : flex;
+    flex-direction: column;
+    @include iota-breakpoint(sm) {
+      flex-direction: row;
+    }
+
+    .#{$iota-pgal-side} {
+      display: none;
+      padding: 10px;
+      @include iota-breakpoint(sm) {
+        width  : 23%;
+        display: initial;
+      };
+
+      .#{$iota-pgal-side-wrapper} {
+        padding       : 15px 40px;
+        background    : $iota-global-off-white;
+        display       : -webkit-flex;
+        display       : -ms-flex;
+        display       : flex;
+        flex-direction: column;
+      }
+    }
+
+    .#{$iota-pgal-wrapper} {
+      display       : -webkit-flex;
+      display       : -ms-flex;
+      display       : flex;
+      flex-wrap     : wrap;
+      flex-direction: row;
+      padding       : 10px;
+      @include iota-breakpoint(sm) {
+        flex: 1;
+      }
+
+      .#{$iota-pgal-product} {
+        .p-pgal_product-saletab {
+          background      : $iota-global-yellow;
+          color           : $iota-global-charcoal;
+          letter-spacing  : 2px;
+          text-transform  : uppercase;
+          position        : absolute;
+          transform       : rotate(-90deg);
+          transform-origin: 45% 153%;
+          padding         : 3px 18px;
+          top             : 20%;
+          font-size       : 12px;
+        }
+        position  : relative;
+        margin    : 1rem 0.25rem;
+        // width     : calc(50% - 0.5rem);
+        // min-height: 20vmax;
+        background: rgb(238, 238, 238);
+        min-height: 300px;
+        min-width : 200px;
+        transition: all 0.25s linear;
+
+        &:hover {
+          box-shadow: 0 10px 32px #ddd;
+          margin-top: -4px;
+        }
+
+        &-wrapper {
+          text-align: center;
+        }
+        @include iota-breakpoint(xs) {
+          margin    : 0.5rem;
+          min-width : unset;
+          max-width : calc(33.3% - 2rem);
+          max-height: 300px;
+        };
+        @include iota-breakpoint(md) {
+          max-width: calc(25% - 1rem);
+        };
+      }
+    }
+  }
+}

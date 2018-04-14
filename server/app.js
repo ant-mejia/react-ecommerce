@@ -26,6 +26,7 @@ const authManager = require('./managers/authManager');
 const socketManager = require('./managers/socketManager');
 const productManager = require('./managers/productManager');
 const cartManager = require('./managers/cartManager');
+const collectionManager = require('./managers/collectionManager');
 const paymentManager = require('./managers/paymentManager');
 const helpers = require('./helpers');
 const stripe = require('stripe')('pk_test_6NW0ufnPuIGneWb88nmNDvqR');
@@ -45,7 +46,7 @@ app.use(morgan(':remote-addr - :type :referrer :moment ":method :url HTTP/:http-
 // app.use(morgan(':remote-addr - :type :referrer :moment ":method :url HTTP/:http-version" :status :response-time ms', {
 // stream: stream
 // }));
-io.use(slogger());
+io.use(slogger({ minimal: false }));
 io.engine.generateId = () => {
   return helpers.generateUid(); // custom id must be unique
 }
@@ -71,6 +72,9 @@ io.on('connection', (socket) => {
   socketManager.logIt('item');
   sessionManager.createSession(socket);
   console.log("Socket connected: " + socket.id);
+  if (socket.userUid === undefined) {
+    socket.emit('user/verify', { request: 'token' });
+  };
   socket.on('session/view', (data) => {
     /**
      * @api {get} /session/view Create a view for session
@@ -217,7 +221,7 @@ io.on('connection', (socket) => {
     }
   })
   socket.on('session/:param', (response) => {
-    if (response.parameter === 'products') {
+    if (response.parameter === 'product') {
       console.log(`session/products:${response.path.split('/')[1]}`);
       // io.in('session/products').emit('session/notify', socketManager.sendData('success', response));
       productManager.getProduct('path', response, socket.userUid).then((data) => {
@@ -251,6 +255,18 @@ io.on('connection', (socket) => {
         package.renderCode = 404;
         socket.emit('product/view', package);
         console.log("FAILURE!!", error);
+      })
+    } else if (response.parameter === 'products') {
+      productManager.getProducts(response.filter, socket.userUid).then((data) => {
+        socket.emit('products/view', { type: 'success', data: data })
+      });
+    } else if (response.parameter === 'collection') {
+      collectionManager.getCollection(response.data).then((data) => {
+        socket.emit('collection/view', socketManager.sendData('success', data));
+      })
+    } else if (response.parameter === 'collections') {
+      collectionManager.getCollections().then((data) => {
+        socket.emit('collections/view', socketManager.sendData('success', data));
       })
     }
   });

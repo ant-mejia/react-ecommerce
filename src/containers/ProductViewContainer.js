@@ -11,7 +11,7 @@ class ProductViewContainer extends Component {
         <Helmet>
           <title>{this.props.product.title}</title>
         </Helmet>
-        <ProductPresentation1 addToCart={this.props.addToCart} product={this.props.product}/>
+        <ProductPresentation1 formatPrice={this.props.actions.formatPrice} addToCart={this.props.addToCart} product={this.props.product}/>
       </div>
     );
   }

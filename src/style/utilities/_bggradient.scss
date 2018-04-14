@@ -1,0 +1,12 @@
+$iota-bgg-gradients: (
+  (#8965fe, #8ca3ff),
+  (rgb(235, 84, 172), rgb(159, 76, 51)),
+  (rgb(235, 84, 172), rgb(74, 177, 65))
+);
+@each $gr in $iota-bgg-gradients {
+  $i: index($iota-bgg-gradients, $gr);
+
+  .#{'u-bgg-' + $i} {
+    background: linear-gradient($gr);
+  }
+}
