@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import { AnimatedSwitch } from 'react-router-transition';
 import Header from '../components/Header'
 import Footer from '../components/Footer';
 import Page from '../components/Page';

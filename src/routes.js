@@ -20,7 +20,6 @@ import NotificationContainer from './containers/NotificationContainer';
 import ProductContainer from './containers/ProductContainer';
 import CheckoutContainer from './containers/CheckoutContainer';
 import Helmet from 'react-helmet';
-import PageTransition from 'react-router-page-transition';
 
 class Routes extends Component {
   constructor(props) {

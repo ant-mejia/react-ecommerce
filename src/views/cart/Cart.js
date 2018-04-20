@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { VelocityTransitionGroup } from 'velocity-react';
 
 import View from '../../containers/View';
 import { Link } from 'react-router-dom';
@@ -19,7 +18,7 @@ class Cart extends Component {
       return (
         <View>
           <h1>My Cart!</h1>
-          <VelocityTransitionGroup enter={{animation: "slideDown"}} leave={{animation: "slideUp"}}>
+
 
             {this.state.cart.map((item) => {
 
@@ -36,7 +35,6 @@ class Cart extends Component {
                 </div>
               )
             })}
-          </VelocityTransitionGroup>
           <Link to="/checkout"><button>Checkout</button></Link>
         </View>
       );

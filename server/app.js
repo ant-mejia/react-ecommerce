@@ -19,7 +19,6 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 const authHelpers = require('./auth/auth-helpers');
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-const passportSocketIo = require('passport.socketio');
 const slogger = require('slogged')
 const moment = require('moment');
 const sessionManager = require('./managers/sessionManager');
@@ -32,7 +31,6 @@ const paymentManager = require('./managers/paymentManager');
 const helpers = require('./helpers');
 const stripe = require('stripe')('pk_test_6NW0ufnPuIGneWb88nmNDvqR');
 const Sifter = require('sifter');
-const get_ip = require('ipware')().get_ip;
 const useragent = require('useragent');
 const subdomain = require('express-subdomain');
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ScrollLock from 'react-scrolllock';
 import View from '../containers/View'
 import { Link } from 'react-router-dom';
 import Jumbotron from '../components/Jumbotron/Jumbotron';

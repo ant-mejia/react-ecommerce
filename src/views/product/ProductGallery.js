@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import InputRange from 'react-input-range';
 import View from '../../containers/View';
 import Product from '../../components/Product/ProductGallery/Product';
-var Dropdown = require('rc-dropdown');
+
 class ProductGallery extends Component {
   constructor(props) {
     super(props);
