@@ -14,7 +14,8 @@ const appClient = express();
 const appVendor = express();
 const models = require('../db/models/index');
 const passport = require('passport');
-require('dotenv').config();
+// require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 const authHelpers = require('./auth/auth-helpers');
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
@@ -52,7 +53,6 @@ io.engine.generateId = () => {
 }
 // OLD!
 server.listen(3030);
-
 io.on('connection', (socket) => {
   // var docs = gendoc(models).auto();
   // console.log(docs);
@@ -100,6 +100,7 @@ io.on('connection', (socket) => {
     socket.currentPath = data.path;
   });
   socket.on('auth/authenticate', (token) => {
+
     /**
      * @api {socket} /auth/authenticate Authenticate user token
      * @apiName GetUser
@@ -226,17 +227,17 @@ io.on('connection', (socket) => {
       // io.in('session/products').emit('session/notify', socketManager.sendData('success', response));
       productManager.getProduct('path', response, socket.userUid).then((data) => {
         socket.join(`products:${data.uid}`);
-        let package = socketManager.sendData('success', data);
-        package.renderCode = 200;
+        let parcel = socketManager.sendData('success', data);
+        parcel.renderCode = 200;
         let userClearance = 0;
         if (socket.userUid && data.availability === true) {
           models.users.User.findById(socket.userUid)
             .then((item) => {
               userClearance = item.dataValues.privilege === null ? userClearance : item.dataValues.privilege;
               if (userClearance < data.clearance) {
-                package.data.availability = false;
+                parcel.data.availability = false;
               }
-              socket.emit('product/view', package);
+              socket.emit('product/view', parcel);
             }).catch((err) => {
               console.log("error ::: ", err);
               // user was not able to be found via userUid provided from socket.userUid
@@ -246,14 +247,14 @@ io.on('connection', (socket) => {
             });
         } else {
           if (userClearance < data.clearance) {
-            package.data.availability = false;
+            parcel.data.availability = false;
           }
-          socket.emit('product/view', package);
+          socket.emit('product/view', parcel);
         }
       }).catch((error) => {
-        let package = socketManager.sendError(error);
-        package.renderCode = 404;
-        socket.emit('product/view', package);
+        let parcel = socketManager.sendError(error);
+        parcel.renderCode = 404;
+        socket.emit('product/view', parcel);
         console.log("FAILURE!!", error);
       })
     } else if (response.parameter === 'products') {

@@ -13,18 +13,35 @@ $iota-components-tab-separator: '-'; // .c-tab
     display        : flex;
     justify-content: space-around;
     flex-direction : column;
+    margin-bottom  : 40px;
     @include iota-breakpoint(sm) {
       flex-direction: row;
     }
     // .c-tab_header-item
     .#{$iota-global-components-namespace + $iota-components-tab-name + $iota-global-separator + $iota-components-tab-nav-name + $iota-components-tab-separator + $iota-components-tab-nav-item-name} {
-      color  : green;
-      cursor : pointer;
-      padding: 10px;
+      color     : rgb(186, 186, 186);
+      cursor    : pointer;
+      padding   : 10px;
+      margin    : 0 4px;
+      transition: border 0.25s linear;
+      @include iota-breakpoint(sm) {
+        border-bottom: 2px solid transparent;
+        flex         : 1;
+        text-align   : center;
+      };
+
+      &:hover {
+        border-bottom-color: rgb(186, 186, 186);
+      }
 
       &.#{$iota-global-components-namespace + $iota-components-tab-name + $iota-global-separator + $iota-components-tab-nav-name + $iota-components-tab-separator + $iota-components-tab-nav-item-name + $iota-global-separator + $iota-components-tab-active-name} {
-        color: navy;
+        border-bottom-color: rgb(69, 69, 69);
+        color              : rgb(69, 69, 69);
       }
     }
   }
+}
+
+.c-tab_panel.react-tabs__tab-panel--selected {
+  min-height: 50vh;
 }

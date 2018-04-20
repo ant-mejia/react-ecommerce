@@ -4889,6 +4889,8 @@ h6.c-heading-xlarge {
   transform: translate3d(0px, 70%, -200px);
   transition: transform 0.45s, opacity 0.45s;
   box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1); }
+  #app.header_active .c-page_container .c-page_wrapper .c-page, #app.header_active .c-page_container .c-page_wrapper .c-page_main-section {
+    color: inherit; }
 
 #app.header_active header.c-header .c-header-menu_button::before {
   transform: rotate3d(0, 0, 1, 45deg); }
@@ -5182,16 +5184,30 @@ header.c-header {
   display: -ms-flex;
   display: flex;
   justify-content: space-around;
-  flex-direction: column; }
+  flex-direction: column;
+  margin-bottom: 40px; }
   @media screen and (min-width: 768px) {
     .c-tab .c-tab_header {
       flex-direction: row; } }
   .c-tab .c-tab_header .c-tab_header-item {
-    color: green;
+    color: #bababa;
     cursor: pointer;
-    padding: 10px; }
+    padding: 10px;
+    margin: 0 4px;
+    transition: border 0.25s linear; }
+    @media screen and (min-width: 768px) {
+      .c-tab .c-tab_header .c-tab_header-item {
+        border-bottom: 2px solid transparent;
+        flex: 1;
+        text-align: center; } }
+    .c-tab .c-tab_header .c-tab_header-item:hover {
+      border-bottom-color: #bababa; }
     .c-tab .c-tab_header .c-tab_header-item.c-tab_header-item_active {
-      color: navy; }
+      border-bottom-color: #454545;
+      color: #454545; }
+
+.c-tab_panel.react-tabs__tab-panel--selected {
+  min-height: 50vh; }
 
 .c-panel {
   flex-direction: column;
@@ -5712,6 +5728,12 @@ header.c-header {
   .p-coll .p-coll_detail-container .p-coll_detail-wrapper {
     flex: 1;
     margin: 5px; }
+    .p-coll .p-coll_detail-container .p-coll_detail-wrapper .summary {
+      text-transform: uppercase;
+      font-size: 25px;
+      font-family: 'Lato', sans-serif;
+      line-height: 30px;
+      letter-spacing: 3px; }
     .p-coll .p-coll_detail-container .p-coll_detail-wrapper .p-coll_detail-description {
       padding: 15px 0; }
     .p-coll .p-coll_detail-container .p-coll_detail-wrapper .p-coll_detail-meta-wrapper {
@@ -5732,6 +5754,17 @@ header.c-header {
         display: flex;
         flex-direction: column;
         justify-content: center; }
+        .p-coll .p-coll_detail-container .p-coll_detail-wrapper .p-coll_detail-meta-wrapper .p-coll_detail-meta h3 {
+          font-size: 50px;
+          color: rgba(255, 255, 255, 0.75);
+          font-family: 'Comfortaa', sans-serif;
+          text-align: center; }
+        .p-coll .p-coll_detail-container .p-coll_detail-wrapper .p-coll_detail-meta-wrapper .p-coll_detail-meta p {
+          margin-top: 10px;
+          margin-left: 14px;
+          font-size: 20px;
+          color: rgba(255, 255, 255, 0.7);
+          font-family: 'Comfortaa', sans-serif; }
 
 .p-coll .p-coll_gallery {
   display: -webkit-flex;

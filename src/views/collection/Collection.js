@@ -17,7 +17,7 @@ class Collection extends Component {
     });
     this.state = { collection: {} };
   }
-  setStateOnMount = (obj) => {
+  setStateOnMount = (obj = {}) => {
     if (this.mounted !== true) {
       let keys = Object.keys(obj);
       keys.map((key) => {

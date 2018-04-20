@@ -60,6 +60,14 @@ $iota-p-coll-product: $iota-p-coll + $iota-global-separator +'product';
       flex  : 1;
       margin: 5px;
 
+      .summary {
+        text-transform: uppercase;
+        font-size     : 25px;
+        font-family   : 'Lato', sans-serif;
+        line-height   : 30px;
+        letter-spacing: 3px;
+      }
+
       .p-coll_detail-description {
         padding: 15px 0;
       }
@@ -83,6 +91,21 @@ $iota-p-coll-product: $iota-p-coll + $iota-global-separator +'product';
           display        : flex;
           flex-direction : column;
           justify-content: center;
+
+          h3 {
+            font-size  : 50px;
+            color      : rgba(255,255,255,0.75);
+            font-family: 'Comfortaa', sans-serif;
+            text-align : center;
+          }
+
+          p {
+            margin-top : 10px;
+            margin-left: 14px;
+            font-size  : 20px;
+            color      : rgba(255, 255, 255, 0.7);
+            font-family: 'Comfortaa', sans-serif;
+          }
         }
       }
     }
