@@ -1,3 +1,4 @@
+// @flow
 const express = require('express');
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan');
@@ -51,7 +52,7 @@ io.engine.generateId = () => {
   return helpers.generateUid(); // custom id must be unique
 }
 // OLD!
-server.listen(3030);
+// server.listen(3030);
 io.on('connection', (socket) => {
   // var docs = gendoc(models).auto();
   // console.log(docs);
