@@ -3421,123 +3421,6 @@ select {
   cursor: default;
   background-image: url("assets/images/holo/06.jpg"); }
 
-.text-gradient-wood-1 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/01.jpg"); }
-
-.text-gradient-wood-2 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/02.jpg"); }
-
-.text-gradient-wood-3 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/03.jpg"); }
-
-.text-gradient-wood-4 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/04.jpg"); }
-
-.text-gradient-wood-5 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/05.jpg"); }
-
-.text-gradient-wood-6 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/06.jpg"); }
-
-.text-gradient-wood-7 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/07.jpg"); }
-
-.text-gradient-wood-8 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/08.jpg"); }
-
-.text-gradient-wood-9 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/09.jpg"); }
-
-.text-gradient-wood-10 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/10.jpg"); }
-
-.text-gradient-wood-11 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/11.jpg"); }
-
-.text-gradient-wood-12 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/12.jpg"); }
-
-.text-gradient-wood-13 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/wood/13.jpg"); }
-
 .text-gradient-marble-1 {
   color: #707070;
   -webkit-background-clip: text;
@@ -3682,158 +3565,122 @@ select {
   cursor: default;
   background-image: url("assets/images/marble/16.jpg"); }
 
-.text-gradient-brick-1 {
+.text-gradient-wood-1 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/brick/01.jpg"); }
+  background-image: url("assets/images/wood/01.jpg"); }
 
-.text-gradient-brick-2 {
+.text-gradient-wood-2 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/brick/02.jpg"); }
+  background-image: url("assets/images/wood/02.jpg"); }
 
-.text-gradient-brick-3 {
+.text-gradient-wood-3 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/brick/03.jpg"); }
+  background-image: url("assets/images/wood/03.jpg"); }
 
-.text-gradient-brick-4 {
+.text-gradient-wood-4 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/brick/04.jpg"); }
+  background-image: url("assets/images/wood/04.jpg"); }
 
-.text-gradient-brick-5 {
+.text-gradient-wood-5 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/brick/05.jpg"); }
+  background-image: url("assets/images/wood/05.jpg"); }
 
-.text-gradient-brick-6 {
+.text-gradient-wood-6 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/brick/06.jpg"); }
+  background-image: url("assets/images/wood/06.jpg"); }
 
-.text-gradient-brick-7 {
+.text-gradient-wood-7 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/brick/07.jpg"); }
+  background-image: url("assets/images/wood/07.jpg"); }
 
-.text-gradient-stone-1 {
+.text-gradient-wood-8 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/stone/01.jpg"); }
+  background-image: url("assets/images/wood/08.jpg"); }
 
-.text-gradient-stone-2 {
+.text-gradient-wood-9 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/stone/02.jpg"); }
+  background-image: url("assets/images/wood/09.jpg"); }
 
-.text-gradient-stone-3 {
+.text-gradient-wood-10 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/stone/03.jpg"); }
+  background-image: url("assets/images/wood/10.jpg"); }
 
-.text-gradient-stone-4 {
+.text-gradient-wood-11 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/stone/04.jpg"); }
+  background-image: url("assets/images/wood/11.jpg"); }
 
-.text-gradient-stone-5 {
+.text-gradient-wood-12 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/stone/05.jpg"); }
+  background-image: url("assets/images/wood/12.jpg"); }
 
-.text-gradient-stone-6 {
+.text-gradient-wood-13 {
   color: #707070;
   -webkit-background-clip: text;
   background-clip: text;
   background-size: cover;
   color: transparent;
   cursor: default;
-  background-image: url("assets/images/stone/06.jpg"); }
-
-.text-gradient-stone-7 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/stone/07.jpg"); }
-
-.text-gradient-stone-8 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/stone/08.jpg"); }
-
-.text-gradient-stone-9 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/stone/09.jpg"); }
-
-.text-gradient-stone-10 {
-  color: #707070;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: cover;
-  color: transparent;
-  cursor: default;
-  background-image: url("assets/images/stone/10.jpg"); }
+  background-image: url("assets/images/wood/13.jpg"); }
 
 .u-text-left {
   text-align: left !important; }

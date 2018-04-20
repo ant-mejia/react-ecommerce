@@ -27,10 +27,8 @@ $iota-utils-text-gradient-directory: 'assets/images'; // $iota-text-backgrounds:
 // );
 $iota-text-backgrounds: (
   holo  : 6,
-  wood  : 13,
   marble: 16,
-  brick : 7,
-  stone : 10
+  wood  : 13
 );
 
 *[class*=' #{$iota-utils-text-gradient-name}']::selection,
