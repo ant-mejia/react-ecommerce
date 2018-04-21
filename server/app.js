@@ -34,6 +34,8 @@ const Sifter = require('sifter');
 const useragent = require('useragent');
 const subdomain = require('express-subdomain');
 
+console.log("SERVER IS FUCKING RUNNING!! >:O");
+
 const port = process.env.PORT || 8000;
 
 const io = require('socket.io')(server);
