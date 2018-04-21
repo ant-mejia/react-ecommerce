@@ -53,7 +53,7 @@ io.engine.generateId = () => {
   return helpers.generateUid(); // custom id must be unique
 }
 // OLD!
-server.listen(PORT);
+
 io.on('connection', (socket) => {
   // var docs = gendoc(models).auto();
   // console.log(docs);
@@ -367,5 +367,7 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')))
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
+
+server.listen(PORT);
 
 module.exports = app;
