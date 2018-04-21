@@ -19,13 +19,11 @@ class App extends Component {
       notifications: []
     };
     this.history.listen(this.listenHistory);
-    console.log(window.location);
-    console.log(process.env);
     const genUrl = () => {
       let hostname = window.location.hostname;
       let port = process.env.PORT || 8000;
       let protocol = 'https';
-      if (hostname = 'localhost') {
+      if (hostname === 'localhost') {
         protocol = 'http'
       }
       return `${protocol}://${hostname}:${port}`
