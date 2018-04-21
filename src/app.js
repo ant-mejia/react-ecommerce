@@ -29,7 +29,7 @@ class App extends Component {
       return `${protocol}://${hostname}:${port}`
     }
     let url = genUrl();
-    this.socket = io();
+    this.socket = io(url);
     this.socket.on('connect', () => {
       this.listenHistory();
       this.socket.emit('cart', { method: 'get' })

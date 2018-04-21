@@ -34,7 +34,7 @@ const Sifter = require('sifter');
 const useragent = require('useragent');
 const subdomain = require('express-subdomain');
 
-const PORT = process.env.PORT || 8000;
+const port = process.env.PORT || 8000;
 
 const io = require('socket.io')(server);
 // Setup logger
@@ -368,6 +368,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
-server.listen(PORT);
+server.listen(port);
 
 module.exports = app;
