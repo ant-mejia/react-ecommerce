@@ -94,6 +94,8 @@
     "seed": "node db/seed.js",
     "preinstall": "npm i -g pm2 && pm2 install pm2-logrotate && npm i -g node-sass-chokidar"
   },
+  "proxy": "https://recommerca.herokuapp.com",
+  "port": 3030,
   "apidoc": {
     "name": "example",
     "version": "0.1.0",

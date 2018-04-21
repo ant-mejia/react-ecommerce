@@ -6,7 +6,7 @@ import Routes from './routes';
 import './style/main.css';
 import io from 'socket.io-client';
 import createHistory from 'history/createBrowserHistory';
-
+const pkg = require('../package.json')
 class App extends Component {
   history = createHistory();
   constructor(props) {
@@ -19,7 +19,10 @@ class App extends Component {
       notifications: []
     };
     this.history.listen(this.listenHistory);
-    this.socket = io('http://localhost:3030');
+    console.log(window.location);
+    console.log(process.env);
+    let url = `http://${window.location.hostname}:${process.env.PORT || 8000}`;
+    this.socket = io(url);
     this.socket.on('connect', () => {
       this.listenHistory();
       this.socket.emit('cart', { method: 'get' })

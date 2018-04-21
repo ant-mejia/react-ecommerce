@@ -19,7 +19,6 @@ const passport = require('passport');
 if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 const authHelpers = require('./auth/auth-helpers');
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
 const slogger = require('slogged')
 const moment = require('moment');
 const sessionManager = require('./managers/sessionManager');
@@ -35,7 +34,9 @@ const Sifter = require('sifter');
 const useragent = require('useragent');
 const subdomain = require('express-subdomain');
 
+const PORT = process.env.PORT || 8000;
 
+const io = require('socket.io')(server);
 // Setup logger
 var logDirectory = path.join(__dirname, 'logs');
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
@@ -52,7 +53,7 @@ io.engine.generateId = () => {
   return helpers.generateUid(); // custom id must be unique
 }
 // OLD!
-// server.listen(3030);
+server.listen(PORT);
 io.on('connection', (socket) => {
   // var docs = gendoc(models).auto();
   // console.log(docs);
