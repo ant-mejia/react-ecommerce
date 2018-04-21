@@ -21,7 +21,16 @@ class App extends Component {
     this.history.listen(this.listenHistory);
     console.log(window.location);
     console.log(process.env);
-    let url = `http://${window.location.hostname}:${process.env.PORT || 8000}`;
+    const genUrl = () => {
+      let hostname = window.location.hostname;
+      let port = process.env.PORT || 8000;
+      let protocol = 'https';
+      if (hostname = 'localhost') {
+        protocol = 'http'
+      }
+      return `${protocol}://${hostname}:${port}`
+    }
+    let url = genUrl();
     this.socket = io(url);
     this.socket.on('connect', () => {
       this.listenHistory();
