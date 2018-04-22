@@ -45,7 +45,7 @@ const userAddress = db.define('userAddress', {
     allowNull: false
   },
   location: {
-    type: Sequelize.GEOMETRY('POINT'),
+    type: Sequelize.STRING,
     allowNull: false
   }
 });
