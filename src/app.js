@@ -20,16 +20,13 @@ class App extends Component {
     };
     this.history.listen(this.listenHistory);
     const genUrl = () => {
-      let hostname = window.location.hostname;
-      let port = process.env.PORT || 8000;
-      let protocol = 'https';
-      if (hostname === 'localhost') {
-        protocol = 'http'
+      if (window.location.hostname === 'localhost') {
+        return `localhost:${8000}`
       }
-      return `${protocol}://${hostname}:${port}`
+      return undefined;
     }
     let url = genUrl();
-    this.socket = io();
+    this.socket = io(genUrl());
     this.socket.on('connect', () => {
       this.listenHistory();
       this.socket.emit('cart', { method: 'get' })

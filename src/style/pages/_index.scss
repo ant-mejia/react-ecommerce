@@ -1,8 +1,8 @@
 $iota-p-index-name: $iota-pages-prefix + 'index';
 $iota-p-index-section: $iota-p-index-name + $iota-global-separator + $iota-pages-section-name;
 $iota-p-collection: $iota-p-index-name + $iota-global-separator + 'collection';
-$iota-p-collections: $iota-p-index-name + $iota-global-separator + 'collections';
-/// @name message
+$iota-p-collections: $iota-p-index-name + $iota-global-separator + 'collections'; /// @name message
+
 .#{$iota-p-index-name} {
   .#{$iota-p-index-section} {
     min-height   : 100vh;
@@ -26,7 +26,7 @@ $iota-p-collections: $iota-p-index-name + $iota-global-separator + 'collections'
       position  : relative;
       margin    : 25px 0;
       height    : calc(100vw - 100px);
-      background: #584ed2;
+      background: $iota-global-off-white;
 
       .p-index_collection-background {
         position       : absolute;
@@ -83,6 +83,7 @@ $iota-p-collections: $iota-p-index-name + $iota-global-separator + 'collections'
 
         .#{$iota-p-collection} {
           height: auto;
+          color : #4eb5e2;
           flex  : 1;
         }
       }

@@ -7,6 +7,7 @@ const logs = require('./logs/index');
 const payment = require('./payment');
 
 sessions.Session.belongsTo(users.User);
+sessions.sessionSearch.belongsTo(users.User);
 logs.userEvent.belongsTo(users.User);
 logs.userEvent.belongsTo(sessions.Session);
 users.Cart.belongsTo(sessions.Session, { foreignKey: { allowNull: false } });

@@ -291,6 +291,10 @@ arraybuffer.slice@0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/arraybuffer.slice/-/arraybuffer.slice-0.0.6.tgz#f33b2159f0532a3f3107a272c0ccfbd1ad2979ca"
 
+arrayiffy-if-string@*, arrayiffy-if-string@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/arrayiffy-if-string/-/arrayiffy-if-string-3.0.6.tgz#5639d6cfd75f38190ec9efde4fa78c2484b40761"
+
 arrify@^1.0.0, arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
@@ -1533,6 +1537,15 @@ chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0:
 charm@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/charm/-/charm-0.1.2.tgz#06c21eed1a1b06aeb67553cdc53e23274bac2296"
+
+check-types-mini@^3.1.1, check-types-mini@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/check-types-mini/-/check-types-mini-3.1.2.tgz#23cf575f896546f19d6a18a06df39a88ac5a2ae8"
+  dependencies:
+    arrayiffy-if-string "*"
+    lodash.intersection "*"
+    lodash.pullall "*"
+    type-detect "^4.0.8"
 
 cheerio@^1.0.0-rc.2:
   version "1.0.0-rc.2"
@@ -4045,6 +4058,14 @@ is-installed-globally@^0.1.0:
     global-dirs "^0.1.0"
     is-path-inside "^1.0.0"
 
+is-natural-number-string@*:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/is-natural-number-string/-/is-natural-number-string-1.0.1.tgz#d0ebf1c011fae2d3b0734d8c80116e2512a4a2e8"
+
+is-natural-number@*, is-natural-number@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/is-natural-number/-/is-natural-number-4.0.1.tgz#ab9d76e1db4ced51e35de0c72ebecf09f734cde8"
+
 is-npm@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-npm/-/is-npm-1.0.0.tgz#f2fb63a65e4905b406c86072765a1a4dc793b9f4"
@@ -5113,6 +5134,10 @@ lodash.includes@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.includes/-/lodash.includes-4.3.0.tgz#60bb98a87cb923c68ca1e51325483314849f553f"
 
+lodash.intersection@*:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.intersection/-/lodash.intersection-4.4.0.tgz#0a11ba631d0e95c23c7f2f4cbb9a692ed178e705"
+
 lodash.isarguments@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/lodash.isarguments/-/lodash.isarguments-3.1.0.tgz#2f573d85c6a24289ff00663b491c1d338ff3458a"
@@ -5141,7 +5166,7 @@ lodash.isnumber@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz#3ce76810c5928d03352301ac287317f11c0b1ffc"
 
-lodash.isplainobject@^4.0.6:
+lodash.isplainobject@*, lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
 
@@ -5181,6 +5206,10 @@ lodash.pick@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
 
+lodash.pullall@*:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.pullall/-/lodash.pullall-4.2.0.tgz#9d98b8518b7c965b0fae4099bd9fb7df8bbf38ba"
+
 lodash.restparam@^3.0.0:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
@@ -5201,6 +5230,10 @@ lodash.templatesettings@^4.0.0:
   resolved "https://registry.yarnpkg.com/lodash.templatesettings/-/lodash.templatesettings-4.1.0.tgz#2b4d4e95ba440d915ff08bc899e4553666713316"
   dependencies:
     lodash._reinterpolate "~3.0.0"
+
+lodash.trim@*:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/lodash.trim/-/lodash.trim-4.5.1.tgz#36425e7ee90be4aa5e27bcebb85b7d11ea47aa57"
 
 lodash.union@^4.6.0:
   version "4.6.0"
@@ -5863,6 +5896,10 @@ optionator@^0.8.1, optionator@^0.8.2:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
     wordwrap "~1.0.0"
+
+ordinal-number-suffix@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/ordinal-number-suffix/-/ordinal-number-suffix-0.1.1.tgz#26a2d167f5b88e750307594692c046fdcab47e45"
 
 original@>=0.0.5:
   version "1.0.0"
@@ -6813,6 +6850,20 @@ randomfill@^1.0.3:
 range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
+
+ranges-merge@^3.1.3:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/ranges-merge/-/ranges-merge-3.1.4.tgz#7ba3f614c786a6057ce3d3dbf055318241592fa5"
+  dependencies:
+    ranges-sort "^3.1.2"
+
+ranges-sort@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/ranges-sort/-/ranges-sort-3.1.2.tgz#25c0da2158b2fd8e7f2a8748036e08d2a6883cc8"
+  dependencies:
+    check-types-mini "^3.1.1"
+    is-natural-number "^4.0.1"
+    ordinal-number-suffix "^0.1.1"
 
 raw-body@2.3.2:
   version "2.3.2"
@@ -7997,6 +8048,10 @@ strict-uri-encode@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
 
+string-collapse-leading-whitespace@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/string-collapse-leading-whitespace/-/string-collapse-leading-whitespace-1.0.2.tgz#d649521419ab94d6436e9fd751b0140ca0934d2a"
+
 string-length@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/string-length/-/string-length-1.0.1.tgz#56970fb1c38558e9e70b728bf3de269ac45adfac"
@@ -8009,6 +8064,45 @@ string-length@^2.0.0:
   dependencies:
     astral-regex "^1.0.0"
     strip-ansi "^4.0.0"
+
+string-match-left-right@^3.0.3:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/string-match-left-right/-/string-match-left-right-3.1.1.tgz#23ecdce8c0ea11c102b8371b5c672107bdd1d54b"
+  dependencies:
+    arrayiffy-if-string "^3.0.6"
+    check-types-mini "^3.1.2"
+    is-natural-number "^4.0.1"
+    lodash.isplainobject "*"
+
+string-replace-slices-array@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/string-replace-slices-array/-/string-replace-slices-array-2.1.0.tgz#27240837e2cb1e6e0da890b6235ab3b201151ddf"
+  dependencies:
+    is-natural-number "*"
+    is-natural-number-string "*"
+    ordinal-number-suffix "^0.1.1"
+
+string-slices-array-push@^2.5.1:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/string-slices-array-push/-/string-slices-array-push-2.6.0.tgz#737b1158053ef777f31e08b80aa65be411db1d35"
+  dependencies:
+    check-types-mini "^3.1.2"
+    is-natural-number "*"
+    is-natural-number-string "*"
+    ordinal-number-suffix "^0.1.1"
+    ranges-merge "^3.1.3"
+    string-collapse-leading-whitespace "^1.0.2"
+
+string-strip-html@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/string-strip-html/-/string-strip-html-1.3.2.tgz#a58b63256b1429781829f9341b295c67c9adbe81"
+  dependencies:
+    check-types-mini "^3.1.2"
+    lodash.isplainobject "*"
+    lodash.trim "*"
+    string-match-left-right "^3.0.3"
+    string-replace-slices-array "^2.1.0"
+    string-slices-array-push "^2.5.1"
 
 string-width@^1.0.1, string-width@^1.0.2:
   version "1.0.2"
@@ -8373,6 +8467,10 @@ type-check@~0.3.2:
 type-detect@^4.0.0:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.5.tgz#d70e5bc81db6de2a381bcaca0c6e0cbdc7635de2"
+
+type-detect@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
 
 type-is@~1.6.15:
   version "1.6.15"

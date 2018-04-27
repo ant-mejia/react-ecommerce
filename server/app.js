@@ -15,8 +15,6 @@ const appClient = express();
 const appVendor = express();
 const models = require('../db/models/index');
 const passport = require('passport');
-// require('dotenv').config();
-if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 const authHelpers = require('./auth/auth-helpers');
 const server = require('http').createServer(app);
 const slogger = require('slogged')
@@ -28,15 +26,17 @@ const productManager = require('./managers/productManager');
 const cartManager = require('./managers/cartManager');
 const collectionManager = require('./managers/collectionManager');
 const paymentManager = require('./managers/paymentManager');
+const searchManager = require('./managers/searchManager');
 const helpers = require('./helpers');
 const stripe = require('stripe')('pk_test_6NW0ufnPuIGneWb88nmNDvqR');
 const Sifter = require('sifter');
 const useragent = require('useragent');
 const subdomain = require('express-subdomain');
+if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 
 console.log("SERVER IS FUCKING RUNNING!! >:O");
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || process.env.localport || 8000;
 
 const io = require('socket.io')(server);
 // Setup logger
@@ -195,20 +195,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('search', (search) => {
-    models.products.Product.findAll().then((products) => {
-      let productArray = products.map((prd) => {
-        return prd.dataValues;
-      })
-      var sifter = new Sifter(productArray);
-      var result = sifter.search(search.query, {
-        fields: ['title', 'description'],
-        sort: [{ field: 'title', direction: 'asc' }],
-        limit: 3
-      });
-      let items = result.items.map((obj) => {
-        return productArray[obj.id]
-      })
-      socket.emit('search/results', items);
+    searchManager.search(search).then((results) => {
+      socket.emit('search/results', results);
     });
   })
 

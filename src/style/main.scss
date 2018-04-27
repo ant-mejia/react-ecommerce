@@ -760,6 +760,7 @@ a {
   text-decoration: none;
   color          : #5c5edc;
   outline        : none;
+  transition     : all 0.25s linear;
 
   &:hover {
     color: #b5b5b5;

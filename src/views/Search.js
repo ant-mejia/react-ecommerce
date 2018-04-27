@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import SearchGallery from '../components/search/SearchGallery';
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +20,11 @@ class Search extends Component {
 
   handleChange = () => {
     this.setState({ query: this.refs.search.value })
-    this.props.socket.emit('search', { query: this.refs.search.value })
+    if (this.refs.search.value.length > 0) {
+      this.props.socket.emit('search', { query: this.refs.search.value })
+    }
+    this.setState({results: []})
+
   }
 
   render() {
@@ -29,6 +33,7 @@ class Search extends Component {
         <h2>Search Page</h2>
         <input ref="search" type="text" placeholder="search here" onChange={this.handleChange}/>
         <button onClick={this.handleClick}>Search!</button>
+        <SearchGallery results={this.state.results}/>
       </div>
     );
   }
