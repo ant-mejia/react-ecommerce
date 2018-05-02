@@ -83,6 +83,7 @@ $iota-global-primary-color: #366ba8;
 $iota-global-primary-accent-color: #5268dd;
 $iota-global-secondary-color: #ba9f59;
 $iota-global-white: #ffffff;
+$iota-global-grey: #a5a5a5;
 $iota-global-off-white: #ececec;
 $iota-global-black: #000000;
 $iota-global-charcoal: #707070;
@@ -90,6 +91,7 @@ $iota-global-yellow: #fff27c;
 $iota-global-colors: (
   white    : $iota-global-white,
   offwhite : $iota-global-off-white,
+  grey     : $iota-global-grey,
   black    : $iota-global-black,
   primary  : $iota-global-primary-color,
   secondary: $iota-global-secondary-color,

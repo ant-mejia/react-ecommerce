@@ -82,7 +82,7 @@ this.getCartbyUserId = (userId) => {
       reject('terrible error!')
     }
     models.users.User.findById(userId).then((user) => {
-      if (user.dataValues === undefined) {
+      if (user === null || user.dataValues === undefined) {
         reject('terrible error!')
       }
       models.users.Cart.findAll({

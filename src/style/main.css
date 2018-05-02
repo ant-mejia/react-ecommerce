@@ -553,6 +553,9 @@ select {
 .u-bgcolor-offwhite {
   background-color: #ececec !important; }
 
+.u-bgcolor-grey {
+  background-color: #a5a5a5 !important; }
+
 .u-bgcolor-black {
   background-color: #000000 !important; }
 
@@ -5678,7 +5681,7 @@ input[type="text"] {
 
 .p-cols .p-cols_title {
   letter-spacing: 4px;
-  color: grey;
+  color: #a5a5a5;
   text-transform: uppercase; }
   .p-cols .p-cols_title::after {
     content: '';
@@ -5687,7 +5690,7 @@ input[type="text"] {
     margin-left: 10px;
     width: 80px;
     height: 2px;
-    background: grey; }
+    background: #a5a5a5; }
 
 .p-cols .p-cols_list {
   overflow: hidden; }
@@ -5704,7 +5707,9 @@ input[type="text"] {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 100%; }
+      max-width: 100%;
+      letter-spacing: 1px;
+      font-size: 31px; }
       .p-cols .p-cols_list .p-cols_list-item .p-cols_list-item_title::before {
         background: #5268dd;
         content: '';

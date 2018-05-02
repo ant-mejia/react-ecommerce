@@ -7,7 +7,7 @@ class CollectionItem extends Component {
     return (
       <Link to={`/collections${this.props.collection.path}`}>
         <div className="p-cols_list-item">
-          <h2 className="p-cols_list-item_title">{this.props.collection.title}</h2>
+          <h2 className="p-cols_list-item_title u-font-lato6">{this.props.collection.title}</h2>
           <p>View Collection</p>
         </div>
       </Link>

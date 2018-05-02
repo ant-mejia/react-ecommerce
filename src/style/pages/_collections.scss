@@ -3,7 +3,7 @@ $iota-p-cols: $iota-pages-prefix + 'cols';
 .#{$iota-p-cols} {
   .p-cols_title {
     letter-spacing: 4px;
-    color         : grey;
+    color         : $iota-global-grey;
     text-transform: uppercase;
 
     &::after {
@@ -13,7 +13,7 @@ $iota-p-cols: $iota-pages-prefix + 'cols';
       margin-left: 10px;
       width      : 80px;
       height     : 2px;
-      background : grey;
+      background : $iota-global-grey;
     }
   }
 
@@ -27,14 +27,16 @@ $iota-p-cols: $iota-pages-prefix + 'cols';
       max-width: 500px;
 
       .p-cols_list-item_title {
-        margin-bottom: 10px;
-        position     : relative;
-        z-index      : 1;
-        display      : inline-block;
-        overflow     : hidden;
-        text-overflow: ellipsis;
-        white-space  : nowrap;
-        max-width    : 100%;
+        margin-bottom : 10px;
+        position      : relative;
+        z-index       : 1;
+        display       : inline-block;
+        overflow      : hidden;
+        text-overflow : ellipsis;
+        white-space   : nowrap;
+        max-width     : 100%;
+        letter-spacing: 1px;
+        font-size     : 31px;
 
         &::before {
           background      : $iota-global-primary-accent-color;
