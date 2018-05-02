@@ -1,4 +1,4 @@
-let server = 'https://recommerca.herokuapp.com';
+let server = 'https://recommerca.herokuapp.com:80';
 
 const env = process.env.NODE_ENV;
 
