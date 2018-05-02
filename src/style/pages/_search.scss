@@ -20,6 +20,7 @@ $iota-p-search-input-wrapper: $iota-p-search + $iota-global-separator + 'input-w
       background    : transparent;
       letter-spacing: 2px;
       text-transform: capitalize;
+      min-width     : 200px;
 
       &::placeholder {
         text-transform: capitalize;
