@@ -1,5 +1,6 @@
-let server = 'https://recommerca.herokuapp.com:80';
+let server = `https://recommerca.herokuapp.com:${process.env.PORT}`;
 
+console.log(process);
 const env = process.env.NODE_ENV;
 
 if (env === 'development') {
