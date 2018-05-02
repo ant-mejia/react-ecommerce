@@ -7,7 +7,9 @@ const moment = require('moment');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-this.search = (search = {}) => {
+this.addSearchHistory = (search) => {}
+
+this.search = (search = {}, sessionId = '') => {
   let siftArray = [];
   const addToSift = (arr = [], type) => {
     let flour = arr.map((item) => {
@@ -70,21 +72,20 @@ this.search = (search = {}) => {
     }
     const sifter = new Sifter(siftArray);
     var result = sifter.search(search.query, {
+      conjunction: "and",
       fields: [
-        'title', 'description'
+        'title', 'description',
       ],
-      sort: [
-        {
-          field: 'title',
-          direction: 'asc'
-        }
-      ]
+      sort: [{
+        field: 'title',
+        direction: 'asc',
+      }],
     });
     let items = result.items.map((obj) => {
       let data = siftArray[obj.id];
       let rsp = {
         type: data.type,
-        data
+        data,
       }
       return rsp;
     });

@@ -6,17 +6,25 @@ class SearchGallery extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Search Results</h2>
-        {
-          this.props.results.map((result) => {
-            if (result.type === 'product') {
-              return <ProductSearch key={result.data.uid} data={result.data}/>
-            } else if (result.type === 'collection') {
-              return <CollectionSearch key={result.data.uid} data={result.data}/>
-            }
-          })
-        }
+      <div className="p-search_container">
+        {this.props.inputEmpty() ? undefined: <h2>Search Results</h2>}
+        <ul className="p-search_list">
+          {
+            this.props.results.map((result) => {
+              let item = null;
+              if (result.type === 'product') {
+                item = <ProductSearch data={result.data}/>
+              } else if (result.type === 'collection') {
+                item = <CollectionSearch data={result.data}/>
+              }
+              return (
+                <li className="p-search_list-item" key={result.data.uid}>
+                  {item}
+                </li>
+              )
+            })
+          }
+        </ul>
       </div>
     );
   }

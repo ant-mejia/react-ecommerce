@@ -16,12 +16,16 @@ this.getCollections = () => {
           [Op.gt]: moment().toDate()
         },
       },
+      order: [
+        ['releaseDate', 'DESC']
+      ],
       include: [{ model: models.products.Product, required: true, }]
     }).then((response) => {
       resolve(response);
     });
   });
 };
+
 this.getCollection = (obj) => {
   return new Promise((resolve, reject) => {
     if (obj.path) {

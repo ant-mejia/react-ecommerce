@@ -169,8 +169,9 @@ io.on('connection', (socket) => {
      */
     authManager.logoutUser(userId);
     authManager.logUser('logout', 'button-click', 'client-side', { userUid: userId, sessionUid: socket.id })
-    socket.leave(`user:${userId}`)
+    io.in(`user:${userId}`).emit('session/notify', socketManager.sendData('success', { message: "test" }));
     socket.userUid = undefined;
+    socket.leave(`user:${userId}`)
   });
 
   socket.on('auth/register', (data) => {
@@ -195,7 +196,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('search', (search) => {
-    searchManager.search(search).then((results) => {
+    searchManager.search(search, socket.id).then((results) => {
       socket.emit('search/results', results);
     });
   })

@@ -11,6 +11,7 @@
     .#{$iota-components-pages-namespace + $iota-global-separator + $iota-components-pages-wrapper-name} {
       height    : 100vh;
       overflow  : scroll;
+      background: $iota-global-page-default-color;
       transition: transform 0.45s, opacity 0.45s;
 
       &.#{'no-scroll'} {
@@ -20,10 +21,13 @@
       .#{$iota-components-pages-namespace} {
         background-color: #fff;
         min-height      : 100vh;
-        min-width       : 100vw;
+        width           : 100vw;
+        max-width       : 2400px;
+        margin          : 0 auto;
         padding-left    : $iota-components-header-menu-buffer;
         padding-right   : $iota-components-header-menu-buffer;
         padding-top     : $iota-components-header-menu-width;
+        overflow        : auto;
         @include iota-breakpoint(sm) {
           padding-right: $iota-components-header-menu-width + $iota-components-header-menu-buffer;
           padding-left : $iota-components-header-menu-width + $iota-components-header-menu-buffer;
@@ -34,6 +38,7 @@
         background-color: #fff;
         min-height      : 100vh;
         min-width       : 100vw;
+        overflow        : auto;
       }
 
       .#{$iota-components-pages-namespace + "_main-section"} {

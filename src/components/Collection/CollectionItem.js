@@ -5,10 +5,12 @@ class CollectionItem extends Component {
 
   render() {
     return (
-      <div>
-        <h2>{this.props.collection.title}</h2>
-        <Link to={`/collections${this.props.collection.path}`}>View Collection</Link>
-      </div>
+      <Link to={`/collections${this.props.collection.path}`}>
+        <div className="p-cols_list-item">
+          <h2 className="p-cols_list-item_title">{this.props.collection.title}</h2>
+          <p>View Collection</p>
+        </div>
+      </Link>
     );
   }
 

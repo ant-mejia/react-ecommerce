@@ -28,9 +28,25 @@ class Header extends Component {
               <Link className="c-header-container_menu-item" to="/products/test-product">Test Product</Link>
               <Link className="c-header-container_menu-item" to="/products/unavailable">Unavailable</Link>
               <div className="c-header-container_menu-item-alternate-wrapper">
-                <Link to="/login"><p className="c-header-container_menu-item-alternate-item">Sign In</p></Link>
-                <Link to="/register"><p className="c-header-container_menu-item-alternate-item">Register</p></Link>
-                <Link to="/cart"><p className="c-header-container_menu-item-alternate-item">Cart ({cartLength})</p></Link>
+                <div className="c-header-container_menu-item-alternate-item">
+                  { this.props.isUserAuth() ? <Link to="/orders">
+                    <p className="">Order History</p>
+                  </Link> : <Link to="/register">
+                    <p>Register</p>
+                  </Link>
+                  }
+                </div>
+                <div className="c-header-container_menu-item-alternate-item">
+                  { this.props.isUserAuth() ? <Link to="/account">
+                    <p>My Account</p>
+                  </Link> : <Link to="/login">
+                    <p>Sign In</p>
+                  </Link>
+                  }
+                </div>
+                <div className="c-header-container_menu-item-alternate-item">
+                  <Link to="/cart"><p>Cart ({cartLength})</p></Link>
+                </div>
               </div>
               <div className="c-header-container_menu-footer">
                 This is a really, really, really, really, really, really, really, really, really, really, really, long sentence

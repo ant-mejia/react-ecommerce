@@ -215,7 +215,9 @@ header.#{$iota-components-header-namespace} {
           };
 
           .c-header-container_menu-item-alternate-item {
-            margin: 10px;
+            text-align: center;
+            margin    : 10px;
+            flex      : 1;
           }
         }
       }

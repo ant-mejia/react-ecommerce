@@ -1,26 +1,26 @@
 // Name:            Notification
 // Description:     Component to create notification messages
 //
-// Component:       `uk-notification`
+// Component:       `c-notification`
 //
-// Sub-objects:     `uk-notification-message`
+// Sub-objects:     `c-notification-message`
 //
-// Adopted:         `uk-notification-close`
+// Adopted:         `c-notification-close`
 //
-// Modifiers:       `uk-notification-top-center`
-//                  `uk-notification-top-right`
-//                  `uk-notification-bottom-left`
-//                  `uk-notification-bottom-center`
-//                  `uk-notification-bottom-right`
-//                  `uk-notification-message-primary`
-//                  `uk-notification-message-success`
-//                  `uk-notification-message-warning`
-//                  `uk-notification-message-danger`
+// Modifiers:       `c-notification-top-center`
+//                  `c-notification-top-right`
+//                  `c-notification-bottom-left`
+//                  `c-notification-bottom-center`
+//                  `c-notification-bottom-right`
+//                  `c-notification-message-primary`
+//                  `c-notification-message-success`
+//                  `c-notification-message-warning`
+//                  `c-notification-message-danger`
 //
 // ========================================================================
 // Variables
 // ========================================================================
-$notification-position: 10px !default;
+$notification-position: 50px !default;
 $notification-z-index: $global-z-index + 40 !default;
 $notification-width: 350px !default;
 $notification-message-margin-bottom: 10px !default;
@@ -42,18 +42,12 @@ $notification-message-danger-color: $global-danger-background !default;
  * 1. Set position
  * 2. Dimensions
  */
-.c-notification_container {
-  position: fixed;
-  z-index : $notification-z-index;
-  left    : 50%;
-  top     : 40px;
-}
-
-.uk-notification {
+.c-notification {
   /* 1 */
-  // position  : absolute;
+  position  : fixed;
   top       : $notification-position;
-  // left      : $notification-position;
+  left      : $notification-position;
+  z-index   : $notification-z-index;
   /* 2 */
   box-sizing: border-box;
   width     : $notification-width;
@@ -63,21 +57,21 @@ $notification-message-danger-color: $global-danger-background !default;
 }
 /* Position modifiers
 ========================================================================== */
-.uk-notification-bottom-right,
-.uk-notification-top-right {
+.c-notification-bottom-right,
+.c-notification-top-right {
   left : auto;
   right: $notification-position;
 }
 
-.uk-notification-bottom-center,
-.uk-notification-top-center {
+.c-notification-bottom-center,
+.c-notification-top-center {
   left       : 50%;
   margin-left: ($notification-width / -2);
 }
 
-.uk-notification-bottom-center,
-.uk-notification-bottom-left,
-.uk-notification-bottom-right {
+.c-notification-bottom-center,
+.c-notification-bottom-left,
+.c-notification-bottom-right {
   top   : auto;
   bottom: $notification-position;
 }
@@ -85,7 +79,7 @@ $notification-message-danger-color: $global-danger-background !default;
 ========================================================================== */
 /* Phones portrait and smaller */
 @media (max-width: $breakpoint-xsmall-max) {
-  .uk-notification {
+  .c-notification {
     left  : $notification-position;
     right : $notification-position;
     width : auto;
@@ -94,7 +88,7 @@ $notification-message-danger-color: $global-danger-background !default;
 }
 /* Message
 ========================================================================== */
-.uk-notification-message {
+.c-notification-message {
   position     : relative;
   margin-bottom: $notification-message-margin-bottom;
   padding      : $notification-message-padding;
@@ -108,9 +102,9 @@ $notification-message-danger-color: $global-danger-background !default;
   }
 }
 /* Close
- * Adopts `uk-close`
+ * Adopts `c-close`
  ========================================================================== */
-.uk-notification-close {
+.c-notification-close {
   display : none;
   position: absolute;
   top     : $notification-close-top;
@@ -120,7 +114,7 @@ $notification-message-danger-color: $global-danger-background !default;
   }
 }
 
-.uk-notification-message:hover .uk-notification-close {
+.c-notification-message:hover .c-notification-close {
   display: block;
 }
 /* Style modifiers
@@ -128,7 +122,7 @@ $notification-message-danger-color: $global-danger-background !default;
 /*
  * Primary
  */
-.uk-notification-message-primary {
+.c-notification-message-primary {
   color: $notification-message-primary-color;
   @if(mixin-exists(hook-notification-message-primary)) {
     @include hook-notification-message-primary();
@@ -137,7 +131,7 @@ $notification-message-danger-color: $global-danger-background !default;
 /*
  * Success
  */
-.uk-notification-message-success {
+.c-notification-message-success {
   color: $notification-message-success-color;
   @if(mixin-exists(hook-notification-message-success)) {
     @include hook-notification-message-success();
@@ -146,7 +140,7 @@ $notification-message-danger-color: $global-danger-background !default;
 /*
  * Warning
  */
-.uk-notification-message-warning {
+.c-notification-message-warning {
   color: $notification-message-warning-color;
   @if(mixin-exists(hook-notification-message-warning)) {
     @include hook-notification-message-warning();
@@ -155,7 +149,7 @@ $notification-message-danger-color: $global-danger-background !default;
 /*
  * Danger
  */
-.uk-notification-message-danger {
+.c-notification-message-danger {
   color: $notification-message-danger-color;
   @if(mixin-exists(hook-notification-message-danger)) {
     @include hook-notification-message-danger();

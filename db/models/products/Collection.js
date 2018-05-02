@@ -10,7 +10,7 @@ const Collection = db.define('collection', {
     allowNull: false,
     primaryKey: true,
     defaultValue: helpers.generateUid(),
-    unique: true
+    unique: true,
   },
   path: {
     type: Sequelize.STRING,
@@ -18,27 +18,27 @@ const Collection = db.define('collection', {
     unique: true,
     validate: {
       is: /^\/(([A-z0-9\-])+$)/
-    }
+    },
   },
   title: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   tagline: {
     type: Sequelize.STRING(100),
-    allowNull: false
+    allowNull: false,
   },
   summary: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   description: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   availability: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   clearance: {
     type: Sequelize.INTEGER
@@ -51,6 +51,10 @@ const Collection = db.define('collection', {
   },
   metadata: {
     type: Sequelize.JSON
-  }
+  },
+  style: {
+    type: Sequelize.JSON,
+    defaultValue: null,
+  },
 });
 module.exports = Collection;

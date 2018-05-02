@@ -1,0 +1,64 @@
+$iota-p-cols: $iota-pages-prefix + 'cols';
+
+.#{$iota-p-cols} {
+  .p-cols_title {
+    letter-spacing: 4px;
+    color         : grey;
+    text-transform: uppercase;
+
+    &::after {
+      content    : '';
+      display    : block;
+      margin-top : 5px;
+      margin-left: 10px;
+      width      : 80px;
+      height     : 2px;
+      background : grey;
+    }
+  }
+
+  .p-cols_list {
+    overflow: hidden;
+
+    .p-cols_list-item {
+      color    : $iota-global-primary-accent-color;
+      margin   : 50px 0;
+      padding  : 10px;
+      max-width: 500px;
+
+      .p-cols_list-item_title {
+        margin-bottom: 10px;
+        position     : relative;
+        z-index      : 1;
+        display      : inline-block;
+        overflow     : hidden;
+        text-overflow: ellipsis;
+        white-space  : nowrap;
+        max-width    : 100%;
+
+        &::before {
+          background      : $iota-global-primary-accent-color;
+          content         : '';
+          position        : absolute;
+          z-index         : -1;
+          bottom          : 0;
+          left            : 0;
+          width           : 90%;
+          height          : 50%;
+          opacity         : 0.2;
+          transform       : scale3d(0,1,1);
+          transform-origin: 0 50%;
+          transition      : transform 0.5s cubic-bezier(0.24, 0.91, 0.2, 1);
+        }
+      }
+
+      &:hover {
+        .p-cols_list-item_title {
+          &::before {
+            transform: scale3d(1,1,1);
+          }
+        }
+      }
+    }
+  }
+}

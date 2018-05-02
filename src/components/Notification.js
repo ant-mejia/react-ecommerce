@@ -10,9 +10,9 @@ class Notification extends Component {
 
   render() {
     return (
-      <div className="uk-notification">
-        <div className="uk-notification uk-notification-top-center">
-          <div className="uk-notification-message uk-transition">
+      <div className="c-notification">
+        <div className="c-notification c-notification-top-center">
+          <div className="c-notification-message c-transition">
             <Tappable onTap={this.props.handleClick} onPress={this.props.handleClick}>
               {this.props.message}
             </Tappable>

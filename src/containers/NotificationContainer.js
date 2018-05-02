@@ -19,7 +19,7 @@ class NotificationContainer extends Component {
       <div className="c-notification_container">
         {
           this.props.notifications.map((item) => {
-            return <Notification uid={item.uid} key={this.props.notifications.indexOf(item)} message={"Notification message"} closeNotification={this.closeNotification} handleClick={this.handleClick}/>
+            return <Notification uid={item.uid} key={item.uid} message={"Notification message"} closeNotification={this.closeNotification} handleClick={this.handleClick}/>
           })
         }
       </div>

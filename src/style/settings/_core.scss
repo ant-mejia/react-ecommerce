@@ -80,7 +80,7 @@ $iota-global-utils-fonts: (
 );
 $iota-global-delimiter: \/;
 $iota-global-primary-color: #366ba8;
-$iota-global-primary-accent-color: #5c5edc;
+$iota-global-primary-accent-color: #5268dd;
 $iota-global-secondary-color: #ba9f59;
 $iota-global-white: #ffffff;
 $iota-global-off-white: #ececec;
@@ -95,6 +95,7 @@ $iota-global-colors: (
   secondary: $iota-global-secondary-color,
   yellow   : $iota-global-yellow
 );
+$iota-global-page-default-color: $iota-global-white;
 $iota-global-heading-font: 'Arista', sans-serif;
 $iota-global-root: '#app';
 @import 'node_modules/iotacss/settings/core';

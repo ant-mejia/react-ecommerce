@@ -112,6 +112,7 @@ $iota-p-coll-product: $iota-p-coll + $iota-global-separator +'product';
   }
 
   .#{$iota-p-coll-gallery} {
+    margin-top     : 60px;
     display        : -webkit-flex;
     display        : -ms-flex;
     display        : flex;

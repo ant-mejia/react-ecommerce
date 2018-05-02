@@ -25,6 +25,16 @@ $iota-utils-text-gradient-directory: 'assets/images'; // $iota-text-backgrounds:
 //   marble: ("assets/images/marble/01.jpg", "assets/images/marble/02.jpg", "assets/images/marble/03.jpg", "assets/images/marble/04.jpg", "assets/images/marble/05.jpg", "assets/images/marble/06.jpg"),
 //   wood  : ("assets/images/wood/01.jpg", "assets/images/wood/02.jpg", "assets/images/wood/03.jpg", "assets/images/wood/04.jpg", "assets/images/wood/05.jpg", "assets/images/wood/06.jpg")
 // );
+
+.text-shadow-1 {
+  -webkit-background-clip: text;
+  -moz-background-clip   : text;
+  background-clip        : text;
+  color                  : transparent;
+  text-shadow            : rgba(255,255,255,0.5) 0 3px 3px;
+  background             : $iota-global-charcoal;
+  transition             : all 0.25s linear;
+}
 $iota-text-backgrounds: (
   holo  : 6,
   marble: 13,

@@ -29,10 +29,12 @@ class Collections extends Component {
 
   render() {
     return (
-      <div className="c-page">
-        <h2>Collections</h2>
-        {this.state.collections.map((c) => <CollectionItem key={c.uid} collection={c}/>)}
-      </div>
+      <View classNames="p-cols">
+        <h1 className="p-cols_title u-font-lato4">Collections</h1>
+        <div className="p-cols_list">
+          {this.state.collections.map((c) => <CollectionItem key={c.uid} collection={c}/>)}
+        </div>
+      </View>
     );
   }
 

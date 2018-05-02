@@ -6,7 +6,10 @@ import Routes from './routes';
 import './style/main.css';
 import io from 'socket.io-client';
 import createHistory from 'history/createBrowserHistory';
-const pkg = require('../package.json')
+import server from './config/config';
+
+const pkg = require('../package.json');
+
 class App extends Component {
   history = createHistory();
   constructor(props) {
@@ -26,7 +29,7 @@ class App extends Component {
       return undefined;
     }
     let url = genUrl();
-    this.socket = io(genUrl());
+    this.socket = io(server);
     this.socket.on('connect', () => {
       this.listenHistory();
       this.socket.emit('cart', { method: 'get' })

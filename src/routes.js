@@ -58,7 +58,7 @@ class Routes extends Component {
           <title>My Title</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
-        <Header store={this.props.store} toggleHeader={this.props.actions.toggleHeader}/>
+        <Header isUserAuth={this.props.actions.isUserAuth} store={this.props.store} toggleHeader={this.props.actions.toggleHeader}/>
         <div className="c-page_container">
           {/* <div className="c-page_stack">
             <Page/>
