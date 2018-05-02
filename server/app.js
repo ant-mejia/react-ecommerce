@@ -50,7 +50,7 @@ app.use(morgan(':remote-addr - :type :referrer :moment ":method :url HTTP/:http-
 // app.use(morgan(':remote-addr - :type :referrer :moment ":method :url HTTP/:http-version" :status :response-time ms', {
 // stream: stream
 // }));
-io.use(slogger({ minimal: process.env.NODE_ENV === 'production' }));
+io.use(slogger({ minimal: process.env.LOG_VERBOSE || process.env.NODE_ENV === 'production' }));
 io.engine.generateId = () => {
   return helpers.generateUid(); // custom id must be unique
 }

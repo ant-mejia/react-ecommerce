@@ -322,7 +322,6 @@ class App extends Component {
   }
 
   userCheckout = () => {
-    console.log('boo');
     this.socket.emit('checkout', {
       data: 'vars!'
     })
