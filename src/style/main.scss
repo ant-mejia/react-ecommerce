@@ -1,5 +1,6 @@
 @import 'settings/core';
 @import 'tools/core';
+@import "./extensions/extensions";
 @import 'tools/breakpoint';
 @import 'tools/ms';
 @import 'tools/rtl';
@@ -35,7 +36,10 @@
 @import "partials/partials";
 @import "components/components";
 @import "pages/pages";
-@import "./extensions/extensions";
+
+.vis-hidden {
+  visibility: hidden;
+}
 
 #app {
   background: $iota-global-off-white;

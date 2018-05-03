@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InputRange from 'react-input-range';
 import View from '../../containers/View';
 import Product from '../../components/Product/ProductGallery/Product';
+import InViewMonitor from 'react-inview-monitor';
 
 class ProductGallery extends Component {
   constructor(props) {
@@ -81,7 +82,11 @@ class ProductGallery extends Component {
           </div>
           <div className="p-pgal_wrapper">
             {this.state.products.map((p) => {
-              return <Product formatPrice={this.props.actions.formatPrice} key={p.uid} product={p}/>
+              return (
+                <InViewMonitor classNameNotInView='vis-hidden' classNameInView='animated fadeInUp'>
+                  <Product formatPrice={this.props.actions.formatPrice} key={p.uid} product={p}/>
+                </InViewMonitor>
+              )
             })}
           </div>
         </div>

@@ -19,7 +19,7 @@ class View extends Component {
       className = 'c-page_wrap'
     }
     if (this.props.classNames) {
-      className += ` ${this.props.classNames}`;
+      className += ` sr ${this.props.classNames}`;
     }
     return (
       <div className={className}>

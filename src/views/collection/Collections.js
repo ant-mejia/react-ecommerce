@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import View from '../../containers/View';
 import CollectionItem from '../../components/Collection/CollectionItem';
+import InViewMonitor from 'react-inview-monitor';
 
 class Collections extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class Collections extends Component {
     }
   }
   componentDidMount() {
+    console.log(window.ScrollReveal);
     console.log('mounted');
     this.mounted = true;
     this.props.actions.getCollections();
@@ -31,8 +33,9 @@ class Collections extends Component {
     return (
       <View classNames="p-cols">
         <h1 className="p-cols_title u-font-lato4">Collections</h1>
-        <div className="p-cols_list">
-          {this.state.collections.map((c) => <CollectionItem key={c.uid} collection={c}/>)}
+        <div className="p-cols_list u-pb-large">
+          {this.state.collections.map((c) => <InViewMonitor classNameNotInView='vis-hidden' classNameInView='animated fadeInUp'><CollectionItem key={c.uid} collection={c}/></InViewMonitor> )}
+
         </div>
       </View>
     );
