@@ -7,7 +7,6 @@ import Routes from './routes';
 import './style/main.css';
 import io from 'socket.io-client';
 import createHistory from 'history/createBrowserHistory';
-import server from './config/config';
 
 const pkg = require('../package.json');
 ReactGA.initialize('UA-43966783-7');
