@@ -34,23 +34,38 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
     }
 
     .#{$iota-pgal-wrapper} {
-      display       : -webkit-flex;
-      display       : -ms-flex;
-      display       : flex;
-      flex-wrap     : wrap;
-      flex-direction: row;
-      padding       : 10px;
+      display        : -webkit-flex;
+      display        : -ms-flex;
+      display        : flex;
+      flex-wrap      : wrap;
+      flex-direction : row;
+      justify-content: center;
+      padding        : 10px;
       @include iota-breakpoint(sm) {
         flex: 1;
       }
 
+      .animated {
+        -webkit-animation-duration : calc(0.5s);
+        animation-duration         : calc(0.5s);
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode        : both;
+      }
+
       .p-pgal_product-container {
-        transition: all 0.25s linear;
+        // transition: all 0.25s linear;
         min-height: 300px;
-        min-width : 200px;
+        min-width : 100px;
         width     : calc(50% - 0.5rem);
         min-height: 20vmax;
         margin    : 1rem 0.25rem;
+        @media screen and (max-width: 665px) and (orientation:portrait) {
+          // border: 1px solid red;
+        }
+        @media screen and (max-width: 665px) and (orientation:landscape) {
+          max-width: calc(33.3% - 2rem);
+          margin   : 0.5rem;
+        }
         @include iota-breakpoint(xs) {
           margin    : 0.5rem;
           min-width : unset;
@@ -89,7 +104,7 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
 
           &-wrapper {
             text-align: center;
-            padding   : 20px 0;
+            padding   : 20px 5px;
           }
         }
       }

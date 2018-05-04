@@ -20,9 +20,11 @@ class SearchGallery extends Component {
                 item = <CollectionSearch data={result.data}/>
               }
               return (
-                <li className="p-search_list-item" key={result.data.uid}>
-                  {item}
-                </li>
+                <InViewMonitor key={result.data.uid} classNameNotInView="vis-hidden" classNameInView="animated fadeInUp">
+                  <li className="p-search_list-item" >
+                    {item}
+                  </li>
+                </InViewMonitor>
               )
             })
           }

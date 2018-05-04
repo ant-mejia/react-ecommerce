@@ -50,6 +50,12 @@ $iota-p-search-input-wrapper: $iota-p-search + $iota-global-separator + 'input-w
   }
 
   .p-search_container {
+    .animated {
+      -webkit-animation-duration : calc(0.25s);
+      animation-duration         : calc(0.25s);
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode        : both;
+    }
     margin-top: 15vh;
 
     .p-search_list {
