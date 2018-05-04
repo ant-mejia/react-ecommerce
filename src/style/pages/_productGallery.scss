@@ -34,13 +34,13 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
     }
 
     .#{$iota-pgal-wrapper} {
-      display        : -webkit-flex;
-      display        : -ms-flex;
-      display        : flex;
-      flex-wrap      : wrap;
-      flex-direction : row;
-      justify-content: center;
-      padding        : 10px;
+      display       : -webkit-flex;
+      display       : -ms-flex;
+      display       : flex;
+      flex-wrap     : wrap;
+      flex-direction: row;
+      padding       : 10px;
+      // justify-content: center;
       @include iota-breakpoint(sm) {
         flex: 1;
       }
