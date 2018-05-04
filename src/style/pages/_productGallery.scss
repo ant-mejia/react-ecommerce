@@ -69,7 +69,7 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
         }
 
         .#{$iota-pgal-product} {
-          background: rgb(238, 238, 238);
+          background: $iota-global-off-white;
           transition: all 0.2s linear;
           height    : 100%;
           position  : relative;
@@ -89,6 +89,7 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
 
           &-wrapper {
             text-align: center;
+            padding   : 20px 0;
           }
         }
       }

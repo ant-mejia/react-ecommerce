@@ -1298,7 +1298,7 @@ select {
   background-color: #ffffff !important; }
 
 .u-bgcolor-offwhite {
-  background-color: #ececec !important; }
+  background-color: #eee !important; }
 
 .u-bgcolor-grey {
   background-color: #a5a5a5 !important; }
@@ -5585,7 +5585,7 @@ header.c-header {
         transition: transform 0.25s;
         -webkit-transform-origin: 50% 50%;
         transform-origin: 50% 50%;
-        background-color: #868686; }
+        background-color: #888888; }
       header.c-header .c-header-menu .c-header-menu_button span {
         content: '';
         position: absolute;
@@ -5598,7 +5598,7 @@ header.c-header {
         transition: all 0.25s linear;
         -webkit-transform-origin: 50% 50%;
         transform-origin: 50% 50%;
-        background-color: #868686; }
+        background-color: #888888; }
       header.c-header .c-header-menu .c-header-menu_button::after {
         -webkit-transform: translate3d(0, 10px, 0) scale3d(0.8, 1, 1);
         transform: translate3d(0, 10px, 0) scale3d(0.8, 1, 1);
@@ -5613,9 +5613,9 @@ header.c-header {
         transition: transform 0.25s;
         -webkit-transform-origin: 50% 50%;
         transform-origin: 50% 50%;
-        background-color: #868686; }
+        background-color: #888888; }
   header.c-header .c-header-container {
-    background: #ececec; }
+    background: #eee; }
     header.c-header .c-header-container .c-header-container_menu {
       transition: all 0.50s linear;
       opacity: 0;
@@ -5669,7 +5669,7 @@ header.c-header {
             height: 3px;
             background: #000; }
         header.c-header .c-header-container .c-header-container_menu .c-header-container_menu-wrapper .c-header-container_menu-item-alternate {
-          color: #b9b9b9; }
+          color: #bbbbbb; }
         header.c-header .c-header-container .c-header-container_menu .c-header-container_menu-wrapper .c-header-container_menu-item-alternate-wrapper {
           width: 100%;
           padding: 1.5%;
@@ -5726,7 +5726,7 @@ input {
   border: none;
   padding: 10px; }
   input[type="email"], input[type="password"] {
-    background: #ececec;
+    background: #eee;
     border: 3px dashed transparent;
     transition: all 0.15s linear; }
     input[type="email"]:focus, input[type="password"]:focus {
@@ -5928,8 +5928,8 @@ input[type="text"] {
 
 .input-range__slider {
   appearance: none;
-  background: #3f51b5;
-  border: 1px solid #3f51b5;
+  background: #5268dd;
+  border: 1px solid #5268dd;
   border-radius: 100%;
   cursor: pointer;
   display: block;
@@ -6006,7 +6006,7 @@ input[type="text"] {
   top: 50%; }
 
 .input-range__track--active {
-  background: #3f51b5; }
+  background: #5268dd; }
 
 .input-range {
   height: 1rem;
@@ -6207,7 +6207,7 @@ input[type="text"] {
     position: relative;
     margin: 25px 0;
     height: calc(100vw - 100px);
-    background: #ececec; }
+    background: #eee; }
     .p-index .p-index_collections .p-index_collection .p-index_collection-background {
       position: absolute;
       z-index: 1;
@@ -6286,7 +6286,7 @@ input[type="text"] {
         display: initial; } }
     .p-pgal .p-pgal_container .p-pgal_side .p-pgal_side-wrapper {
       padding: 15px 40px;
-      background: #ececec;
+      background: #eee;
       display: -webkit-flex;
       display: -ms-flex;
       display: flex;
@@ -6321,7 +6321,7 @@ input[type="text"] {
         transform: translate3d(0px, -5%, 5em);
         box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2); }
       .p-pgal .p-pgal_container .p-pgal_wrapper .p-pgal_product-container .p-pgal_product {
-        background: #eeeeee;
+        background: #eee;
         transition: all 0.2s linear;
         height: 100%;
         position: relative; }
@@ -6337,7 +6337,8 @@ input[type="text"] {
           top: 20%;
           font-size: 12px; }
         .p-pgal .p-pgal_container .p-pgal_wrapper .p-pgal_product-container .p-pgal_product-wrapper {
-          text-align: center; }
+          text-align: center;
+          padding: 20px 0; }
 
 .p-coll .p-coll_container, .p-coll .p-coll_title-container, .p-coll .p-coll_detail-container {
   min-height: calc(100vh - 50px);
@@ -6567,7 +6568,7 @@ input[type="text"] {
   visibility: hidden; }
 
 #app {
-  background: #ececec; }
+  background: #eee; }
 
 html {
   height: 100%;

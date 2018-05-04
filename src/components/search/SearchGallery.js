@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ProductSearch from './ProductSearch';
 import CollectionSearch from './CollectionSearch';
+import InViewMonitor from 'react-inview-monitor';
+
 class SearchGallery extends Component {
 
   render() {
