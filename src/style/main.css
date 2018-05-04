@@ -6330,6 +6330,9 @@ input[type="text"] {
           color: #707070;
           letter-spacing: 2px;
           text-transform: uppercase;
+          position: absolute;
+          transform: rotate(-90deg);
+          transform-origin: 45% 153%;
           padding: 3px 18px;
           top: 20%;
           font-size: 12px; }

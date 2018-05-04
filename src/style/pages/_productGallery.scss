@@ -75,16 +75,16 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
           position  : relative;
 
           .p-pgal_product-saletab {
-            background    : $iota-global-yellow;
-            color         : $iota-global-charcoal;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            // position        : absolute;
-            // transform       : rotate(-90deg);
-            // transform-origin: 45% 153%;
-            padding       : 3px 18px;
-            top           : 20%;
-            font-size     : 12px;
+            background      : $iota-global-yellow;
+            color           : $iota-global-charcoal;
+            letter-spacing  : 2px;
+            text-transform  : uppercase;
+            position        : absolute;
+            transform       : rotate(-90deg);
+            transform-origin: 45% 153%;
+            padding         : 3px 18px;
+            top             : 20%;
+            font-size       : 12px;
           }
 
           &-wrapper {
