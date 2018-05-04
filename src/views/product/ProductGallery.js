@@ -83,8 +83,8 @@ class ProductGallery extends Component {
           <div className="p-pgal_wrapper">
             {this.state.products.map((p) => {
               return (
-                <InViewMonitor classNameNotInView='vis-hidden' classNameInView='animated fadeInUp'>
-                  <Product formatPrice={this.props.actions.formatPrice} key={p.uid} product={p}/>
+                <InViewMonitor key={p.uid} classNameNotInView="p-pgal_product-container vis-hidden" classNameInView="p-pgal_product-container animated fadeInUp">
+                  <Product formatPrice={this.props.actions.formatPrice} product={p}/>
                 </InViewMonitor>
               )
             })}

@@ -44,36 +44,13 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
         flex: 1;
       }
 
-      .#{$iota-pgal-product} {
-        .p-pgal_product-saletab {
-          background      : $iota-global-yellow;
-          color           : $iota-global-charcoal;
-          letter-spacing  : 2px;
-          text-transform  : uppercase;
-          position        : absolute;
-          transform       : rotate(-90deg);
-          transform-origin: 45% 153%;
-          padding         : 3px 18px;
-          top             : 20%;
-          font-size       : 12px;
-        }
-        position  : relative;
-        margin    : 1rem 0.25rem;
-        // width     : calc(50% - 0.5rem);
-        // min-height: 20vmax;
-        background: rgb(238, 238, 238);
+      .p-pgal_product-container {
+        transition: all 0.25s linear;
         min-height: 300px;
         min-width : 200px;
-        transition: all 0.25s linear;
-
-        &:hover {
-          box-shadow: 0 10px 32px #ddd;
-          margin-top: -4px;
-        }
-
-        &-wrapper {
-          text-align: center;
-        }
+        width     : calc(50% - 0.5rem);
+        min-height: 20vmax;
+        margin    : 1rem 0.25rem;
         @include iota-breakpoint(xs) {
           margin    : 0.5rem;
           min-width : unset;
@@ -83,6 +60,37 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
         @include iota-breakpoint(md) {
           max-width: calc(25% - 1rem);
         };
+
+        &:hover {
+          .#{$iota-pgal-product} {
+            transform : translate3d(0px, -5%, 5em);
+            box-shadow: 0 10px 32px rgba(#000,.2);
+          }
+        }
+
+        .#{$iota-pgal-product} {
+          background: rgb(238, 238, 238);
+          transition: all 0.2s linear;
+          height    : 100%;
+          position  : relative;
+
+          .p-pgal_product-saletab {
+            background    : $iota-global-yellow;
+            color         : $iota-global-charcoal;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            // position        : absolute;
+            // transform       : rotate(-90deg);
+            // transform-origin: 45% 153%;
+            padding       : 3px 18px;
+            top           : 20%;
+            font-size     : 12px;
+          }
+
+          &-wrapper {
+            text-align: center;
+          }
+        }
       }
     }
   }
