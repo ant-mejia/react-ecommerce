@@ -17,16 +17,17 @@ class Dropdown extends Component {
       let value = this.props.values[index];
       this.props.onChange(value);
     }
+    this.toggleActive();
   }
 
   render() {
     return (
       <div className={`p-pgal_dropdown${this.state.active ? ' active' : ''}`}>
-        <h3 className="p-pgal_dropdown-value" onClick={this.toggleActive}>{`Sort By: ${this.props.values[this.state.index]}`}</h3>
+        <h2 className="p-pgal_dropdown-value u-font-lato7" onClick={this.toggleActive}>{`Sort By: ${this.props.values[this.state.index]}`}</h2>
         <div className="p-pgal_dropdown-list">
           {this.props.values.map((prop, index) => {
             return this.state.index === index ?  null :
-            <div key={index} onClick={() =>this.handleClick(index)} className="p-pgal_dropdown-list_item"><p>{prop}</p></div>
+            <div key={index} onClick={() =>this.handleClick(index)} className="p-pgal_dropdown-list_item"><h5 className="u-font-lato7">{prop}</h5></div>
           })}
         </div>
       </div>
