@@ -6317,6 +6317,7 @@ input[type="text"] {
           color: rgba(255, 255, 255, 0.8);
           letter-spacing: 1px;
           margin: 20px 15px 30px;
+          padding: 5px;
           cursor: pointer;
           transition: color 0.25s linear;
           overflow: hidden; }
