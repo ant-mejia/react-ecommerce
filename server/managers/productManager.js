@@ -1,4 +1,5 @@
 const stripe = require('stripe')('sk_test_pt5W3nh0S1VIkw3gREYacV1B');
+const _ = require('lodash');
 const models = require('../../db/models/index');
 const helpers = require('../helpers');
 const moment = require('moment');
@@ -91,7 +92,8 @@ this.getProduct = (method, data, userId) => {
   });
 }
 
-this.getProducts = (filter, userUid) => {
+this.getProducts = (options, userUid) => {
+  console.log("OPTIONS ::: ", options);
   return new Promise(async (resolve, reject) => {
     let user = undefined;
     if (userUid) {
@@ -140,7 +142,23 @@ this.getProducts = (filter, userUid) => {
         b.promoPrice = this.getPrice(b);
         return b;
       });
-      resolve(products);
+      let sortedProducts = products;
+      if (options.sort) {
+        if (options.sort === 'newest') {
+          sortedProducts = _.sortBy(products, [(p) => moment().diff(moment(p.releaseDate))])
+        }
+      }
+      if (options.filter) {
+        let filteredProducts = sortedProducts.filter((product) => {
+          if (options.filter.onPromotion) {
+            return product.promoPrice !== undefined;
+          } else {
+            return !options.filter.onPromotion
+          }
+        })
+        resolve(filteredProducts)
+      }
+      resolve(sortedProducts);
     })
   });
 }

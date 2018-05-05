@@ -31,6 +31,11 @@ class App extends Component {
     }
     let url = genUrl();
     this.socket = io(url);
+    this.socket.on('config/update', (response) => {
+      if (response.type === 'success') {
+        this.setStore('config', response.data.config);
+      }
+    });
     this.socket.on('connect', () => {
       this.listenHistory();
       this.socket.emit('cart', { method: 'get' })
@@ -162,7 +167,7 @@ class App extends Component {
     }
   }
 
-  getStore = (prop) => {
+  getStore = (prop = "") => {
     //if property has a dot "." in the string
     //  map through each one
     if (~prop.indexOf(".")) {
@@ -275,8 +280,8 @@ class App extends Component {
   getProductByPath = (path) => {
     this.socket.emit('session/:param', { parameter: "product", path })
   }
-  getProducts = () => {
-    this.socket.emit('session/:param', { parameter: "products", data: {} })
+  getProducts = (options = {}) => {
+    this.socket.emit('session/:param', { parameter: "products", options })
   }
   getCollectionByPath = (path) => {
     this.socket.emit('session/:param', { parameter: "collection", data: { path } })

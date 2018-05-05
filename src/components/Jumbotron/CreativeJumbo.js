@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
-
+import Icon from '../../components/Icon';
 
 class CreativeJumbo extends Component {
   constructor(props) {
@@ -81,10 +81,10 @@ class CreativeJumbo extends Component {
           </div>
           <div className="c-jumbotron_creative_controls">
             <button className="c-jumbotron_creative_controls_prev" onClick={this.prevSlide}>
-              <span className="li-down-open-big"/>
+              <Icon name="down-open-big"/>
             </button>
             <button className="c-jumbotron_creative_controls_next u-flip-v" onClick={this.nextSlide}>
-              <span className="li-down-open-big"/>
+              <Icon name="down-open-big"/>
             </button>
           </div>
         </div>

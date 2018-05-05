@@ -23,6 +23,70 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
         display: initial;
       };
 
+      .p-pgal_dropdown {
+        user-select   : none;
+        text-align    : center;
+        margin-top    : 10px;
+        margin-bottom : 30px;
+        text-transform: capitalize;
+        position      : relative;
+
+        .p-pgal_dropdown-value {
+          transition    : all 0.25s linear;
+          border        : 3px solid $iota-global-off-white;
+          padding       : 15px 10px;
+          cursor        : pointer;
+          letter-spacing: 1px;
+          font-size     : 20px;
+          // margin-bottom: 5px;
+        }
+
+        .p-pgal_dropdown-list {
+          transition: max-height 0.35s linear, padding-bottom 0.25s linear;
+          overflow  : hidden;
+          max-height: 0;
+          padding   : 0 5px;
+          text-align: left;
+          position  : absolute;
+          width     : 100%;
+          background: $iota-global-primary-accent-color;
+
+          .p-pgal_dropdown-list_item {
+            transition: opacity 0.25s linear;
+            cursor    : pointer;
+            opacity   : 0;
+
+            p {
+              color         : rgba(#fff,.9);
+              letter-spacing: 1px;
+              margin        : 15px;
+            }
+          }
+        }
+
+        &.active {
+          .p-pgal_dropdown-value {
+            border-color: $iota-global-primary-accent-color;
+            background  : $iota-global-primary-accent-color;
+            color       : #fff;
+          }
+
+          .p-pgal_dropdown-list {
+            max-height    : 300px;
+            transition    : max-height 0.5s linear;
+            padding-bottom: 20px;
+
+            .p-pgal_dropdown-list_item {
+              opacity           : 1;
+              @extend .animated;
+              @extend .fadeInDown;
+              animation-duration: calc(0.25s);
+              animation-delay   : 0.2s;
+            }
+          }
+        }
+      }
+
       .#{$iota-pgal-side-wrapper} {
         padding       : 15px 40px;
         background    : $iota-global-off-white;
@@ -40,7 +104,6 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
       flex-wrap     : wrap;
       flex-direction: row;
       padding       : 10px;
-      // justify-content: center;
       @include iota-breakpoint(sm) {
         flex: 1;
       }
