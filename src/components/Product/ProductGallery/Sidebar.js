@@ -31,7 +31,7 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="p-pgal_side">
-        <Dropdown values={_.values(this.props.config.sort ? this.props.config.sort.values : {})} onChange={(d) => console.log(d,'abc!')}/>
+        <Dropdown values={this.props.config.sort ? _.values(this.props.config.sort.values) : ["Default"]} onChange={(d) => console.log(d,'abc!')}/>
         <div className="p-pgal_side-wrapper">
           <div>
             <h2>Filter</h2>
