@@ -144,8 +144,15 @@ this.getProducts = (options, userUid) => {
       });
       let sortedProducts = products;
       if (options.sort) {
-        if (options.sort === 'newest') {
+        let sort = options.sort.toLowerCase();
+        if (sort === 'default') {
+          sortedProducts = products;
+        } else if (sort === 'newest') {
           sortedProducts = _.sortBy(products, [(p) => moment().diff(moment(p.releaseDate))])
+        } else if (sort === 'lowest price') {
+          sortedProducts = _.sortBy(products, [(p) => p.promoPrice || p.price]);
+        } else if (sort === 'highest price') {
+          sortedProducts = _.reverse(_.sortBy(products, [(p) => p.promoPrice || p.price]));
         }
       }
       if (options.filter) {
