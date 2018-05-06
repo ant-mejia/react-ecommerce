@@ -18,7 +18,7 @@ class App extends Component {
     Object.assign(this, actions)
     this.state = {
       activeHeader: false,
-      store: {},
+      store: { config: {} },
       cache: {},
       notifications: []
     };

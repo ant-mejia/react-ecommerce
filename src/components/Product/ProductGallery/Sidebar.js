@@ -1,5 +1,5 @@
-import _ from 'lodash'
 import React, { Component } from 'react';
+import _ from 'lodash'
 import InputRange from 'react-input-range';
 import Dropdown from './Dropdown';
 import PropTypes from 'prop-types';
@@ -32,7 +32,7 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="p-pgal_side">
-        <Dropdown values={this.props.config.sort ? _.values(this.props.config.sort.values) : ["Default"]} onChange={(d) => console.log(d,'abc!')}/>
+        <Dropdown values={this.props.config.sort ? this.props.config.sort.values : this.props.config.sort}/>
         <div className="p-pgal_side-wrapper">
           <div>
             <h2>Filter</h2>
@@ -63,7 +63,9 @@ class Sidebar extends Component {
     );
   }
 }
-
+Sidebar.defaultProps = {
+  config: {}
+}
 Sidebar.propTypes = {
   config: PropTypes.object.isRequired
 };
