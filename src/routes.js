@@ -71,7 +71,7 @@ class Routes extends Component {
               <Route exact path="/app" component={Index} />
               <Route exact path="/collections" render={({match, location}) => <Collections actions={this.props.actions} socket={this.props.socket}/>} />
               <Route path="/collections/:collection" render={({match, location}) => <Collection actions={this.props.actions} location={location} actions={this.props.actions} match={match} socket={this.props.socket}/>}/>
-              <Route exact path="/products" render={({match, location}) => <ProductGallery actions={this.props.actions} socket={this.props.socket}/>} />
+              <Route exact path="/products" render={({match, location}) => <ProductGallery actions={this.props.actions} store={this.props.store} socket={this.props.socket}/>} />
               <Route path="/products/:product" render={({match, location}) => <ProductContainer location={location} actions={this.props.actions} match={match} socket={this.props.socket}/>}/>
               <Route exact path="/search" render={({match}) => <Search socket={this.props.socket}/> } />
               <Route exact path="/cart" component={({match}) => <Cart store={this.props.store} actions={this.props.actions}/> } />

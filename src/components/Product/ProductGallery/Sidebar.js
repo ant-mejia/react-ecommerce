@@ -2,6 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react';
 import InputRange from 'react-input-range';
 import Dropdown from './Dropdown';
+import PropTypes from 'prop-types';
 
 class Sidebar extends Component {
   constructor(props) {
@@ -62,6 +63,10 @@ class Sidebar extends Component {
     );
   }
 }
+
+Sidebar.propTypes = {
+  config: PropTypes.object.isRequired
+};
 
 
 export default Sidebar;

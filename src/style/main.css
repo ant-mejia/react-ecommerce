@@ -6329,8 +6329,7 @@ input[type="text"] {
         color: #fff; }
       .p-pgal .p-pgal_container .p-pgal_side .p-pgal_dropdown.active .p-pgal_dropdown-list {
         max-height: 300px;
-        transition: max-height 0.5s linear;
-        padding-bottom: 20px; }
+        transition: max-height 0.5s linear; }
         .p-pgal .p-pgal_container .p-pgal_side .p-pgal_dropdown.active .p-pgal_dropdown-list .p-pgal_dropdown-list_item {
           animation-duration: calc(0.25s);
           animation-delay: 0.2s; }
