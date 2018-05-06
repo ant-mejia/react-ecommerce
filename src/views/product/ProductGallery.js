@@ -65,21 +65,23 @@ class ProductGallery extends Component {
     this.setState({ options: st });
     this.props.actions.getProducts(this.state.options);
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.products !== prevState.products) {
-      console.log('product updated');
       let newRange = this.state.range;
       newRange.scope.max = this.calcMaxScope();
       newRange.value.max = this.calcMaxScope();
       console.log(newRange);
-      this.setState({ range: newRange })
+    }
+    if (this.state.options !== prevState.options) {
+      console.log('options changed:', _.omit(this.state.options, function(v, k) { return prevState.option[k] === v; }));
     }
   }
 
   componentDidMount() {
     this.mounted = true;
     let options = { sort: "newest", filter: { onPromotion: false } }
-    this.props.actions.getProducts(options);
+    this.props.actions.getProducts(this.state.options);
     if (this.preState !== undefined) {
       this.setState(this.preState);
     };
@@ -92,7 +94,6 @@ class ProductGallery extends Component {
   }
 
   render() {
-    console.log(this.props.actions.getCache('productGalleryOptions'));
     return (
       <View classNames="p-pgal">
         <h2>Product Gallery!</h2>

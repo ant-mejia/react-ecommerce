@@ -23,11 +23,7 @@ class Dropdown extends Component {
 
   render() {
     let values = this.props.values;
-    if (_.isPlainObject(values)) {
-      values = _.values(this.props.values)
-    }
-    console.log("VALUES :: ", values);
-    console.log("VALUE PROPS :: ", this.props.values);
+    if (_.isPlainObject(values)) values = _.values(this.props.values)
     return (
       <div className={`p-pgal_dropdown${this.state.active ? ' active' : ''}`}>
         <h2 className="p-pgal_dropdown-value u-font-lato7" onClick={this.toggleActive}>{`Sort By: ${values[this.state.index] || this.props.defaultValue}`}</h2>
