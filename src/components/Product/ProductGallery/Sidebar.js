@@ -29,10 +29,14 @@ class Sidebar extends Component {
     this.props.updateFilterOptions('onPromotion', b || !this.props.options.filter.onPromotion)
   }
 
+  handleDropdownChange = (sort) => {
+    this.props.updateSortOptions(sort);
+  }
+
   render() {
     return (
       <div className="p-pgal_side">
-        <Dropdown values={this.props.config.sort ? this.props.config.sort.values : this.props.config.sort}/>
+        <Dropdown initialIndex={this.props.options.sort} values={this.props.config.sort ? this.props.config.sort.values : this.props.config.sort} onChange={this.handleDropdownChange}/>
         <div className="p-pgal_side-wrapper">
           <div>
             <h2>Filter</h2>

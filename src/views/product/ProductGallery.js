@@ -66,6 +66,16 @@ class ProductGallery extends Component {
     this.props.actions.getProducts(this.state.options);
   }
 
+  updateSortOptions = (val) => {
+    let st = this.state.options;
+    if (st.sort === undefined) {
+      st.sort = "";
+    }
+    st.sort = val;
+    this.setState({ options: st });
+    this.props.actions.getProducts(this.state.options);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.products !== prevState.products) {
       let newRange = this.state.range;
@@ -98,7 +108,7 @@ class ProductGallery extends Component {
       <View classNames="p-pgal">
         <h2>Product Gallery!</h2>
         <div className="p-pgal_container">
-          <Sidebar range={this.state.range} updateFilterOptions={this.updateFilterOptions} options={this.state.options} config={this.props.store.config.productGallery} className=""/>
+          <Sidebar range={this.state.range} updateSortOptions={this.updateSortOptions} updateFilterOptions={this.updateFilterOptions} options={this.state.options} config={this.props.store.config.productGallery} className=""/>
           <div className="p-pgal_wrapper">
             {this.state.products.map((p) => {
               return (

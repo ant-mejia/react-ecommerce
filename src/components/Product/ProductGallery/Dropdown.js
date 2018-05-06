@@ -5,19 +5,24 @@ import PropTypes from 'prop-types';
 class Dropdown extends Component {
   constructor(props) {
     super(props);
-    this.state = { active: false, index: 0 };
+    this.state = { active: false, index: this.props.initialIndex || 0 };
   }
 
   toggleActive = () => {
     this.setState({ active: !this.state.active })
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.index !== prevState.index) {
+      if (_.isFunction(this.props.onChange)) {
+        let value = this.props.values[this.state.index];
+        this.props.onChange(value);
+      }
+    }
+  }
+
   handleClick = (index) => {
     this.setState({ index: index })
-    if (this.props.onChange) {
-      let value = this.props.values[index];
-      this.props.onChange(value);
-    }
     this.toggleActive();
   }
 

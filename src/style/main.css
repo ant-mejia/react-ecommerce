@@ -6304,7 +6304,7 @@ input[type="text"] {
         letter-spacing: 1px;
         font-size: 20px; }
       .p-pgal .p-pgal_container .p-pgal_side .p-pgal_dropdown .p-pgal_dropdown-list {
-        transition: max-height 0.35s linear, padding-bottom 0.25s linear;
+        transition: max-height 0.35s cubic-bezier(0.65, 0.05, 0.36, 1), padding-bottom 0.25s linear;
         overflow: hidden;
         max-height: 0;
         padding: 0 5px;
@@ -6329,7 +6329,7 @@ input[type="text"] {
         color: #fff; }
       .p-pgal .p-pgal_container .p-pgal_side .p-pgal_dropdown.active .p-pgal_dropdown-list {
         max-height: 300px;
-        transition: max-height 0.5s linear; }
+        transition: max-height 0.35s cubic-bezier(0.65, 0.05, 0.36, 1); }
         .p-pgal .p-pgal_container .p-pgal_side .p-pgal_dropdown.active .p-pgal_dropdown-list .p-pgal_dropdown-list_item {
           animation-duration: calc(0.25s);
           animation-delay: 0.2s; }

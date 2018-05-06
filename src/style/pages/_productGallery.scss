@@ -42,7 +42,7 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
         }
 
         .p-pgal_dropdown-list {
-          transition: max-height 0.35s linear, padding-bottom 0.25s linear;
+          transition: max-height 0.35s cubic-bezier(0.65, 0.05, 0.36, 1), padding-bottom 0.25s linear;
           overflow  : hidden;
           max-height: 0;
           padding   : 0 5px;
@@ -84,7 +84,7 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
 
           .p-pgal_dropdown-list {
             max-height: 300px;
-            transition: max-height 0.5s linear;
+            transition: max-height 0.35s cubic-bezier(0.65, 0.05, 0.36, 1);
 
             .p-pgal_dropdown-list_item {
               @extend .animated;
