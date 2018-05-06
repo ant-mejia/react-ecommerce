@@ -10,7 +10,7 @@ class ProductGallery extends Component {
   constructor(props) {
     super(props);
     this.preState = {};
-    this.state = { products: [], options: this.props.actions.getCache('productGalleryOptions') || {}, config: this.props.store.config.productGallery, range: { value: { min: 0, max: 500 }, scope: { min: 0, max: 500 } } };
+    this.state = { products: [], options: this.props.actions.getCache('productGalleryOptions') || {}, config: this.props.store.config.productGallery || {}, range: { value: { min: 0, max: 500 }, scope: { min: 0, max: 500 } } };
     this.props.socket.on('products/view', (response) => {
       if (response.type === 'success') {
         this.setStateOnMount({ products: response.data });
