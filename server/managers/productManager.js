@@ -159,8 +159,11 @@ this.getProducts = (options, userUid) => {
         let filteredProducts = sortedProducts.filter((product) => {
           if (options.filter.onPromotion) {
             return product.promoPrice !== undefined;
-          } else {
-            return !options.filter.onPromotion
+          }
+          if (options.filter.price) {
+            let productPrice = Math.ceil(product.promoPrice || product.price);
+            console.log('FILTERING BY PRICE: Min: ', options.filter.price.min, " MAX: ", options.filter.price.max, " PRICE: ", productPrice);
+            return (productPrice >= options.filter.price.min) && (productPrice <= options.filter.price.max);
           }
         })
         resolve(filteredProducts)

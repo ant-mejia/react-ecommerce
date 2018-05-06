@@ -20,6 +20,13 @@ class Sidebar extends Component {
     this.setState({ range });
   }
 
+  setMinMaxPrice = (data) => {
+    let range = data;
+    range.min = data.min * 100;
+    range.max = data.max * 100;
+    this.props.updateFilterOptions('price', range)
+  }
+
   togglePromoRadio = () => {
     let initialFilter = this.props.options.filter;
     let b = false;
@@ -60,6 +67,7 @@ class Sidebar extends Component {
               step={this.state.range.scope.max / 10}
               value={this.state.range.value}
               onChange={(value) => this.setRangeValue(value)}
+              onChangeComplete={(a) => this.setMinMaxPrice(a)}
             />
           </div>
         </div>
