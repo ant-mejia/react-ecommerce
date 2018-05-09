@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import View from '../containers/View'
 import { Link } from 'react-router-dom';
 import Jumbotron from '../components/Jumbotron/Jumbotron';
+import CollectionItem from '../components/Index/CollectionItem';
 
 class Index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { config: this.props.store.config.index || {} };
+  }
 
   jumbotronContent = [{
     background: { src: 'https://www.screenaustralia.gov.au/sacms/media/samedialibrary/screenguide/titles/tid33797-mountain/tid33797-web/tid33797-mountain-001-hero.jpg', alt: 'Blah Blah Blah' },
@@ -38,74 +43,23 @@ class Index extends Component {
   render() {
     return (
       <div>
-        {/* <PageHeader/> */}
         <div className="c-page_jumbotron">
           <Jumbotron type="creative" content={this.jumbotronContent}/>
         </div>
         <View classNames="p-index">
           <div className="p-index_section">
-            <h1>Featured Collections</h1>
-            <h3>This is just a lil sub heading</h3>
+            <h1 className="p-index_section-heading u-font-lato4">Featured Collections</h1>
+            <h3 className="p-index_section-subheading u-font-lato4">This is just a lil sub heading</h3>
             <div>
               <div className="p-index_collections">
                 <div className="p-index_collection-container">
-                  <div className="p-index_collection">
-                    <div className="p-index_collection-background">
-                      <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
-                    </div>
-                    <Link to="/collections">
-                      <div className="p-index_collection-wrapper ">
-                        <h3>Collection 2</h3>
-                        <h4>Sub Title</h4>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="p-index_collection">
-                    <div className="p-index_collection-background">
-                      <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
-                    </div>
-                    <Link to="/collections">
-                      <div className="p-index_collection-wrapper ">
-                        <h3>Collection 3</h3>
-                        <h4>Sub Title</h4>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-                <div className="p-index_collection p-index_collection-featured">
-                  <div className="p-index_collection-background">
-                    <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
-                  </div>
-                  <Link to="/collections">
-                    <div className="p-index_collection-wrapper ">
-                      <h3>Collection 1</h3>
-                      <h4>Sub Title</h4>
-                    </div>
-                  </Link>
-                </div>
-                <div className="p-index_collection-container">
-                  <div className="p-index_collection">
-                    <div className="p-index_collection-background">
-                      <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
-                    </div>
-                    <Link to="/collections">
-                      <div className="p-index_collection-wrapper ">
-                        <h3>Collection 4</h3>
-                        <h4>Sub Title</h4>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="p-index_collection">
-                    <div className="p-index_collection-background">
-                      <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
-                    </div>
-                    <Link to="/collections">
-                      <div className="p-index_collection-wrapper ">
-                        <h3>Collection 5</h3>
-                        <h4>Sub Title</h4>
-                      </div>
-                    </Link>
-                  </div>
+                  {
+                    this.state.config.featuredCollections.map((c) => {
+                      return (
+                        <CollectionItem key={c.uid} collection={c}/>
+                      )
+                    })
+                  }
                 </div>
               </div>
               <Link to="/collections">
@@ -113,7 +67,7 @@ class Index extends Component {
               </Link>
             </div>
           </div>
-          <div className="p-index_section">
+          <div className="">
             <h5>Next Section</h5>
             <h1>Featured Products</h1>
             <Link to="/products">
@@ -127,3 +81,15 @@ class Index extends Component {
 }
 
 export default Index;
+//
+// <div className="p-index_collection p-index_collection-featured">
+//   <div className="p-index_collection-background">
+//     <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
+//   </div>
+//   <Link to="/collections">
+//     <div className="p-index_collection-wrapper ">
+//       <h3>Collection 1</h3>
+//       <h4>Sub Title</h4>
+//     </div>
+//   </Link>
+// </div>

@@ -34,8 +34,13 @@ class Collections extends Component {
       <View classNames="p-cols">
         <h1 className="p-cols_title u-font-lato4">Collections</h1>
         <div className="p-cols_list u-pb-large">
-          {this.state.collections.map((c) => <InViewMonitor classNameNotInView='vis-hidden' classNameInView='animated fadeInLeftBig'><CollectionItem key={c.uid} collection={c}/></InViewMonitor> )}
-
+          {this.state.collections.map((c) => {
+            return (
+              <InViewMonitor key={c.uid} classNameNotInView='vis-hidden' classNameInView='animated fadeInLeftBig'>
+                <CollectionItem collection={c}/>
+              </InViewMonitor>
+            )
+          })}
         </div>
       </View>
     );

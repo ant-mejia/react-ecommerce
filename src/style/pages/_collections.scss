@@ -24,9 +24,10 @@ $iota-p-cols: $iota-pages-prefix + 'cols';
       color    : $iota-global-primary-accent-color;
       margin   : 50px 0;
       padding  : 10px;
-      max-width: 500px;
+      max-width: 650px;
 
       .p-cols_list-item_title {
+        font-variant  : no-common-ligatures;
         margin-bottom : 10px;
         position      : relative;
         z-index       : 1;
@@ -37,6 +38,9 @@ $iota-p-cols: $iota-pages-prefix + 'cols';
         max-width     : 100%;
         letter-spacing: 1px;
         font-size     : 31px;
+        @include iota-breakpoint(sm) {
+          font-size: 50px;
+        };
 
         &::before {
           background      : $iota-global-primary-accent-color;
@@ -54,11 +58,54 @@ $iota-p-cols: $iota-pages-prefix + 'cols';
         }
       }
 
+      .p-cols_list-item_tag {
+        @extend .animated;
+        transition    : opacity 0.5s linear 0.25s;
+        opacity       : 0;
+        text-transform: uppercase;
+        font-weight   : 700;
+        font-size     : 14px;
+        letter-spacing: 3px;
+        display       : -webkit-flex;
+        display       : -ms-flex;
+        display       : flex;
+        align-items   : center;
+        color         : darken($iota-global-grey, 30%);
+
+        &::after,
+        &::before {
+          content   : "";
+          display   : inline-block;
+          width     : 15px;
+          height    : 2px;
+          background: darken($iota-global-grey, 30%);
+          margin    : auto 10px;
+        }
+      }
+
+      .p-cols_list-item_summary {
+        color         : $iota-global-grey;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition    : color 0.25s linear;
+        margin-bottom : 20px;
+      }
+
       &:hover {
         .p-cols_list-item_title {
           &::before {
             transform: scale3d(1,1,1);
           }
+        }
+
+        .p-cols_list-item_tag {
+          @extend .slideInLeft;
+          animation-duration: 0.38s;
+          opacity           : 1;
+        }
+
+        .p-cols_list-item_summary {
+          color: darken($iota-global-grey, 30%);
         }
       }
     }

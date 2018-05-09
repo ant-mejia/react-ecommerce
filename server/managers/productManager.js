@@ -155,16 +155,19 @@ this.getProducts = (options, userUid) => {
           sortedProducts = _.reverse(_.sortBy(products, [(p) => p.promoPrice || p.price]));
         }
       }
+      console.log("Sorted Products: ", sortedProducts.map(a => `path: ${a.path} price: ${a.promoPrice || a.price}`));
       if (options.filter) {
         let filteredProducts = sortedProducts.filter((product) => {
+          let onPromo = true;
+          let priceMatch = true;
           if (options.filter.onPromotion) {
-            return product.promoPrice !== undefined;
+            onPromo = product.promoPrice !== undefined;
           }
           if (options.filter.price) {
             let productPrice = Math.ceil(product.promoPrice || product.price);
-            console.log('FILTERING BY PRICE: Min: ', options.filter.price.min, " MAX: ", options.filter.price.max, " PRICE: ", productPrice);
-            return (productPrice >= options.filter.price.min) && (productPrice <= options.filter.price.max);
+            priceMatch = (productPrice >= options.filter.price.min) && (productPrice <= options.filter.price.max);
           }
+          return onPromo && priceMatch;
         })
         resolve(filteredProducts)
       }

@@ -66,7 +66,7 @@ class Routes extends Component {
           <NotificationContainer closeNotification={this.props.actions.closeNotification} notifications={this.props.notifications}/>
           <div ref='scrollContainer' className={`c-page_wrapper ${this.state.stopScroll ? 'no-scroll' : ''}`}>
             <Switch location={this.props.history.location} className="transition-item">
-              <Route exact path="/" component={Index} />
+              <Route exact path="/" render={({match, location}) => <Index actions={this.props.actions} store={this.props.store}/>} />
               <Route exact path="/about" component={About} />
               <Route exact path="/app" component={Index} />
               <Route exact path="/collections" render={({match, location}) => <Collections actions={this.props.actions} socket={this.props.socket}/>} />

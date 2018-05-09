@@ -45,6 +45,22 @@ this.getCollection = (obj) => {
       }).then((response) => {
         resolve(response);
       });
+    } else if (obj.uid) {
+      models.products.Collection.findOne({
+        where: {
+          uid: obj.uid,
+          availability: true,
+          releaseDate: {
+            [Op.lt]: moment().toDate()
+          },
+          endDate: {
+            [Op.gt]: moment().toDate()
+          },
+        },
+        include: [{ model: models.products.Product, required: true, include: [{ model: models.products.Promo, required: false }] }]
+      }).then((response) => {
+        resolve(response);
+      });
     }
   });
 };
