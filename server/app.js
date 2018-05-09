@@ -105,10 +105,10 @@
  };
  io.on('connection', async (socket) => {
    // setTimeout(async () => socket.emit('config/update', socketManager.sendData('success', await getAppConfig())), 5000);
-   Object.keys(socket.request.headers).map((a) => {
-     console.log(a, ": ", socket.request.headers[a]);
-   })
-   console.log();
+   // Object.keys(socket.request.headers).map((a) => {
+   //   console.log(a, ": ", socket.request.headers[a]);
+   // })
+   console.log(`Connection Established with ${socket.request.headers['x-forwarded-for']}`);
    console.log('socket.client.conn.remoteAddress', socket.client.conn.remoteAddress);
    console.log('socket.request.connection.remoteAddress', socket.request.connection.remoteAddress);
    console.log('socket.handshake.address', socket.handshake.address);
