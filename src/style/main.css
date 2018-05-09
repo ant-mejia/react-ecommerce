@@ -6292,10 +6292,19 @@ input[type="text"] {
       justify-content: flex-start;
       align-items: stretch; }
       .p-index .p-index_collections .p-index_collection {
-        margin: 40px; } }
+        margin: 10px;
+        width: calc(50% - 40px); } }
+  @media screen and (min-width: 768px) {
+    .p-index .p-index_collections .p-index_collection {
+      margin: 10px;
+      width: calc(33% - 40px); } }
+  @media screen and (min-width: 1000px) {
+    .p-index .p-index_collections .p-index_collection {
+      margin: 10px;
+      width: calc(25% - 40px); } }
 
 .p-index .p-index_products-list {
-  margin-bottom: 50px;
+  margin: 50px auto;
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
@@ -6366,7 +6375,8 @@ input[type="text"] {
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  margin: 50px 0 100px; }
   @media screen and (min-width: 768px) {
     .p-pgal .p-pgal_container {
       flex-direction: row; } }
@@ -6427,7 +6437,22 @@ input[type="text"] {
       display: -webkit-flex;
       display: -ms-flex;
       display: flex;
-      flex-direction: column; }
+      flex-direction: column;
+      color: #ccc; }
+      .p-pgal .p-pgal_container .p-pgal_side .p-pgal_side-wrapper .p-pgal_side-button {
+        transition: all 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+        margin: 20px 0;
+        padding: 10px 5px;
+        border: 3px solid #5268dd;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 16px;
+        color: #5268dd;
+        background: transparent;
+        cursor: pointer; }
+        .p-pgal .p-pgal_container .p-pgal_side .p-pgal_side-wrapper .p-pgal_side-button.active {
+          background: #5268dd;
+          color: #ffffff; }
   .p-pgal .p-pgal_container .p-pgal_wrapper {
     display: -webkit-flex;
     display: -ms-flex;
@@ -6762,6 +6787,9 @@ html {
 body {
   height: 100%;
   -webkit-tap-highlight-color: transparent; }
+
+button {
+  outline: 0; }
 
 .js body,
 html.js {

@@ -55,6 +55,10 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+button {
+  outline: 0;
+}
+
 .js body,
 html.js {
   overflow: hidden;

@@ -15,16 +15,18 @@ class Sidebar extends Component {
   }
 
   setRangeValue = (val) => {
-    let range = this.state.range;
-    range.value = val;
-    this.setState({ range });
+    this.props.setRangeValue(val);
   }
 
   setMinMaxPrice = (data) => {
+    console.log(data);
     let range = data;
-    range.min = data.min * 100;
-    range.max = data.max * 100;
-    this.props.updateFilterOptions('price', range)
+    let newRange = {}
+    newRange.min = range.min * 100;
+    newRange.max = range.max * 100;
+
+    console.log(newRange);
+    this.props.updateFilterOptions('price', newRange)
   }
 
   togglePromoRadio = () => {
@@ -58,14 +60,14 @@ class Sidebar extends Component {
           <h3>Side Barasdaddwa</h3>
           <h3>Side Barasdaddwa</h3>
           <h3>Side Barasdaddwa</h3>
-          <button onClick={this.togglePromoRadio} className="p-pgal_side-radio">On Sale</button>
+          <button onClick={this.togglePromoRadio} className={`p-pgal_side-button u-font-lato6 ${this.props.options.filter ? this.props.options.filter.onPromotion ? 'active' : '' : ''}`}>On Sale</button>
           <div className="u-mv-small">
             <InputRange
               formatLabel={this.rangeLabelFormat}
               minValue={this.state.range.scope.min}
               maxValue={this.state.range.scope.max}
               step={this.state.range.scope.max / 10}
-              value={this.state.range.value}
+              value={this.props.range.value}
               onChange={(value) => this.setRangeValue(value)}
               onChangeComplete={(a) => this.setMinMaxPrice(a)}
             />

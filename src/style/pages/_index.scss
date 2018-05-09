@@ -83,10 +83,15 @@ $iota-p-collections: $iota-p-index-name + $iota-global-separator + 'collections'
       align-items    : stretch;
 
       .p-index_collection {
-        margin: 40px;
+        margin: 10px;
+        width : calc(50% - 40px);
       }
     }
     @include iota-breakpoint(sm) {
+      .p-index_collection {
+        margin: 10px;
+        width : calc(33% - 40px);
+      }
       // flex-direction: row;
       // flex-wrap     : wrap;
       //
@@ -117,10 +122,20 @@ $iota-p-collections: $iota-p-index-name + $iota-global-separator + 'collections'
       //   }
       // }
     }
+    @include iota-breakpoint(md) {
+      .p-index_collection:first-of-type {}
+
+      .p-index_collection:not(:first-of-type) {}
+
+      .p-index_collection {
+        margin: 10px;
+        width : calc(25% - 40px);
+      }
+    }
   }
 
   .p-index_products-list {
-    margin-bottom : 50px;
+    margin        : 50px auto;
     display       : -webkit-flex;
     display       : -ms-flex;
     display       : flex;

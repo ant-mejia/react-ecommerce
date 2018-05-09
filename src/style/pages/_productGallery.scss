@@ -11,6 +11,7 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
     display       : -ms-flex;
     display       : flex;
     flex-direction: column;
+    margin        : 50px 0 100px;
     @include iota-breakpoint(sm) {
       flex-direction: row;
     }
@@ -103,6 +104,25 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
         display       : -ms-flex;
         display       : flex;
         flex-direction: column;
+        color         : #ccc;
+
+        .p-pgal_side-button {
+          transition    : all 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+          margin        : 20px 0;
+          padding       : 10px 5px;
+          border        : 3px solid $iota-global-primary-accent-color;
+          text-transform: uppercase;
+          letter-spacing: 3px;
+          font-size     : 16px;
+          color         : $iota-global-primary-accent-color;
+          background    : transparent;
+          cursor        : pointer;
+
+          &.active {
+            background: $iota-global-primary-accent-color;
+            color     : $iota-global-white;
+          }
+        }
       }
     }
 
