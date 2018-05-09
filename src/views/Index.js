@@ -8,7 +8,7 @@ import ProductItem from '../components/Index/ProductItem';
 class Index extends Component {
   constructor(props) {
     super(props);
-    this.state = { config: this.props.store.config.index || {} };
+    // this.state = { config: this.props.store.config };
   }
 
   jumbotronContent = [{
@@ -55,12 +55,12 @@ class Index extends Component {
             <h3 className="p-index_section-subheading u-font-lato4">This is just a lil sub heading</h3>
             <div>
               <div className="p-index_collections">
-                {
-                  this.state.config.featuredCollections.map((c) => {
+                { this.props.store.config.index ?
+                  this.props.store.config.index.featuredCollections.map((c) => {
                     return (
                       <CollectionItem key={c.uid} collection={c}/>
                     )
-                  })
+                  }) : <p>loading</p>
                 }
               </div>
             </div>

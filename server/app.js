@@ -86,7 +86,7 @@
  }
 
  io.on('connection', async (socket) => {
-   // setTimeout(() => socket.disconnect(true), 5000);
+   // setTimeout(async () => socket.emit('config/update', socketManager.sendData('success', await getAppConfig())), 5000);
    console.log('socket.client.conn.remoteAddress', socket.client.conn.remoteAddress);
    console.log('socket.request.connection.remoteAddress', socket.request.connection.remoteAddress);
    console.log('socket.handshake.address', socket.handshake.address);
