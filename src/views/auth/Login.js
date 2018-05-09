@@ -26,11 +26,6 @@ class Login extends Component {
     }
     return (
       <div className="c-page">
-        <div>
-          <Link to="/"><p className="u-inline-block u-mr-small">Home</p></Link>
-          <Link to="/about"><p className="u-inline-block u-mr-small">about</p></Link>
-          <Link to="/asda"><p className="u-inline-block u-mr-small">asda</p></Link>
-        </div>
         <h1>Log In</h1>
         <form onSubmit={e => this.logIn(e)}>
           <input type="text" ref="emailInput" placeholder="email"/>

@@ -35,8 +35,6 @@
  const subdomain = require('express-subdomain');
  if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 
- console.log("SERVER IS FUCKING RUNNING!! >:O");
-
  const port = process.env.PORT || process.env.localport || 8000;
 
 
@@ -191,7 +189,7 @@
       */
      authManager.logoutUser(userId);
      authManager.logUser('logout', 'button-click', 'client-side', { userUid: userId, sessionUid: socket.id })
-     io.in(`user:${userId}`).emit('session/notify', socketManager.sendData('success', { message: "test" }));
+     // io.in(`user:${userId}`).emit('session/notify', socketManager.sendData('success', { message: "test" }));
      socket.userUid = undefined;
      socket.leave(`user:${userId}`)
    });

@@ -42,62 +42,143 @@ $iota-p-collections: $iota-p-index-name + $iota-global-separator + 'collections'
       background: $iota-global-off-white;
 
       .p-index_collection-background {
-        // position       : absolute;
-        // z-index        : 1;
-        // display        : flex;
-        // justify-content: center;
-        // align-items    : center;
-        // overflow       : hidden;
-        // width          : 100%;
+        width: 100%;
         // height         : 100%;
         img {
           // flex-shrink: 0;
-          // min-width  : 100%;
-          // min-height : 100%;
+          min-width : 100%;
+          min-height: 100%;
         }
       }
 
       .p-index_collection-wrapper {
         // cursor         : pointer;
         // position       : absolute;
-        // width          : 100%;
+        width          : 100%;
         // height         : 100%;
         // z-index        : 2;
-        // padding        : 20px;
+        padding        : 20px;
         // height         : 100%;
-        // display        : -webkit-flex;
-        // display        : -ms-flex;
-        // display        : flex;
-        // flex-direction : column;
-        // justify-content: space-around;
-        // align-items    : center;
-      }
-    }
-    @include iota-breakpoint(sm) {
-      flex-direction: row;
-
-      .p-index_collection-featured {
-        width : 50%;
-        height: calc(50vw - 50px);
-      }
-
-      .#{$iota-p-collection} {
-        margin: 5px;
-      }
-
-      .p-index_collection-container {
         display        : -webkit-flex;
         display        : -ms-flex;
         display        : flex;
         flex-direction : column;
-        justify-content: space-between;
-        flex           : 1;
+        justify-content: space-around;
+        align-items    : center;
 
-        .#{$iota-p-collection} {
-          height: auto;
-          color : #4eb5e2;
-          flex  : 1;
+        .p-index_collection-title {
+          text-transform: uppercase;
+          margin        : 20px 0;
         }
+
+        .p-index_collection-tagline {
+          @extend .p-index_collection-title;
+        }
+      }
+    }
+    @include iota-breakpoint(xs) {
+      flex-direction : row;
+      flex-wrap      : wrap;
+      justify-content: flex-start;
+      align-items    : stretch;
+
+      .p-index_collection {
+        margin: 40px;
+      }
+    }
+    @include iota-breakpoint(sm) {
+      // flex-direction: row;
+      // flex-wrap     : wrap;
+      //
+      // .p-index_collection-featured {
+      //   width : 50%;
+      //   height: calc(50vw - 50px);
+      // }
+      //
+      // .#{$iota-p-collection} {
+      //   margin: 5px;
+      // }
+      //
+      // .p-index_collection-container {
+      //   display        : -webkit-flex;
+      //   display        : -ms-flex;
+      //   display        : flex;
+      //   flex-direction : row;
+      //   justify-content: space-between;
+      //   flex-wrap      : wrap;
+      //   flex           : 1;
+      //
+      //   .#{$iota-p-collection} {
+      //     height   : auto;
+      //     min-width: 200px;
+      //     width    : 25%;
+      //     color    : #4eb5e2;
+      //     flex     : 1;
+      //   }
+      // }
+    }
+  }
+
+  .p-index_products-list {
+    margin-bottom : 50px;
+    display       : -webkit-flex;
+    display       : -ms-flex;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    @include iota-breakpoint(xs) {
+      flex-direction: row;
+      flex-wrap     : wrap;
+      align-items   : stretch;
+    };
+
+    .p-index_products-list-item {
+      margin    : 15px 0;
+      min-width : 200px;
+      max-width : 300px;
+      width     : 20%;
+      background: $iota-global-off-white;
+      transition: all 0.2s linear;
+      position  : relative;
+      min-height: 300px;
+      min-width : 100px;
+      width     : calc(50% - 0.5rem);
+      min-height: 20vmax;
+      margin    : 1rem 0.25rem;
+      @media screen and (max-width: 665px) and (orientation:portrait) {
+        // border: 1px solid red;
+      }
+      @media screen and (max-width: 665px) and (orientation:landscape) {
+        max-width: calc(33.3% - 2rem);
+        margin   : 0.5rem;
+      }
+      @include iota-breakpoint(xs) {
+        margin    : 0.5rem;
+        min-width : unset;
+        max-width : calc(33.3% - 2rem);
+        max-height: 500px;
+      };
+      @include iota-breakpoint(md) {
+        max-width: calc(25% - 1rem);
+      };
+
+      .p-pgal_product-saletab {
+        background      : $iota-global-yellow;
+        color           : $iota-global-charcoal;
+        letter-spacing  : 2px;
+        text-transform  : uppercase;
+        position        : absolute;
+        transform       : rotate(-90deg);
+        transform-origin: 45% 153%;
+        padding         : 3px 18px;
+        top             : 20%;
+        font-size       : 12px;
+      }
+
+      .p-pgal_product-wrapper {
+        text-align: center;
+        padding   : 20px 5px;
+        color     : darken($iota-global-off-white, 30%);
       }
     }
   }

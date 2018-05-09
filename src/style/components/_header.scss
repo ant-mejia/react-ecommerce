@@ -196,10 +196,6 @@ header.#{$iota-components-header-namespace} {
           }
         }
 
-        .c-header-container_menu-item-alternate {
-          color: darken($iota-global-off-white, 20);
-        }
-
         .c-header-container_menu-item-alternate-wrapper {
           width          : 100%;
           padding        : 1.5%;
@@ -218,6 +214,14 @@ header.#{$iota-components-header-namespace} {
             text-align: center;
             margin    : 10px;
             flex      : 1;
+
+            a {
+              color: darken(#868686, 10%);
+
+              &:hover {
+                color: darken(#868686, 30%);
+              }
+            }
           }
         }
       }

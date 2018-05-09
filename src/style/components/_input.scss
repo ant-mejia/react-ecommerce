@@ -5,12 +5,12 @@ input {
 
   &[type="email"],
   &[type="password"] {
-    background: $iota-global-off-white;
-    border    : 3px dashed transparent;
+    background: #fbfbfb;
+    // border    : 3px dashed transparent;
     transition: all 0.15s linear;
 
     &:focus {
-      border-color: black;
+      background: $iota-global-off-white;
     }
   }
 }

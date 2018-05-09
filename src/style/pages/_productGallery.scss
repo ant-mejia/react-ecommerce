@@ -177,6 +177,7 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
           &-wrapper {
             text-align: center;
             padding   : 20px 5px;
+            color     : darken($iota-global-off-white, 30%);
           }
         }
       }

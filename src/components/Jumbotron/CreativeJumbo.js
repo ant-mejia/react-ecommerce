@@ -7,7 +7,7 @@ import Icon from '../../components/Icon';
 class CreativeJumbo extends Component {
   constructor(props) {
     super(props);
-    this.state = { index: 0, duration: 2000, transition: true };
+    this.state = { index: 0, duration: 1000, transition: true };
   }
 
   componentDidMount() {
@@ -65,14 +65,14 @@ class CreativeJumbo extends Component {
             </div>
           </div>
           <div className="c-jumbotron_creative_background">
-            <img src={c.background.src} alt={c.background.alt}/>
+            {/* <img src={c.background.src} alt={c.background.alt}/> */}
           </div>
-          <div className="c-jumbotron_creative_wrapper u-font-dosis">
-            <div>
+          <div className="c-jumbotron_creative_wrapper">
+            <div className="u-font-dosis">
               <h3 className="c-jumbotron_creative_heading">{c.heading}</h3>
               <h1 className="c-jumbotron_creative_title">{c.title}</h1>
             </div>
-            <div className="secondary">
+            <div className="secondary u-font-lato4">
               <p className="c-jumbotron_creative_summary">{c.summary}</p>
               <div className="c-jumbotron_creative_button">
                 <Link to={c.link.href} >{c.link.text}</Link>

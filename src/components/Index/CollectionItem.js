@@ -11,8 +11,8 @@ class CollectionItem extends Component {
             <img src="http://d29u17ylf1ylz9.cloudfront.net/mimosa/img/banner/4.jpg" alt=""/>
           </div>
           <div className="p-index_collection-wrapper ">
-            <h3>{this.props.collection.title}</h3>
-            <h4>{this.props.collection.tagline}</h4>
+            <h3 className="p-index_collection-title">{this.props.collection.title}</h3>
+            <h4 className="p-index_collection-tagline">{this.props.collection.tagline}</h4>
           </div>
         </Link>
       </div>

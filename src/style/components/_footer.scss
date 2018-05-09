@@ -1,0 +1,54 @@
+.c-footer {
+  background     : $iota-global-off-white;
+  color          : $iota-global-grey;
+  padding        : 20px 50px;
+  display        : -webkit-flex;
+  display        : -ms-flex;
+  display        : flex;
+  flex-direction : column;
+  justify-content: space-between;
+  @include iota-breakpoint(sm) {
+    flex-direction: row;
+    flex-wrap     : wrap;
+  };
+
+  .c-footer_wrapper {
+    margin   : 10px;
+    flex     : 1;
+    max-width: 450px;
+    padding  : 10px 0;
+
+    .c-footer_wrapper-title {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin        : 25px 0;
+    }
+
+    .c-footer_wrapper-message {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin        : 30px 0;
+    }
+
+    .c-footer_wrapper-list {
+      display        : -webkit-flex;
+      display        : -ms-flex;
+      display        : flex;
+      flex-direction : column;
+      justify-content: space-between;
+
+      .c-footer_wrapper-list-item {
+        margin: 16px 0;
+      }
+    }
+  }
+
+  .c-footer_container {
+    width: 100%;
+
+    .c-footer_copy {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+  }
+}
