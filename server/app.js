@@ -33,6 +33,7 @@
  const Sifter = require('sifter');
  const useragent = require('useragent');
  const subdomain = require('express-subdomain');
+ const util = require('util');
  if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 
  const port = process.env.PORT || process.env.localport || 8000;
@@ -85,8 +86,29 @@
    }
  }
 
+ function getClientIp(req) {
+   var ipAddress;
+   // The request may be forwarded from local web server.
+   var forwardedIpsStr = req.header('x-forwarded-for');
+   if (forwardedIpsStr) {
+     // 'x-forwarded-for' header may return multiple IP addresses in
+     // the format: "client IP, proxy 1 IP, proxy 2 IP" so take the
+     // the first one
+     var forwardedIps = forwardedIpsStr.split(',');
+     ipAddress = forwardedIps[0];
+   }
+   if (!ipAddress) {
+     // If request was not forwarded
+     ipAddress = req.connection.remoteAddress;
+   }
+   return ipAddress;
+ };
  io.on('connection', async (socket) => {
    // setTimeout(async () => socket.emit('config/update', socketManager.sendData('success', await getAppConfig())), 5000);
+   Object.keys(socket.request.headers).map((a) => {
+     console.log(a, ": ", socket.request.headers[a]);
+   })
+   console.log();
    console.log('socket.client.conn.remoteAddress', socket.client.conn.remoteAddress);
    console.log('socket.request.connection.remoteAddress', socket.request.connection.remoteAddress);
    console.log('socket.handshake.address', socket.handshake.address);
