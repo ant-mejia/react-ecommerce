@@ -140,8 +140,8 @@
 
        }
      })
-     console.log("currentPath: ", socket.currentPath);
-     console.log("data.path: ", data.path);
+     console.log("previous path: ", socket.currentPath);
+     console.log("current path: ", data.path);
      socket.currentPath = data.path;
    });
    socket.on('auth/authenticate', (token) => {

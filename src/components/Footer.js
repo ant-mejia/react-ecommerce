@@ -5,7 +5,7 @@ class Footer extends PureComponent {
 
   render() {
     return (
-      <div className="c-footer u-font-lato">
+      <div className="c-footer u-font-lato u-mt-large">
         <div className="c-footer_wrapper">
           <h3 className="c-footer_wrapper-title">React Ecommerce</h3>
           <p className="c-footer_wrapper-message">This is an elegant React App created by Anthony Mejia. This app uses React and React Router to dynamically render routes. Its backend is built on Node.js and Express.js which serves this build.</p>
@@ -29,7 +29,7 @@ class Footer extends PureComponent {
           </div>
         </div>
         <div className="c-footer_container">
-          <h4 className="c-footer_copy">2018 &copy; Recommerca - Anthony Mejia</h4>
+          <h4 className="c-footer_copy">2018 &copy; Recommerca - <a href="https://antmejia.com">Anthony Mejia</a></h4>
         </div>
       </div>
     );

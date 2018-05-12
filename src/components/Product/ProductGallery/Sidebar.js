@@ -48,7 +48,7 @@ class Sidebar extends Component {
         <Dropdown initialIndex={this.props.options.sort} values={this.props.config.sort ? this.props.config.sort.values : this.props.config.sort} onChange={this.handleDropdownChange}/>
         <div className="p-pgal_side-wrapper">
           <div>
-            <h2>Filter</h2>
+            <h2 className="p-pgal_side-wrapper_title u-font-lato4">Filter</h2>
             <h3>Categories</h3>
             <h4>Table</h4>
             <h4>Chair</h4>

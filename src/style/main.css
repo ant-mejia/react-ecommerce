@@ -6453,6 +6453,11 @@ input[type="text"] {
         .p-pgal .p-pgal_container .p-pgal_side .p-pgal_side-wrapper .p-pgal_side-button.active {
           background: #5268dd;
           color: #ffffff; }
+      .p-pgal .p-pgal_container .p-pgal_side .p-pgal_side-wrapper .p-pgal_side-wrapper_title {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: #5268dd;
+        margin: 20px 0; }
   .p-pgal .p-pgal_container .p-pgal_wrapper {
     display: -webkit-flex;
     display: -ms-flex;

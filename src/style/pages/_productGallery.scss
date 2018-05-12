@@ -123,6 +123,13 @@ $iota-pgal-side-wrapper: $iota-pgal + $iota-global-separator + 'side-wrapper';
             color     : $iota-global-white;
           }
         }
+
+        .p-pgal_side-wrapper_title {
+          text-transform: uppercase;
+          letter-spacing: 3px;
+          color         : $iota-global-primary-accent-color;
+          margin        : 20px 0;
+        }
       }
     }
 

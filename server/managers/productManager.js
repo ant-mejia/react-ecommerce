@@ -155,7 +155,7 @@ this.getProducts = (options, userUid) => {
           sortedProducts = _.reverse(_.sortBy(products, [(p) => p.promoPrice || p.price]));
         }
       }
-      console.log("Sorted Products: ", sortedProducts.map(a => `path: ${a.path} price: ${a.promoPrice || a.price}`));
+      // console.log("Sorted Products: ", sortedProducts.map(a => `path: ${a.path} price: ${a.promoPrice || a.price}`));
       if (options.filter) {
         let filteredProducts = sortedProducts.filter((product) => {
           let onPromo = true;
