@@ -93,7 +93,6 @@ this.getProduct = (method, data, userId) => {
 }
 
 this.getProducts = (options, userUid) => {
-  console.log("OPTIONS ::: ", options);
   return new Promise(async (resolve, reject) => {
     let user = undefined;
     if (userUid) {

@@ -1,6 +1,8 @@
 import store from 'store';
 
-this.setStorage = (key, value) => {
+let that = {}
+
+that.setStorage = (key, value) => {
   if (value === null) {
     store.remove(key);
   } else {
@@ -8,11 +10,11 @@ this.setStorage = (key, value) => {
   }
 }
 
-this.removeStorage = (item) => {
+that.removeStorage = (item) => {
   store.remove(item);
 }
 
-this.getStorage = (key) => {
+that.getStorage = (key) => {
   if (key === undefined) {
     let allKeys = [];
     store.each((value, key) => allKeys.push({ key, value }))
@@ -21,4 +23,4 @@ this.getStorage = (key) => {
   return store.get(key);
 }
 
-export default this;
+export default that;

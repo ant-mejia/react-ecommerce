@@ -9,7 +9,9 @@ import io from 'socket.io-client';
 import createHistory from 'history/createBrowserHistory';
 
 const pkg = require('../package.json');
-ReactGA.initialize('UA-43966783-7');
+if (process.env['NODE_ENV'] === 'production') {
+  ReactGA.initialize('UA-43966783-7');
+}
 
 class App extends Component {
   history = createHistory();
@@ -44,7 +46,9 @@ class App extends Component {
       this.setState({ waiting: undefined });
       if (response.type === 'success') {
         this.setStore('user', response.data);
-        ReactGA.set({ userId: response.data.uid });
+        if (process.env['NODE_ENV'] === 'production') {
+          ReactGA.set({ userId: response.data.uid });
+        }
         if (response.method !== 'auto') {
           this.setStorage('jtk', response.data.token);
         }
@@ -85,7 +89,7 @@ class App extends Component {
     })
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.getStorage('jtk') !== undefined && this.getStore('user') === undefined) {
       this.setState({ waiting: true });
       this.socket.emit('auth/authenticate', this.getStorage('jtk'));
@@ -184,7 +188,9 @@ class App extends Component {
   }
 
   listenHistory = () => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    if (process.env['NODE_ENV'] === 'production') {
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    }
     this.socket.emit('session/view', { path: this.history.location.pathname, type: 'test' })
     this.setState({
       activeHeader: false

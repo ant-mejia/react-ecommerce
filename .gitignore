@@ -8,6 +8,9 @@
 
 # production
 
+# platform
+/.idea
+/cypress
 
 # misc
 .DS_Store
